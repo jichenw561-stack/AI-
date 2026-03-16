@@ -643,6 +643,530 @@
       color: var(--text-dim);
     }
 
+    /* ── Skill / Agent Picker ──────────────────────────────── */
+
+    /* Trigger button active state */
+    .chat-tool-btn.active {
+      color: var(--accent-3);
+      border-color: rgba(167,139,250,0.4);
+      background: rgba(167,139,250,0.1);
+    }
+
+    /* Selected tags row inside chat box */
+    .selected-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .selected-tags:empty { display: none; }
+
+    .sel-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px 3px 8px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid;
+      cursor: default;
+    }
+
+    .sel-tag.tag-skill {
+      background: rgba(99,102,241,0.14);
+      border-color: rgba(99,102,241,0.35);
+      color: #a5b4fc;
+    }
+
+    .sel-tag.tag-agent {
+      background: rgba(34,211,238,0.12);
+      border-color: rgba(34,211,238,0.32);
+      color: #67e8f9;
+    }
+
+    .sel-tag-icon { font-size: 13px; }
+
+    .sel-tag-remove {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity var(--transition);
+      font-style: normal;
+    }
+
+    .sel-tag-remove:hover { opacity: 1; }
+
+    /* Picker popover */
+    .picker-popover {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      background: #1a1f2e;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      box-shadow: 0 -4px 40px rgba(0,0,0,0.5);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      max-height: 380px;
+    }
+
+    .picker-popover.open { display: flex; }
+
+    /* Picker header: tabs + search */
+    .picker-header {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 12px 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .picker-tabs {
+      display: flex;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .picker-tab {
+      padding: 6px 14px;
+      border-radius: 7px 7px 0 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-bottom: none;
+      transition: all var(--transition);
+      margin-bottom: -1px;
+      position: relative;
+    }
+
+    .picker-tab.active {
+      color: var(--accent-3);
+      background: #1a1f2e;
+      border-color: rgba(255,255,255,0.1);
+      border-bottom-color: #1a1f2e;
+      z-index: 1;
+    }
+
+    .picker-tab:not(.active):hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .picker-search-wrap {
+      position: relative;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .picker-search {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 7px 12px 7px 32px;
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .picker-search::placeholder { color: var(--text-dim); }
+    .picker-search:focus { border-color: rgba(99,102,241,0.4); }
+
+    .picker-search-icon {
+      position: absolute;
+      left: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    /* Picker body */
+    .picker-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 8px;
+    }
+
+    .picker-body::-webkit-scrollbar { width: 4px; }
+    .picker-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .picker-panel { display: none; }
+    .picker-panel.active { display: block; }
+
+    .picker-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 8px 8px 4px;
+    }
+
+    .picker-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    .picker-item:hover { background: var(--bg-hover); }
+
+    .picker-item.selected {
+      background: rgba(99,102,241,0.12);
+    }
+
+    .picker-item-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .pi-violet  { background: rgba(99,102,241,0.18); }
+    .pi-cyan    { background: rgba(34,211,238,0.14); }
+    .pi-purple  { background: rgba(167,139,250,0.16); }
+    .pi-amber   { background: rgba(240,165,0,0.14); }
+    .pi-rose    { background: rgba(248,81,73,0.14); }
+    .pi-emerald { background: rgba(63,185,80,0.14); }
+    .pi-sky     { background: rgba(56,189,248,0.14); }
+
+    .picker-item-info { flex: 1; min-width: 0; }
+
+    .picker-item-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1px;
+    }
+
+    .picker-item-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .picker-item-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all var(--transition);
+      font-size: 11px;
+    }
+
+    .picker-item.selected .picker-item-check {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* Picker footer */
+    .picker-footer {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .picker-hint {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .create-skill-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(167,139,250,0.2));
+      border: 1px solid rgba(99,102,241,0.35);
+      color: var(--accent-3);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .create-skill-btn:hover {
+      background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(167,139,250,0.3));
+      border-color: var(--accent-3);
+    }
+
+    /* ── Create Skill Modal ─────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #1a1f2e;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      width: 520px;
+      max-width: 95vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      animation: modal-in 0.2s ease;
+    }
+
+    @keyframes modal-in {
+      from { opacity: 0; transform: scale(0.95) translateY(8px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .modal-close {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.2);
+      background: var(--bg-hover);
+    }
+
+    .modal-body { padding: 20px 24px; }
+
+    /* Form fields */
+    .form-row {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+      letter-spacing: 0.03em;
+    }
+
+    .form-label span {
+      color: var(--red);
+      margin-left: 2px;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 10px 13px;
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: rgba(99,102,241,0.5);
+      background: rgba(99,102,241,0.04);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.6;
+    }
+
+    /* Icon picker grid */
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .icon-opt {
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .icon-opt:hover {
+      border-color: rgba(99,102,241,0.4);
+      background: rgba(99,102,241,0.1);
+    }
+
+    .icon-opt.selected {
+      border-color: var(--accent);
+      background: rgba(99,102,241,0.18);
+      box-shadow: 0 0 0 2px rgba(99,102,241,0.25);
+    }
+
+    /* Category chips */
+    .cat-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cat-chip {
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .cat-chip.selected {
+      color: var(--accent-3);
+      border-color: rgba(167,139,250,0.4);
+      background: rgba(167,139,250,0.12);
+    }
+
+    .cat-chip:hover:not(.selected) {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    /* Model select */
+    .form-select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 10px 13px;
+      color: var(--text);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237d8590' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color var(--transition);
+    }
+
+    .form-select:focus {
+      border-color: rgba(99,102,241,0.5);
+    }
+
+    .form-select option { background: #1a1f2e; }
+
+    /* Divider */
+    .form-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 20px 0;
+    }
+
+    /* Modal footer */
+    .modal-footer {
+      padding: 16px 24px 22px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .btn-cancel {
+      padding: 9px 20px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-cancel:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.15);
+      background: var(--bg-hover);
+    }
+
+    .btn-primary {
+      padding: 9px 22px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      border: none;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity var(--transition);
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
     /* ── SVG Icons (inline) ────────────────────────────────── */
     .icon { display: inline-flex; vertical-align: middle; }
   </style>
@@ -855,8 +1379,143 @@
       </div>
 
       <!-- Chat input -->
-      <div class="chat-input-area">
-        <div class="chat-box">
+      <div class="chat-input-area" style="position:relative;">
+
+        <!-- Skill / Agent Picker Popover -->
+        <div class="picker-popover" id="pickerPopover">
+          <!-- Tabs -->
+          <div class="picker-header">
+            <div class="picker-tabs">
+              <div class="picker-tab active" data-tab="skill">技能</div>
+              <div class="picker-tab" data-tab="agent">智能体</div>
+            </div>
+          </div>
+          <!-- Search -->
+          <div class="picker-search-wrap">
+            <svg class="picker-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="picker-search" id="pickerSearch" type="text" placeholder="搜索技能或智能体..." autocomplete="off" />
+          </div>
+          <!-- Body -->
+          <div class="picker-body">
+            <!-- Skills panel -->
+            <div class="picker-panel active" id="panelSkill">
+              <div class="picker-section-label">内置技能</div>
+              <div class="picker-item" data-id="s1" data-type="skill" data-name="股票基本面分析" data-icon="📊">
+                <div class="picker-item-icon pi-violet">📊</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">股票基本面分析</div>
+                  <div class="picker-item-desc">ROE · 营收 · 估值 · 竞争优势深度解析</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="s2" data-type="skill" data-name="K线技术分析" data-icon="📈">
+                <div class="picker-item-icon pi-cyan">📈</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">K线技术分析</div>
+                  <div class="picker-item-desc">支撑压力 · 形态识别 · 量价关系</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="s3" data-type="skill" data-name="资金流向追踪" data-icon="💹">
+                <div class="picker-item-icon pi-emerald">💹</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">资金流向追踪</div>
+                  <div class="picker-item-desc">北向资金 · 主力净流入 · 机构持仓变化</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="s4" data-type="skill" data-name="宏观经济解读" data-icon="🌐">
+                <div class="picker-item-icon pi-sky">🌐</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">宏观经济解读</div>
+                  <div class="picker-item-desc">PMI · CPI · 货币政策 · 流动性分析</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="s5" data-type="skill" data-name="行业对比研究" data-icon="🔍">
+                <div class="picker-item-icon pi-purple">🔍</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">行业对比研究</div>
+                  <div class="picker-item-desc">行业空间 · 竞争格局 · 龙头对比</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="s6" data-type="skill" data-name="财报速读" data-icon="📋">
+                <div class="picker-item-icon pi-amber">📋</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">财报速读</div>
+                  <div class="picker-item-desc">三表梳理 · 核心指标 · 异常项预警</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+            </div>
+            <!-- Agents panel -->
+            <div class="picker-panel" id="panelAgent">
+              <div class="picker-section-label">智能体</div>
+              <div class="picker-item" data-id="a1" data-type="agent" data-name="股票分析师" data-icon="📊">
+                <div class="picker-item-icon pi-violet">📊</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">股票分析师</div>
+                  <div class="picker-item-desc">深度解析公司基本面与竞争优势</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="a2" data-type="agent" data-name="宏观研究员" data-icon="🌐">
+                <div class="picker-item-icon pi-cyan">🌐</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">宏观研究员</div>
+                  <div class="picker-item-desc">行业趋势 · 市场周期 · 大方向研判</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="a3" data-type="agent" data-name="策略挖掘机" data-icon="🔍">
+                <div class="picker-item-icon pi-purple">🔍</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">策略挖掘机</div>
+                  <div class="picker-item-desc">挖掘投资思路与潜力标的</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="a4" data-type="agent" data-name="盯大盘" data-icon="📡">
+                <div class="picker-item-icon pi-amber">📡</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">盯大盘</div>
+                  <div class="picker-item-desc">实时监控市场走势与板块轮动</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="a5" data-type="agent" data-name="盯个股" data-icon="🎯">
+                <div class="picker-item-icon pi-rose">🎯</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">盯个股</div>
+                  <div class="picker-item-desc">价格异动 · 资金变化 · 事件提醒</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+              <div class="picker-item" data-id="a6" data-type="agent" data-name="盯消息" data-icon="📰">
+                <div class="picker-item-icon pi-emerald">📰</div>
+                <div class="picker-item-info">
+                  <div class="picker-item-name">盯消息</div>
+                  <div class="picker-item-desc">政策 · 行业 · 公司消息第一时间推送</div>
+                </div>
+                <div class="picker-item-check"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="picker-footer">
+            <span class="picker-hint" id="pickerHint">点击选择，可多选</span>
+            <button class="create-skill-btn" id="openCreateSkill">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              创建技能
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Box -->
+        <div class="chat-box" id="chatBox">
+          <!-- Selected skill/agent tags -->
+          <div class="selected-tags" id="selectedTags"></div>
           <textarea
             class="chat-textarea"
             id="chatInput"
@@ -865,13 +1524,14 @@
           ></textarea>
           <div class="chat-actions">
             <div class="chat-left-btns">
+              <!-- @ Skill/Agent trigger -->
+              <button class="chat-tool-btn" id="skillTriggerBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/></svg>
+                技能 / 智能体
+              </button>
               <button class="chat-tool-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
                 文件
-              </button>
-              <button class="chat-tool-btn">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                数据
               </button>
               <button class="chat-tool-btn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
@@ -886,19 +1546,98 @@
         </div>
         <div class="footer-note">内容由 AI 生成，请查核重要信息</div>
       </div>
+
+      <!-- ── Create Skill Modal ────────────────────────────── -->
+      <div class="modal-overlay" id="createSkillModal">
+        <div class="modal">
+          <div class="modal-header">
+            <span class="modal-title">✦ 创建技能</span>
+            <button class="modal-close" id="closeCreateSkill">✕</button>
+          </div>
+          <div class="modal-body">
+
+            <div class="form-row">
+              <label class="form-label">技能名称 <span>*</span></label>
+              <input class="form-input" id="skillName" type="text" placeholder="例如：港股打新分析" maxlength="30" />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label">选择图标</label>
+              <div class="icon-grid" id="iconGrid">
+                <div class="icon-opt selected" data-icon="🚀">🚀</div>
+                <div class="icon-opt" data-icon="💡">💡</div>
+                <div class="icon-opt" data-icon="🧠">🧠</div>
+                <div class="icon-opt" data-icon="⚡">⚡</div>
+                <div class="icon-opt" data-icon="🔬">🔬</div>
+                <div class="icon-opt" data-icon="🎯">🎯</div>
+                <div class="icon-opt" data-icon="📌">📌</div>
+                <div class="icon-opt" data-icon="🧩">🧩</div>
+                <div class="icon-opt" data-icon="🔭">🔭</div>
+                <div class="icon-opt" data-icon="💎">💎</div>
+                <div class="icon-opt" data-icon="🌊">🌊</div>
+                <div class="icon-opt" data-icon="🔑">🔑</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label">分类</label>
+              <div class="cat-chips" id="catChips">
+                <div class="cat-chip selected" data-cat="分析">分析</div>
+                <div class="cat-chip" data-cat="监控">监控</div>
+                <div class="cat-chip" data-cat="策略">策略</div>
+                <div class="cat-chip" data-cat="研究">研究</div>
+                <div class="cat-chip" data-cat="风控">风控</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label">简介描述 <span>*</span></label>
+              <input class="form-input" id="skillDesc" type="text" placeholder="一句话描述技能的用途" maxlength="60" />
+            </div>
+
+            <div class="form-divider"></div>
+
+            <div class="form-row">
+              <label class="form-label">提示词模板</label>
+              <textarea class="form-textarea" id="skillPrompt" placeholder="定义这个技能的行为，例如：&#10;你是一位专业的港股打新分析师，当用户询问某只新股时，你需要分析其招股书、估值水平、行业地位和打新胜算..." style="min-height:100px;"></textarea>
+            </div>
+
+            <div class="form-row" style="margin-bottom:0;">
+              <label class="form-label">调用模型</label>
+              <select class="form-select" id="skillModel">
+                <option value="auto">自动选择（推荐）</option>
+                <option value="gpt4">GPT-4o</option>
+                <option value="claude3">Claude 3.5 Sonnet</option>
+                <option value="deepseek">DeepSeek-R1</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel" id="cancelCreateSkill">取消</button>
+            <button class="btn-primary" id="confirmCreateSkill">创建技能</button>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </div>
 
 <script>
-  // Auto-resize textarea & toggle send button
+  /* ── Textarea auto-resize & send button ────────────────── */
   const textarea = document.getElementById('chatInput');
   const sendBtn  = document.getElementById('sendBtn');
+
+  function updateSendBtn() {
+    const hasText = textarea.value.trim() !== '';
+    const hasTags = document.querySelectorAll('.sel-tag').length > 0;
+    sendBtn.disabled = !(hasText || hasTags);
+  }
 
   textarea.addEventListener('input', () => {
     textarea.style.height = 'auto';
     textarea.style.height = Math.min(textarea.scrollHeight, 160) + 'px';
-    sendBtn.disabled = textarea.value.trim() === '';
+    updateSendBtn();
   });
 
   textarea.addEventListener('keydown', e => {
@@ -909,16 +1648,21 @@
   });
 
   sendBtn.addEventListener('click', () => {
-    const val = textarea.value.trim();
-    if (!val) return;
-    // Placeholder: navigate to chat view
-    alert('发起对话：' + val);
+    const tags = [...document.querySelectorAll('.sel-tag')].map(t => t.dataset.name);
+    const val  = textarea.value.trim();
+    if (!val && tags.length === 0) return;
+    const summary = tags.length ? `[${tags.join(', ')}] ${val}` : val;
+    alert('发起对话：\n' + summary);
     textarea.value = '';
     textarea.style.height = 'auto';
-    sendBtn.disabled = true;
+    document.getElementById('selectedTags').innerHTML = '';
+    selectedItems.clear();
+    syncPickerChecks();
+    updateSendBtn();
+    updatePickerHint();
   });
 
-  // Quick prompt chips → fill input
+  /* ── Quick prompt chips ─────────────────────────────────── */
   document.querySelectorAll('.qp-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       textarea.value = chip.textContent;
@@ -927,7 +1671,7 @@
     });
   });
 
-  // Nav tabs (sidebar)
+  /* ── Sidebar nav tabs ───────────────────────────────────── */
   document.querySelectorAll('.nav-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -935,7 +1679,7 @@
     });
   });
 
-  // Page nav
+  /* ── Page nav ───────────────────────────────────────────── */
   document.querySelectorAll('.page-nav-item').forEach(item => {
     item.addEventListener('click', () => {
       document.querySelectorAll('.page-nav-item').forEach(i => i.classList.remove('active'));
@@ -943,12 +1687,234 @@
     });
   });
 
-  // Conversation items
+  /* ── Conversation items ─────────────────────────────────── */
   document.querySelectorAll('.conv-item').forEach(item => {
     item.addEventListener('click', () => {
       document.querySelectorAll('.conv-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
     });
+  });
+
+  /* ══════════════════════════════════════════════════════════
+     Skill / Agent Picker
+  ══════════════════════════════════════════════════════════ */
+  const pickerPopover   = document.getElementById('pickerPopover');
+  const skillTriggerBtn = document.getElementById('skillTriggerBtn');
+  const pickerSearch    = document.getElementById('pickerSearch');
+  const pickerHint      = document.getElementById('pickerHint');
+  const selectedTagsEl  = document.getElementById('selectedTags');
+
+  // Track selected item IDs  →  { id: { type, name, icon } }
+  const selectedItems = new Map();
+
+  /* Open / close popover */
+  skillTriggerBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const isOpen = pickerPopover.classList.toggle('open');
+    skillTriggerBtn.classList.toggle('active', isOpen);
+    if (isOpen) { pickerSearch.value = ''; applySearch(''); pickerSearch.focus(); }
+  });
+
+  document.addEventListener('click', e => {
+    if (!pickerPopover.contains(e.target) && e.target !== skillTriggerBtn) {
+      pickerPopover.classList.remove('open');
+      skillTriggerBtn.classList.remove('active');
+    }
+  });
+
+  /* Picker tabs */
+  document.querySelectorAll('.picker-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.picker-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const target = tab.dataset.tab;
+      document.getElementById('panelSkill').classList.toggle('active', target === 'skill');
+      document.getElementById('panelAgent').classList.toggle('active', target === 'agent');
+    });
+  });
+
+  /* Search filter */
+  pickerSearch.addEventListener('input', () => applySearch(pickerSearch.value.toLowerCase()));
+
+  function applySearch(q) {
+    document.querySelectorAll('.picker-item').forEach(item => {
+      const name = item.querySelector('.picker-item-name').textContent.toLowerCase();
+      const desc = item.querySelector('.picker-item-desc').textContent.toLowerCase();
+      item.style.display = (!q || name.includes(q) || desc.includes(q)) ? '' : 'none';
+    });
+  }
+
+  /* Select / deselect item */
+  document.querySelectorAll('.picker-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const { id, type, name, icon } = item.dataset;
+      if (selectedItems.has(id)) {
+        selectedItems.delete(id);
+        item.classList.remove('selected');
+        item.querySelector('.picker-item-check').textContent = '';
+        removeTag(id);
+      } else {
+        selectedItems.set(id, { type, name, icon });
+        item.classList.add('selected');
+        item.querySelector('.picker-item-check').textContent = '✓';
+        addTag(id, type, name, icon);
+      }
+      updateSendBtn();
+      updatePickerHint();
+    });
+  });
+
+  function addTag(id, type, name, icon) {
+    const tag = document.createElement('span');
+    tag.className = `sel-tag tag-${type}`;
+    tag.dataset.id   = id;
+    tag.dataset.name = name;
+    tag.innerHTML = `
+      <span class="sel-tag-icon">${icon}</span>
+      ${name}
+      <i class="sel-tag-remove" data-id="${id}">✕</i>
+    `;
+    tag.querySelector('.sel-tag-remove').addEventListener('click', e => {
+      e.stopPropagation();
+      deselectItem(id);
+    });
+    selectedTagsEl.appendChild(tag);
+  }
+
+  function removeTag(id) {
+    const tag = selectedTagsEl.querySelector(`[data-id="${id}"]`);
+    if (tag) tag.remove();
+  }
+
+  function deselectItem(id) {
+    selectedItems.delete(id);
+    removeTag(id);
+    syncPickerChecks();
+    updateSendBtn();
+    updatePickerHint();
+  }
+
+  function syncPickerChecks() {
+    document.querySelectorAll('.picker-item').forEach(item => {
+      const on = selectedItems.has(item.dataset.id);
+      item.classList.toggle('selected', on);
+      item.querySelector('.picker-item-check').textContent = on ? '✓' : '';
+    });
+  }
+
+  function updatePickerHint() {
+    const n = selectedItems.size;
+    pickerHint.textContent = n === 0 ? '点击选择，可多选' : `已选 ${n} 项`;
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     Create Skill Modal
+  ══════════════════════════════════════════════════════════ */
+  const modal            = document.getElementById('createSkillModal');
+  const openBtn          = document.getElementById('openCreateSkill');
+  const closeBtn         = document.getElementById('closeCreateSkill');
+  const cancelBtn        = document.getElementById('cancelCreateSkill');
+  const confirmBtn       = document.getElementById('confirmCreateSkill');
+
+  function openModal() {
+    modal.classList.add('open');
+    pickerPopover.classList.remove('open');
+    skillTriggerBtn.classList.remove('active');
+  }
+
+  function closeModal() { modal.classList.remove('open'); }
+
+  openBtn.addEventListener('click',   openModal);
+  closeBtn.addEventListener('click',  closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  /* Icon picker */
+  document.querySelectorAll('.icon-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.icon-opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+
+  /* Category chips */
+  document.querySelectorAll('.cat-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.classList.toggle('selected');
+    });
+  });
+
+  /* Confirm create */
+  confirmBtn.addEventListener('click', () => {
+    const name   = document.getElementById('skillName').value.trim();
+    const desc   = document.getElementById('skillDesc').value.trim();
+    const prompt = document.getElementById('skillPrompt').value.trim();
+    const icon   = (document.querySelector('.icon-opt.selected') || {}).dataset?.icon || '🚀';
+
+    if (!name) { document.getElementById('skillName').focus(); return; }
+    if (!desc) { document.getElementById('skillDesc').focus(); return; }
+
+    // Inject the new skill into the picker list
+    const newId = 'custom_' + Date.now();
+    const panel = document.getElementById('panelSkill');
+
+    // Create section label if first custom skill
+    if (!document.getElementById('customSkillSection')) {
+      const label = document.createElement('div');
+      label.className = 'picker-section-label';
+      label.id = 'customSkillSection';
+      label.textContent = '自定义技能';
+      panel.appendChild(label);
+    }
+
+    const itemEl = document.createElement('div');
+    itemEl.className = 'picker-item';
+    itemEl.dataset.id   = newId;
+    itemEl.dataset.type = 'skill';
+    itemEl.dataset.name = name;
+    itemEl.dataset.icon = icon;
+    itemEl.innerHTML = `
+      <div class="picker-item-icon pi-purple">${icon}</div>
+      <div class="picker-item-info">
+        <div class="picker-item-name">${name}</div>
+        <div class="picker-item-desc">${desc}</div>
+      </div>
+      <div class="picker-item-check"></div>
+    `;
+    itemEl.addEventListener('click', () => {
+      const { id, type, name: n, icon: ic } = itemEl.dataset;
+      if (selectedItems.has(id)) {
+        selectedItems.delete(id);
+        itemEl.classList.remove('selected');
+        itemEl.querySelector('.picker-item-check').textContent = '';
+        removeTag(id);
+      } else {
+        selectedItems.set(id, { type, name: n, icon: ic });
+        itemEl.classList.add('selected');
+        itemEl.querySelector('.picker-item-check').textContent = '✓';
+        addTag(id, type, n, ic);
+      }
+      updateSendBtn();
+      updatePickerHint();
+    });
+    panel.appendChild(itemEl);
+
+    // Reset form
+    document.getElementById('skillName').value   = '';
+    document.getElementById('skillDesc').value   = '';
+    document.getElementById('skillPrompt').value = '';
+    document.querySelectorAll('.icon-opt').forEach((o,i) => o.classList.toggle('selected', i===0));
+    document.querySelectorAll('.cat-chip').forEach((c,i) => c.classList.toggle('selected', i===0));
+
+    closeModal();
+
+    // Open picker and switch to skill tab to show the new skill
+    pickerPopover.classList.add('open');
+    skillTriggerBtn.classList.add('active');
+    document.querySelectorAll('.picker-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector('[data-tab="skill"]').classList.add('active');
+    document.getElementById('panelSkill').classList.add('active');
+    document.getElementById('panelAgent').classList.remove('active');
   });
 </script>
 </body>
