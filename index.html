@@ -369,6 +369,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
     .content::-webkit-scrollbar { width: 6px; }
@@ -377,7 +378,7 @@
     /* Hero */
     .hero {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
       max-width: 680px;
     }
 
@@ -423,90 +424,6 @@
       color: var(--text-muted);
       line-height: 1.7;
     }
-
-    /* ── Feature Cards ─────────────────────────────────────── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      width: 100%;
-      max-width: 900px;
-      margin-bottom: 32px;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px 20px;
-      cursor: pointer;
-      transition: all var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--card-color1, transparent) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity var(--transition);
-    }
-
-    .feature-card:hover {
-      border-color: rgba(99,102,241,0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-
-    .feature-card:hover::before { opacity: 0.06; }
-
-    .card-icon-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 14px;
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--text);
-    }
-
-    .card-desc {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .card-arrow {
-      position: absolute;
-      top: 20px;
-      right: 18px;
-      color: var(--text-dim);
-      font-size: 14px;
-      transition: all var(--transition);
-    }
-
-    .feature-card:hover .card-arrow {
-      color: var(--accent-3);
-      transform: translate(2px, -2px);
-    }
-
-    /* Color themes per card */
-    .card-violet  .card-icon-wrap { background: rgba(99,102,241,0.15); }
-    .card-cyan    .card-icon-wrap { background: rgba(34,211,238,0.12); }
-    .card-purple  .card-icon-wrap { background: rgba(167,139,250,0.14); }
-    .card-amber   .card-icon-wrap { background: rgba(240,165,0,0.12); }
-    .card-rose    .card-icon-wrap { background: rgba(248,81,73,0.12); }
-    .card-emerald .card-icon-wrap { background: rgba(63,185,80,0.12); }
 
     /* ── Quick Prompts ─────────────────────────────────────── */
     .quick-prompts {
@@ -1312,53 +1229,6 @@
         </div>
         <h1 class="hero-title">我是你的 AI 投研助手</h1>
         <p class="hero-sub">你可以和我讨论市场行情、深度分析股票基本面、研究行业趋势<br/>我们一起用数据和逻辑做更好的投资决策</p>
-      </div>
-
-      <!-- Feature Cards -->
-      <div class="features-grid">
-
-        <div class="feature-card card-violet">
-          <span class="card-arrow">↗</span>
-          <div class="card-icon-wrap">📊</div>
-          <div class="card-title">股票分析师</div>
-          <div class="card-desc">深度解析公司基本面、商业模式与竞争优势，判断是否值得长期持有。</div>
-        </div>
-
-        <div class="feature-card card-cyan">
-          <span class="card-arrow">↗</span>
-          <div class="card-icon-wrap">🌐</div>
-          <div class="card-title">宏观研究员</div>
-          <div class="card-desc">讨论宏观经济、行业趋势和市场周期，把握市场大方向与拐点信号。</div>
-        </div>
-
-        <div class="feature-card card-purple">
-          <span class="card-arrow">↗</span>
-          <div class="card-icon-wrap">🔍</div>
-          <div class="card-title">策略挖掘机</div>
-          <div class="card-desc">寻找新的投资思路与市场机会，挖掘可能跑出来的行业和个股。</div>
-        </div>
-
-        <div class="feature-card card-amber">
-          <span class="card-arrow">↗</span>
-          <div class="card-icon-wrap">📡</div>
-          <div class="card-title">盯大盘</div>
-          <div class="card-desc">实时盯住市场走势、板块轮动和资金变化，有重要异动立刻通知你。</div>
-        </div>
-
-        <div class="feature-card card-rose">
-          <span class="card-arrow">↗</span>
-          <div class="card-icon-wrap">🎯</div>
-          <div class="card-title">盯个股</div>
-          <div class="card-desc">把你关注的股票交给我盯着，价格异动、资金变化或重要事件及时提醒。</div>
-        </div>
-
-        <div class="feature-card card-emerald">
-          <span class="card-arrow">↗</span>
-          <div class="card-icon-wrap">📰</div>
-          <div class="card-title">盯消息</div>
-          <div class="card-desc">持续跟踪政策、行业和公司消息，重要信息出现时第一时间推送给你。</div>
-        </div>
-
       </div>
 
       <!-- Quick Prompts -->
