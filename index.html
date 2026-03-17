@@ -2975,11 +2975,12 @@
 
   /* ══════════════════════════════════════════════════════════
      Agent Process Page & Result Page
-     (deferred: overlay HTML is after </script>, so wait for DOMContentLoaded)
+     NOTE: overlay HTML lives *after* </script>, so we NEVER store element
+     references at script-parse time. All getElementById calls are lazy
+     (inside functions / event handlers that run after full DOM parse).
+     Card clicks use delegation on #pageIndustry (exists at parse time).
+     Overlay buttons use document-level delegation.
   ══════════════════════════════════════════════════════════ */
-  document.addEventListener('DOMContentLoaded', function() {
-  const agentResultPage  = document.getElementById('agentResultPage');
-  const agentProcessPage = document.getElementById('agentProcessPage');
 
   const agentMeta = {
     '行业一页纸':       { subtitle: '新能源车',   doc: '新能源汽车 · 行业一页纸' },
@@ -3056,13 +3057,18 @@
   let elapsedSec = 0;
 
   function startProcessPage(agentName) {
+    // Lazy lookup — overlay HTML is parsed after this script block
+    const agentProcessPage = document.getElementById('agentProcessPage');
+    if (!agentProcessPage) return; // safety guard
+
     const meta  = agentMeta[agentName] || agentMeta['行业一页纸'];
     const steps = agentSteps[agentName] || agentSteps.default;
 
     // Set titles
-    ['apPageTitle','arPageTitle'].forEach(id => document.getElementById(id).textContent = agentName);
-    ['apPageSubtitle','arPageSubtitle'].forEach(id => document.getElementById(id).textContent = meta.subtitle);
-    document.getElementById('arDocTitle').textContent = meta.doc;
+    ['apPageTitle','arPageTitle'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = agentName; });
+    ['apPageSubtitle','arPageSubtitle'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = meta.subtitle; });
+    const docTitleEl = document.getElementById('arDocTitle');
+    if (docTitleEl) docTitleEl.textContent = meta.doc;
 
     // Reset process page
     const stepsContainer = document.getElementById('apStepsContainer');
@@ -3157,40 +3163,39 @@
     });
   }
 
-  // Card click → process page
-  document.querySelectorAll('.agent-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const name = card.querySelector('.agent-name')?.textContent?.trim() || '行业一页纸';
-      startProcessPage(name);
-    });
+  // Card click → process page (delegation on pageIndustry which exists at parse time)
+  document.getElementById('pageIndustry').addEventListener('click', e => {
+    const card = e.target.closest('.agent-card');
+    if (!card) return;
+    const name = card.querySelector('.agent-name')?.textContent?.trim() || '行业一页纸';
+    startProcessPage(name);
   });
 
-  // Process page back
-  document.getElementById('apBackBtn').addEventListener('click', () => {
-    clearInterval(elapsedTimer);
-    agentProcessPage.style.display = 'none';
-  });
-
-  // View result button
-  document.getElementById('apViewResultBtn').addEventListener('click', () => {
-    agentProcessPage.style.display = 'none';
-    agentResultPage.style.display = 'flex';
-  });
-
-  // Result page back
-  document.getElementById('arBackBtn').addEventListener('click', () => {
-    agentResultPage.style.display = 'none';
-  });
-
-  document.querySelectorAll('.ar-toc-item').forEach(item => {
-    item.addEventListener('click', () => {
+  // Overlay button clicks via document delegation (overlay HTML parsed after this script)
+  document.addEventListener('click', e => {
+    if (e.target.closest('#apBackBtn')) {
+      clearInterval(elapsedTimer);
+      document.getElementById('agentProcessPage').style.display = 'none';
+      return;
+    }
+    if (e.target.closest('#apViewResultBtn')) {
+      document.getElementById('agentProcessPage').style.display = 'none';
+      document.getElementById('agentResultPage').style.display = 'flex';
+      return;
+    }
+    if (e.target.closest('#arBackBtn')) {
+      document.getElementById('agentResultPage').style.display = 'none';
+      return;
+    }
+    if (e.target.closest('.ar-toc-item')) {
+      const item = e.target.closest('.ar-toc-item');
       document.querySelectorAll('.ar-toc-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
       const target = document.getElementById(item.dataset.sec);
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+      return;
+    }
   });
-  }); // end DOMContentLoaded
 </script>
 
 <!-- ══════════════════════════════════════════════════════════
