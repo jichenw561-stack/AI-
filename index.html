@@ -1086,6 +1086,262 @@
 
     /* ── SVG Icons (inline) ────────────────────────────────── */
     .icon { display: inline-flex; vertical-align: middle; }
+
+    /* ═══════════════════════════════════════════════════════════
+       行业研究页面
+    ═══════════════════════════════════════════════════════════ */
+    .page-industry {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      background: var(--bg);
+    }
+    .page-industry::-webkit-scrollbar { width: 6px; }
+    .page-industry::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+
+    .ir-section-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ir-section-label::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 16px;
+      border-radius: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    }
+
+    /* ── 智研引擎 wrapper ── */
+    .engine-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .engine-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      flex-wrap: wrap;
+    }
+    .engine-logo {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #6366f1, #0ea5e9);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+    .engine-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .engine-count-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      background: rgba(99,102,241,0.1);
+      color: var(--accent);
+      border-radius: 100px;
+      border: 1px solid rgba(99,102,241,0.2);
+      white-space: nowrap;
+    }
+    .engine-tabs {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: auto;
+    }
+    .engine-tab {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all var(--transition);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .engine-tab.active {
+      background: rgba(99,102,241,0.12);
+      color: var(--accent);
+      border-color: rgba(99,102,241,0.2);
+    }
+    .engine-tab:hover:not(.active) { background: var(--bg-hover); color: var(--text); }
+    .engine-tab.star-tab { color: var(--gold); }
+    .engine-collapse-btn {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+    .engine-collapse-btn:hover { background: var(--bg-hover); color: var(--text-muted); }
+
+    /* ── Agent grid ── */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .agent-card {
+      background: var(--bg-card);
+      padding: 18px 16px 14px;
+      cursor: pointer;
+      transition: background var(--transition);
+      position: relative;
+      border-left: 3px solid transparent;
+    }
+    .agent-card:hover { background: var(--bg-hover); }
+    .agent-card.border-orange { border-left-color: #f97316; }
+    .agent-card.border-teal   { border-left-color: #06b6d4; }
+    .agent-card.border-purple { border-left-color: #8b5cf6; }
+    .agent-card.border-green  { border-left-color: #22c55e; }
+    .agent-card.border-rose   { border-left-color: #f43f5e; }
+    .agent-card.border-blue   { border-left-color: #3b82f6; }
+
+    .agent-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .agent-card-title-row { display: flex; align-items: center; gap: 8px; }
+
+    .agent-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+    .ai-orange  { background: linear-gradient(135deg, #f97316, #ef4444); }
+    .ai-teal    { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+    .ai-purple  { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+    .ai-green   { background: linear-gradient(135deg, #22c55e, #16a34a); }
+    .ai-rose    { background: linear-gradient(135deg, #f97316, #ec4899); }
+    .ai-blue    { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+
+    .agent-name { font-size: 14px; font-weight: 600; color: var(--text); }
+    .agent-tag {
+      font-size: 10px; padding: 2px 7px;
+      border-radius: 4px; white-space: nowrap;
+    }
+    .tag-common   { background: rgba(6,182,212,0.12); color: #0891b2; border: 1px solid rgba(6,182,212,0.25); }
+    .tag-enhanced { background: rgba(139,92,246,0.12); color: #7c3aed; border: 1px solid rgba(139,92,246,0.25); }
+    .tag-new      { background: rgba(34,197,94,0.12); color: #16a34a; border: 1px solid rgba(34,197,94,0.25); }
+
+    .agent-corner-icon { font-size: 16px; opacity: 0.45; line-height: 1; flex-shrink: 0; }
+    .agent-desc1 { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; line-height: 1.5; }
+    .agent-desc2 { font-size: 11px; color: var(--text-dim); margin-bottom: 12px; line-height: 1.4; }
+    .agent-actions {
+      display: flex; gap: 4px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .agent-act-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .agent-act-btn:hover { background: var(--bg-hover); color: var(--text-muted); border-color: rgba(99,102,241,0.3); }
+
+    /* ── 特色分析 ── */
+    .fa-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .fa-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+    }
+    .fa-tab {
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .fa-tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+    .fa-tab:hover:not(.active) { color: var(--text); }
+
+    .fa-panel { display: none; padding: 24px; flex-direction: column; gap: 18px; }
+    .fa-panel.active { display: flex; }
+
+    .fa-industry-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .fa-industry-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+    .fa-industry-chip {
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 12px; border: 1px solid var(--border);
+      color: var(--text-muted); cursor: pointer;
+      transition: all var(--transition);
+    }
+    .fa-industry-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .fa-industry-chip:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+    .fa-conclusion {
+      background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(14,165,233,0.05));
+      border: 1px solid rgba(99,102,241,0.15);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .fa-conclusion-title {
+      font-size: 11px; font-weight: 700; color: var(--accent);
+      letter-spacing: 0.05em; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .fa-conclusion-items { display: flex; flex-direction: column; gap: 9px; }
+    .fa-conclusion-item { display: flex; gap: 10px; font-size: 13px; color: var(--text); line-height: 1.5; }
+    .fa-ci-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-top: 7px; flex-shrink: 0; }
+
+    .fa-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .chart-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .chart-card-title { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 14px; }
+    .chart-svg { width: 100%; display: block; }
+
+    .hbar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+    .hbar-label { font-size: 11px; color: var(--text-muted); width: 72px; flex-shrink: 0; text-align: right; }
+    .hbar-track { flex: 1; background: var(--bg-hover); border-radius: 4px; height: 8px; overflow: hidden; }
+    .hbar-fill { height: 100%; border-radius: 4px; }
+    .hbar-value { font-size: 11px; font-weight: 600; color: var(--text); width: 40px; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -1219,7 +1475,7 @@
     </div>
 
     <!-- Scrollable content -->
-    <div class="content">
+    <div class="content" id="pageHome">
       <!-- Hero -->
       <div class="hero">
         <div class="hero-badge">
@@ -1489,6 +1745,501 @@
         </div>
       </div>
     </div>
+
+    <!-- ══════════════════════════════════════════════════════
+         行业研究页面
+    ══════════════════════════════════════════════════════════ -->
+    <div class="page-industry" id="pageIndustry" style="display:none;">
+
+      <!-- ── Module 1: AI睿思·智研引擎 ── -->
+      <div>
+        <div class="ir-section-label">AI睿思·智研引擎</div>
+        <div class="engine-wrapper">
+          <div class="engine-header">
+            <div class="engine-logo">✦</div>
+            <div class="engine-title">睿思·AI智研引擎</div>
+            <div class="engine-count-badge">6 个智能体</div>
+            <div class="engine-tabs">
+              <div class="engine-tab star-tab">★ 我的</div>
+              <div class="engine-tab active">常用</div>
+              <div class="engine-tab">全部</div>
+              <div class="engine-tab">通用</div>
+              <div class="engine-tab">增强</div>
+              <div class="engine-tab">行业特色</div>
+            </div>
+            <button class="engine-collapse-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+            </button>
+          </div>
+          <div class="agent-grid">
+
+            <!-- Card 1: 行业一页纸 -->
+            <div class="agent-card border-orange">
+              <div class="agent-card-top">
+                <div class="agent-card-title-row">
+                  <div class="agent-icon ai-orange">📄</div>
+                  <div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                      <span class="agent-name">行业一页纸</span>
+                      <span class="agent-tag tag-common">通用</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-corner-icon">🔥</div>
+              </div>
+              <div class="agent-desc1">快速认知行业、建立行业投资框架</div>
+              <div class="agent-desc2">路演/会议前准备 · 新行业覆盖 · 投委会材料</div>
+              <div class="agent-actions">
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Card 2: 主题选股 -->
+            <div class="agent-card border-teal">
+              <div class="agent-card-top">
+                <div class="agent-card-title-row">
+                  <div class="agent-icon ai-teal">🎯</div>
+                  <div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                      <span class="agent-name">主题选股</span>
+                      <span class="agent-tag tag-common">通用</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-corner-icon">⚡</div>
+              </div>
+              <div class="agent-desc1">行业投资逻辑映射投资标的</div>
+              <div class="agent-desc2">热点出现 · 主题交易</div>
+              <div class="agent-actions">
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Card 3: 行业景气度透视 -->
+            <div class="agent-card border-purple">
+              <div class="agent-card-top">
+                <div class="agent-card-title-row">
+                  <div class="agent-icon ai-purple">📊</div>
+                  <div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                      <span class="agent-name">行业景气度透视</span>
+                      <span class="agent-tag tag-enhanced">增强</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-corner-icon">💎</div>
+              </div>
+              <div class="agent-desc1">公司纪要反推行业趋势，横纵多源交叉印证</div>
+              <div class="agent-desc2">财报季 · 策略会 · 产业链调研</div>
+              <div class="agent-actions">
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Card 4: 周度行业新闻总结 -->
+            <div class="agent-card border-green">
+              <div class="agent-card-top">
+                <div class="agent-card-title-row">
+                  <div class="agent-icon ai-green">📰</div>
+                  <div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                      <span class="agent-name">周度行业新闻总结</span>
+                      <span class="agent-tag tag-common">通用</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-corner-icon">📅</div>
+              </div>
+              <div class="agent-desc1">信息聚合与趋势提炼</div>
+              <div class="agent-desc2">周报撰写</div>
+              <div class="agent-actions">
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Card 5: 供应链映射 -->
+            <div class="agent-card border-rose">
+              <div class="agent-card-top">
+                <div class="agent-card-title-row">
+                  <div class="agent-icon ai-rose">🔗</div>
+                  <div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                      <span class="agent-name">供应链映射</span>
+                      <span class="agent-tag tag-enhanced">增强</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-corner-icon">⚡</div>
+              </div>
+              <div class="agent-desc1">产业链结构拆解与价格/需求传导路径分析</div>
+              <div class="agent-desc2">新赛道梳理 · 上下游价格变动 · 冲击传导</div>
+              <div class="agent-actions">
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+              </div>
+            </div>
+
+            <!-- Card 6: 行业热点跟踪（新增） -->
+            <div class="agent-card border-blue">
+              <div class="agent-card-top">
+                <div class="agent-card-title-row">
+                  <div class="agent-icon ai-blue">📡</div>
+                  <div>
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                      <span class="agent-name">行业热点跟踪</span>
+                      <span class="agent-tag tag-new">新增</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="agent-corner-icon">🔥</div>
+              </div>
+              <div class="agent-desc1">实时跟踪行业热点，第一时间捕捉关键动态</div>
+              <div class="agent-desc2">政策变动 · 市场热点 · 机构观点</div>
+              <div class="agent-actions">
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/></svg></button>
+                <button class="agent-act-btn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button>
+              </div>
+            </div>
+
+          </div><!-- /agent-grid -->
+        </div><!-- /engine-wrapper -->
+      </div>
+
+      <!-- ── Module 2: 特色分析 ── -->
+      <div>
+        <div class="ir-section-label">特色分析</div>
+        <div class="fa-section">
+
+          <!-- Tabs -->
+          <div class="fa-tabs">
+            <div class="fa-tab active" data-fa-tab="supply">产业链分析</div>
+            <div class="fa-tab" data-fa-tab="sales">销售潜力分析</div>
+            <div class="fa-tab" data-fa-tab="inventory">库存压力分析</div>
+            <div class="fa-tab" data-fa-tab="competition">竞争力分析</div>
+          </div>
+
+          <!-- ──────── Panel 1: 产业链分析 ──────── -->
+          <div class="fa-panel active" id="fa-supply">
+            <div class="fa-industry-bar">
+              <span class="fa-industry-label">行业选择：</span>
+              <span class="fa-industry-chip active">新能源汽车</span>
+              <span class="fa-industry-chip">半导体</span>
+              <span class="fa-industry-chip">消费电子</span>
+              <span class="fa-industry-chip">医疗器械</span>
+              <span class="fa-industry-chip">光伏</span>
+            </div>
+            <div class="fa-conclusion">
+              <div class="fa-conclusion-title">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                核心分析结论
+              </div>
+              <div class="fa-conclusion-items">
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span><strong>上游锂矿：</strong>碳酸锂现货价格持续下行至 <strong>8.5万元/吨</strong>，较2022年高点回落超90%，矿企盈利空间持续承压，行业集中度加速提升</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span><strong>中游电池材料：</strong>正极、负极、电解液毛利率触及历史低位，电芯价格逼近成本线，头部企业依靠规模优势维持盈利，二三线产能加速出清</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span><strong>下游整车：</strong>比亚迪凭借垂直整合优势保持成本领先，2025年2月市占率达 <strong>38.2%</strong>，价格战持续向中上游传导</span></div>
+              </div>
+            </div>
+            <div class="fa-charts">
+              <!-- 各环节毛利率 -->
+              <div class="chart-card">
+                <div class="chart-card-title">产业链各环节毛利率对比（2025Q1）</div>
+                <div style="padding:4px 0 0;">
+                  <div class="hbar-row"><div class="hbar-label">锂矿</div><div class="hbar-track"><div class="hbar-fill" style="width:63%;background:linear-gradient(90deg,#f97316,#ef4444);"></div></div><div class="hbar-value">43.2%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">充电桩</div><div class="hbar-track"><div class="hbar-fill" style="width:39%;background:linear-gradient(90deg,#8b5cf6,#6366f1);"></div></div><div class="hbar-value">26.8%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">负极材料</div><div class="hbar-track"><div class="hbar-fill" style="width:31%;background:linear-gradient(90deg,#06b6d4,#3b82f6);"></div></div><div class="hbar-value">21.5%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">正极材料</div><div class="hbar-track"><div class="hbar-fill" style="width:26%;background:linear-gradient(90deg,#22c55e,#16a34a);"></div></div><div class="hbar-value">18.1%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">整车</div><div class="hbar-track"><div class="hbar-fill" style="width:21%;background:linear-gradient(90deg,#f43f5e,#ec4899);"></div></div><div class="hbar-value">14.3%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">电芯/PACK</div><div class="hbar-track"><div class="hbar-fill" style="width:17%;background:linear-gradient(90deg,#f59e0b,#d97706);"></div></div><div class="hbar-value">11.8%</div></div>
+                </div>
+              </div>
+              <!-- 碳酸锂价格 -->
+              <div class="chart-card">
+                <div class="chart-card-title">碳酸锂价格走势（万元/吨，2024年）</div>
+                <svg class="chart-svg" height="168" viewBox="0 0 300 168">
+                  <defs>
+                    <linearGradient id="supplyFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#6366f1" stop-opacity="0.18"/>
+                      <stop offset="100%" stop-color="#6366f1" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <line x1="40" y1="12" x2="40" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="132" x2="292" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="12" x2="292" y2="12" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <line x1="40" y1="52" x2="292" y2="52" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <line x1="40" y1="92" x2="292" y2="92" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <text x="36" y="16" text-anchor="end" font-size="9" fill="#9ca3af">30</text>
+                  <text x="36" y="56" text-anchor="end" font-size="9" fill="#9ca3af">20</text>
+                  <text x="36" y="96" text-anchor="end" font-size="9" fill="#9ca3af">10</text>
+                  <text x="36" y="136" text-anchor="end" font-size="9" fill="#9ca3af">0</text>
+                  <!-- y=132-(val/30)*120; x=40+idx*(252/11) -->
+                  <!-- 30→12, 26→28, 22→44, 18→60, 15→72, 13→80, 11→88, 9.5→94, 9→96, 8.8→96.8, 8.5→98, 8.5→98 -->
+                  <polygon points="40,12 62.9,28 85.8,44 108.7,60 131.5,72 154.4,80 177.3,88 200.2,94 223,96 245.9,96.8 268.8,98 291.6,98 291.6,132 40,132" fill="url(#supplyFill)"/>
+                  <polyline points="40,12 62.9,28 85.8,44 108.7,60 131.5,72 154.4,80 177.3,88 200.2,94 223,96 245.9,96.8 268.8,98 291.6,98" fill="none" stroke="#6366f1" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                  <circle cx="40" cy="12" r="3" fill="#6366f1"/>
+                  <circle cx="291.6" cy="98" r="3" fill="#6366f1"/>
+                  <text x="282" y="94" text-anchor="end" font-size="9" fill="#6366f1" font-weight="600">8.5万</text>
+                  <text x="40" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">1月</text>
+                  <text x="108.7" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">4月</text>
+                  <text x="177.3" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">7月</text>
+                  <text x="245.9" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">10月</text>
+                  <text x="291.6" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">12月</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- ──────── Panel 2: 销售潜力分析 ──────── -->
+          <div class="fa-panel" id="fa-sales">
+            <div class="fa-industry-bar">
+              <span class="fa-industry-label">行业选择：</span>
+              <span class="fa-industry-chip active">新能源汽车</span>
+              <span class="fa-industry-chip">智能手机</span>
+              <span class="fa-industry-chip">工业机器人</span>
+              <span class="fa-industry-chip">储能</span>
+            </div>
+            <div class="fa-conclusion">
+              <div class="fa-conclusion-title">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                核心分析结论
+              </div>
+              <div class="fa-conclusion-items">
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>2025年2月新能源乘用车销量 <strong>82.3万辆</strong>，同比增长84.7%，渗透率达 <strong>41.2%</strong>，连续8个月超40%，一线城市渗透率趋于饱和</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>下沉市场成新增量核心驱动：三四线城市及农村市场渗透率仅22%，10万元以下车型销量同比增速超120%，微型车与入门级纯电SUV需求旺盛</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>预计2025年全年新能源汽车销量突破 <strong>1,350万辆</strong>，同比增长约28%；出口市场贡献增量约150万辆，欧洲、东南亚为主要目标市场</span></div>
+              </div>
+            </div>
+            <div class="fa-charts">
+              <div class="chart-card">
+                <div class="chart-card-title">月度销量走势（万辆，2024年）</div>
+                <svg class="chart-svg" height="168" viewBox="0 0 300 168">
+                  <defs>
+                    <linearGradient id="salesBar" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.95"/>
+                      <stop offset="100%" stop-color="#16a34a" stop-opacity="0.75"/>
+                    </linearGradient>
+                  </defs>
+                  <line x1="40" y1="12" x2="40" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="132" x2="292" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="52" x2="292" y2="52" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <line x1="40" y1="92" x2="292" y2="92" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <text x="36" y="56" text-anchor="end" font-size="9" fill="#9ca3af">80万</text>
+                  <text x="36" y="96" text-anchor="end" font-size="9" fill="#9ca3af">40万</text>
+                  <!-- Sales: 55,46,60,63,72,80,87,90,95,100,110,125 max=125; y=132-(v/125)*120 -->
+                  <!-- x=40+idx*21, w=15 -->
+                  <rect x="33"  y="79.2" width="15" height="52.8" fill="url(#salesBar)" rx="2"/>
+                  <rect x="54"  y="88.2" width="15" height="43.8" fill="url(#salesBar)" rx="2"/>
+                  <rect x="75"  y="74.4" width="15" height="57.6" fill="url(#salesBar)" rx="2"/>
+                  <rect x="96"  y="71.5" width="15" height="60.5" fill="url(#salesBar)" rx="2"/>
+                  <rect x="117" y="63"   width="15" height="69"   fill="url(#salesBar)" rx="2"/>
+                  <rect x="138" y="55.2" width="15" height="76.8" fill="url(#salesBar)" rx="2"/>
+                  <rect x="159" y="47.5" width="15" height="84.5" fill="url(#salesBar)" rx="2"/>
+                  <rect x="180" y="44.4" width="15" height="87.6" fill="url(#salesBar)" rx="2"/>
+                  <rect x="201" y="38.4" width="15" height="93.6" fill="url(#salesBar)" rx="2"/>
+                  <rect x="222" y="36"   width="15" height="96"   fill="url(#salesBar)" rx="2"/>
+                  <rect x="243" y="27.6" width="15" height="104.4" fill="url(#salesBar)" rx="2"/>
+                  <rect x="264" y="12"   width="15" height="120"  fill="url(#salesBar)" rx="2"/>
+                  <text x="40"  y="150" text-anchor="middle" font-size="9" fill="#9ca3af">1月</text>
+                  <text x="103" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">4月</text>
+                  <text x="166" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">7月</text>
+                  <text x="229" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">10月</text>
+                  <text x="271" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">12月</text>
+                </svg>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-title">新能源渗透率变化（%，2024年）</div>
+                <svg class="chart-svg" height="168" viewBox="0 0 300 168">
+                  <defs>
+                    <linearGradient id="salesFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#f97316" stop-opacity="0.18"/>
+                      <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <line x1="40" y1="12" x2="40" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="132" x2="292" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="12" x2="292" y2="12" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <line x1="40" y1="52" x2="292" y2="52" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <line x1="40" y1="92" x2="292" y2="92" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <text x="36" y="16" text-anchor="end" font-size="9" fill="#9ca3af">50%</text>
+                  <text x="36" y="56" text-anchor="end" font-size="9" fill="#9ca3af">33%</text>
+                  <text x="36" y="96" text-anchor="end" font-size="9" fill="#9ca3af">17%</text>
+                  <!-- Penetration %: 28,25,30,32,35,37,39,40,42,41,43,45 max=50 y=132-(v/50)*120 -->
+                  <!-- 28→64.8, 25→72, 30→60, 32→55.2, 35→48, 37→43.2, 39→38.4, 40→36, 42→30.8, 41→33.6, 43→28.4, 45→24 -->
+                  <polygon points="40,64.8 62.9,72 85.8,60 108.7,55.2 131.5,48 154.4,43.2 177.3,38.4 200.2,36 223,30.8 245.9,33.6 268.8,28.4 291.6,24 291.6,132 40,132" fill="url(#salesFill)"/>
+                  <polyline points="40,64.8 62.9,72 85.8,60 108.7,55.2 131.5,48 154.4,43.2 177.3,38.4 200.2,36 223,30.8 245.9,33.6 268.8,28.4 291.6,24" fill="none" stroke="#f97316" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                  <circle cx="40" cy="64.8" r="3" fill="#f97316"/>
+                  <circle cx="291.6" cy="24" r="3" fill="#f97316"/>
+                  <text x="282" y="20" text-anchor="end" font-size="9" fill="#f97316" font-weight="600">45%</text>
+                  <text x="40"  y="150" text-anchor="middle" font-size="9" fill="#9ca3af">1月</text>
+                  <text x="108.7" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">4月</text>
+                  <text x="177.3" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">7月</text>
+                  <text x="245.9" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">10月</text>
+                  <text x="291.6" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">12月</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- ──────── Panel 3: 库存压力分析 ──────── -->
+          <div class="fa-panel" id="fa-inventory">
+            <div class="fa-industry-bar">
+              <span class="fa-industry-label">行业选择：</span>
+              <span class="fa-industry-chip active">新能源汽车</span>
+              <span class="fa-industry-chip">白色家电</span>
+              <span class="fa-industry-chip">半导体</span>
+              <span class="fa-industry-chip">锂电池</span>
+            </div>
+            <div class="fa-conclusion">
+              <div class="fa-conclusion-title">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                核心分析结论
+              </div>
+              <div class="fa-conclusion-items">
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>行业整体库存天数降至 <strong>38天</strong>（较2024Q2高点45天显著改善），分化明显：比亚迪、特斯拉维持18-22天健康水平，部分二线品牌超60天</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>上游电池材料库存去化加速：碳酸锂库存量较峰值下降约35%，正极材料库存天数由75天收窄至52天，产能利用率回升至68%</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span><strong>风险预警：</strong>哪吒等二三线品牌库销比超2.8，资金链压力加剧，预计2025年将有2-3家品牌退出市场或被并购</span></div>
+              </div>
+            </div>
+            <div class="fa-charts">
+              <div class="chart-card">
+                <div class="chart-card-title">主要车企库存天数对比（天）</div>
+                <div style="padding:4px 0 0;">
+                  <div class="hbar-row"><div class="hbar-label">比亚迪</div><div class="hbar-track"><div class="hbar-fill" style="width:18%;background:linear-gradient(90deg,#22c55e,#16a34a);"></div></div><div class="hbar-value">18天</div></div>
+                  <div class="hbar-row"><div class="hbar-label">特斯拉</div><div class="hbar-track"><div class="hbar-fill" style="width:22%;background:linear-gradient(90deg,#22c55e,#16a34a);"></div></div><div class="hbar-value">22天</div></div>
+                  <div class="hbar-row"><div class="hbar-label">理想</div><div class="hbar-track"><div class="hbar-fill" style="width:28%;background:linear-gradient(90deg,#22c55e,#16a34a);"></div></div><div class="hbar-value">28天</div></div>
+                  <div class="hbar-row"><div class="hbar-label">小鹏</div><div class="hbar-track"><div class="hbar-fill" style="width:42%;background:linear-gradient(90deg,#f59e0b,#d97706);"></div></div><div class="hbar-value">42天</div></div>
+                  <div class="hbar-row"><div class="hbar-label">蔚来</div><div class="hbar-track"><div class="hbar-fill" style="width:48%;background:linear-gradient(90deg,#f59e0b,#d97706);"></div></div><div class="hbar-value">48天</div></div>
+                  <div class="hbar-row"><div class="hbar-label">哪吒</div><div class="hbar-track"><div class="hbar-fill" style="width:68%;background:linear-gradient(90deg,#f43f5e,#dc2626);"></div></div><div class="hbar-value">68天</div></div>
+                </div>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-title">行业库存天数趋势（天，2024年）</div>
+                <svg class="chart-svg" height="168" viewBox="0 0 300 168">
+                  <defs>
+                    <linearGradient id="invFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.2"/>
+                      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <line x1="40" y1="12" x2="40" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="132" x2="292" y2="132" stroke="#e5e7eb" stroke-width="1"/>
+                  <line x1="40" y1="42" x2="292" y2="42" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <line x1="40" y1="82" x2="292" y2="82" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="4"/>
+                  <text x="36" y="16" text-anchor="end" font-size="9" fill="#9ca3af">60天</text>
+                  <text x="36" y="46" text-anchor="end" font-size="9" fill="#9ca3af">45天</text>
+                  <text x="36" y="86" text-anchor="end" font-size="9" fill="#9ca3af">25天</text>
+                  <!-- Days: 38,40,42,45,44,43,42,40,39,38,38,38 max=60 y=132-(v/60)*120 -->
+                  <!-- 38→56, 40→52, 42→48, 45→42, 44→44, 43→46, 42→48, 40→52, 39→54, 38→56, 38→56, 38→56 -->
+                  <polygon points="40,56 62.9,52 85.8,48 108.7,42 131.5,44 154.4,46 177.3,48 200.2,52 223,54 245.9,56 268.8,56 291.6,56 291.6,132 40,132" fill="url(#invFill)"/>
+                  <polyline points="40,56 62.9,52 85.8,48 108.7,42 131.5,44 154.4,46 177.3,48 200.2,52 223,54 245.9,56 268.8,56 291.6,56" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+                  <circle cx="108.7" cy="42" r="3.5" fill="#f43f5e"/>
+                  <text x="108.7" y="36" text-anchor="middle" font-size="9" fill="#f43f5e" font-weight="600">峰值45天</text>
+                  <circle cx="291.6" cy="56" r="3.5" fill="#22c55e"/>
+                  <text x="280" y="52" text-anchor="end" font-size="9" fill="#22c55e" font-weight="600">38天</text>
+                  <text x="40"   y="150" text-anchor="middle" font-size="9" fill="#9ca3af">1月</text>
+                  <text x="108.7" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">4月</text>
+                  <text x="177.3" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">7月</text>
+                  <text x="245.9" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">10月</text>
+                  <text x="291.6" y="150" text-anchor="middle" font-size="9" fill="#9ca3af">12月</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- ──────── Panel 4: 竞争力分析 ──────── -->
+          <div class="fa-panel" id="fa-competition">
+            <div class="fa-industry-bar">
+              <span class="fa-industry-label">行业选择：</span>
+              <span class="fa-industry-chip active">新能源汽车</span>
+              <span class="fa-industry-chip">动力电池</span>
+              <span class="fa-industry-chip">自动驾驶</span>
+              <span class="fa-industry-chip">充电桩</span>
+            </div>
+            <div class="fa-conclusion">
+              <div class="fa-conclusion-title">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                核心分析结论
+              </div>
+              <div class="fa-conclusion-items">
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>比亚迪凭借电池+整车垂直整合优势市占率达 <strong>38.2%</strong>，在10-30万价格带具备绝对竞争力，成本护城河持续加深</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>特斯拉FSD技术壁垒突出，北美市场地位稳固，但中国市场受本土品牌冲击明显，Q1份额降至 <strong>6.8%</strong>，降价空间有限</span></div>
+                <div class="fa-conclusion-item"><div class="fa-ci-dot"></div><span>华为鸿蒙智行生态优势凸显，问界M9累计销量超15万辆，赛力斯、奇瑞、长安合作模式或将推动格局再次重塑</span></div>
+              </div>
+            </div>
+            <div class="fa-charts">
+              <div class="chart-card">
+                <div class="chart-card-title">主要品牌市场份额（2025年2月）</div>
+                <div style="padding:4px 0 0;">
+                  <div class="hbar-row"><div class="hbar-label">比亚迪</div><div class="hbar-track"><div class="hbar-fill" style="width:76%;background:linear-gradient(90deg,#6366f1,#8b5cf6);"></div></div><div class="hbar-value">38.2%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">特斯拉</div><div class="hbar-track"><div class="hbar-fill" style="width:27%;background:linear-gradient(90deg,#0ea5e9,#06b6d4);"></div></div><div class="hbar-value">13.6%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">理想</div><div class="hbar-track"><div class="hbar-fill" style="width:20%;background:linear-gradient(90deg,#f97316,#f59e0b);"></div></div><div class="hbar-value">9.8%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">问界</div><div class="hbar-track"><div class="hbar-fill" style="width:16%;background:linear-gradient(90deg,#22c55e,#16a34a);"></div></div><div class="hbar-value">7.9%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">小鹏</div><div class="hbar-track"><div class="hbar-fill" style="width:12%;background:linear-gradient(90deg,#f43f5e,#ec4899);"></div></div><div class="hbar-value">5.8%</div></div>
+                  <div class="hbar-row"><div class="hbar-label">其他</div><div class="hbar-track"><div class="hbar-fill" style="width:49%;background:linear-gradient(90deg,#9ca3af,#6b7280);"></div></div><div class="hbar-value">24.7%</div></div>
+                </div>
+              </div>
+              <div class="chart-card">
+                <div class="chart-card-title">竞争力评分对比（头部车企）</div>
+                <svg class="chart-svg" height="168" viewBox="0 0 300 168">
+                  <!-- Pentagon radar chart, center (150,84) r=56 -->
+                  <!-- Outer: top(150,28) right(203,61) bot-r(183,122) bot-l(117,122) left(97,61) -->
+                  <polygon points="150,28 203,61 183,122 117,122 97,61" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+                  <polygon points="150,44.8 186.8,70.2 173.8,103.2 126.2,103.2 113.2,70.2" fill="none" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3"/>
+                  <polygon points="150,61.6 170.6,79.4 164.6,84.4 135.4,84.4 129.4,79.4" fill="none" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3"/>
+                  <line x1="150" y1="84" x2="150" y2="28" stroke="#e5e7eb" stroke-width="0.8"/>
+                  <line x1="150" y1="84" x2="203" y2="61" stroke="#e5e7eb" stroke-width="0.8"/>
+                  <line x1="150" y1="84" x2="183" y2="122" stroke="#e5e7eb" stroke-width="0.8"/>
+                  <line x1="150" y1="84" x2="117" y2="122" stroke="#e5e7eb" stroke-width="0.8"/>
+                  <line x1="150" y1="84" x2="97" y2="61" stroke="#e5e7eb" stroke-width="0.8"/>
+                  <!-- BYD: 技术85% 成本95% 品牌80% 服务70% 规模90% -->
+                  <!-- 技术(top): 150, 84-56*0.85=36.4 -->
+                  <!-- 成本(right): 150+53*0.95=200.4, 84-23*0.95=62.2 -->
+                  <!-- 品牌(bot-r): 150+33*0.80=176.4, 84+38*0.80=114.4 -->
+                  <!-- 服务(bot-l): 150-33*0.70=126.9, 84+38*0.70=110.6 -->
+                  <!-- 规模(left): 150-53*0.90=102.3, 84-23*0.90=63.3 -->
+                  <polygon points="150,36.4 200.4,62.2 176.4,114.4 126.9,110.6 102.3,63.3" fill="rgba(99,102,241,0.18)" stroke="#6366f1" stroke-width="1.5"/>
+                  <!-- Tesla: 技术92% 成本72% 品牌85% 服务62% 规模52% -->
+                  <!-- 技术: 150, 84-56*0.92=32.5 -->
+                  <!-- 成本: 150+53*0.72=188.2, 84-23*0.72=67.4 -->
+                  <!-- 品牌: 150+33*0.85=178.1, 84+38*0.85=116.3 -->
+                  <!-- 服务: 150-33*0.62=129.5, 84+38*0.62=107.6 -->
+                  <!-- 规模: 150-53*0.52=122.4, 84-23*0.52=72.0 -->
+                  <polygon points="150,32.5 188.2,67.4 178.1,116.3 129.5,107.6 122.4,72" fill="rgba(249,115,22,0.12)" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4"/>
+                  <!-- Labels -->
+                  <text x="150" y="22" text-anchor="middle" font-size="9" fill="#6b7280">技术</text>
+                  <text x="212" y="60" text-anchor="start" font-size="9" fill="#6b7280">成本</text>
+                  <text x="190" y="132" text-anchor="middle" font-size="9" fill="#6b7280">品牌</text>
+                  <text x="110" y="132" text-anchor="middle" font-size="9" fill="#6b7280">服务</text>
+                  <text x="88" y="60" text-anchor="end" font-size="9" fill="#6b7280">规模</text>
+                  <!-- Legend -->
+                  <rect x="105" y="148" width="10" height="3" fill="#6366f1" rx="1"/>
+                  <text x="118" y="153" font-size="9" fill="#6b7280">比亚迪</text>
+                  <rect x="160" y="148" width="10" height="3" fill="#f97316" rx="1"/>
+                  <text x="173" y="153" font-size="9" fill="#6b7280">特斯拉</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /fa-section -->
+      </div>
+
+    </div><!-- /page-industry -->
   </main>
 </div>
 
@@ -1549,10 +2300,41 @@
   });
 
   /* ── Page nav ───────────────────────────────────────────── */
-  document.querySelectorAll('.page-nav-item').forEach(item => {
+  const pageHome     = document.getElementById('pageHome');
+  const pageIndustry = document.getElementById('pageIndustry');
+  document.querySelectorAll('.page-nav-item').forEach((item, idx) => {
     item.addEventListener('click', () => {
       document.querySelectorAll('.page-nav-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
+      pageHome.style.display     = idx === 0 ? '' : 'none';
+      pageIndustry.style.display = idx === 1 ? '' : 'none';
+    });
+  });
+
+  /* ── Engine filter tabs ─────────────────────────────────── */
+  document.querySelectorAll('.engine-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      tab.closest('.engine-header').querySelectorAll('.engine-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+
+  /* ── 特色分析 tabs ──────────────────────────────────────── */
+  document.querySelectorAll('.fa-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const section = tab.closest('.fa-section');
+      section.querySelectorAll('.fa-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      section.querySelectorAll('.fa-panel').forEach(p => p.classList.remove('active'));
+      section.querySelector('#fa-' + tab.dataset.faTab).classList.add('active');
+    });
+  });
+
+  /* ── 行业选择 chips ─────────────────────────────────────── */
+  document.querySelectorAll('.fa-industry-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      chip.closest('.fa-industry-bar').querySelectorAll('.fa-industry-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
     });
   });
 
