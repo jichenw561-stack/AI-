@@ -2975,7 +2975,9 @@
 
   /* ══════════════════════════════════════════════════════════
      Agent Process Page & Result Page
+     (deferred: overlay HTML is after </script>, so wait for DOMContentLoaded)
   ══════════════════════════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', function() {
   const agentResultPage  = document.getElementById('agentResultPage');
   const agentProcessPage = document.getElementById('agentProcessPage');
 
@@ -3188,6 +3190,7 @@
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+  }); // end DOMContentLoaded
 </script>
 
 <!-- ══════════════════════════════════════════════════════════
