@@ -1654,6 +1654,132 @@
       transition: color var(--transition);
     }
     .ar-ref-act:hover { color: var(--accent); }
+
+    /* ═══════════════════════════════════════════════════════════
+       Agent Process Page (thinking steps overlay)
+    ═══════════════════════════════════════════════════════════ */
+    .agent-process-page {
+      position: fixed; inset: 0; z-index: 1998;
+      background: #fff; display: flex; flex-direction: column;
+    }
+    .ap-topbar {
+      height: 52px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; padding: 0 24px; gap: 14px;
+    }
+    .ap-title {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 14px; font-weight: 700; color: var(--text);
+    }
+    .ap-running-badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--accent);
+      background: rgba(99,102,241,0.09); padding: 3px 10px;
+      border-radius: 100px; border: 1px solid rgba(99,102,241,0.2);
+    }
+    .ap-running-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    .ap-statusbar {
+      height: 38px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(99,102,241,0.03);
+      display: flex; align-items: center; padding: 0 24px; gap: 6px;
+      font-size: 12px; color: var(--text-muted);
+    }
+    .ap-scroll {
+      flex: 1; overflow-y: auto; display: flex; justify-content: center;
+    }
+    .ap-scroll::-webkit-scrollbar { width: 6px; }
+    .ap-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 6px; }
+    .ap-body { width: 100%; max-width: 720px; padding: 32px 48px 60px; }
+    .ap-steps-hdr {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; color: var(--text);
+      margin-bottom: 26px; cursor: pointer; user-select: none;
+    }
+
+    /* Step group */
+    .ap-step-group {
+      display: flex; gap: 0; position: relative;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .ap-step-group.visible { opacity: 1; transform: translateY(0); }
+
+    .ap-step-left {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: 3px; margin-right: 16px; flex-shrink: 0; width: 12px;
+    }
+    .ap-step-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+      flex-shrink: 0; box-shadow: 0 0 0 3px rgba(99,102,241,0.14);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .ap-step-dot.running { animation: pulse 1.2s ease-in-out infinite; }
+    .ap-step-dot.done {
+      background: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+      animation: none;
+    }
+    .ap-step-line {
+      width: 1.5px; flex: 1; min-height: 20px; margin-top: 5px;
+      background: linear-gradient(180deg, rgba(99,102,241,0.35), rgba(99,102,241,0.08));
+    }
+
+    .ap-step-right { flex: 1; padding-bottom: 22px; }
+    .ap-step-text {
+      font-size: 13.5px; color: var(--text); line-height: 1.75; margin-bottom: 10px;
+    }
+
+    /* Tool call row */
+    .ap-tool {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 14px;
+      background: rgba(99,102,241,0.04);
+      border: 1px solid rgba(99,102,241,0.12);
+      border-radius: 8px; margin-bottom: 6px;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+      opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s, border-color 0.2s;
+    }
+    .ap-tool.visible { opacity: 1; transform: translateX(0); }
+    .ap-tool:hover { background: rgba(99,102,241,0.09); border-color: rgba(99,102,241,0.28); }
+
+    .ap-tc-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1.5px solid rgba(99,102,241,0.35);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: rgba(99,102,241,0.5); font-size: 10px;
+      transition: all 0.3s;
+    }
+    .ap-tc-check.done {
+      background: rgba(34,197,94,0.1); border-color: #22c55e; color: #16a34a;
+    }
+    .ap-tc-icon { color: var(--text-dim); flex-shrink: 0; }
+    .ap-tc-name { font-size: 12.5px; color: var(--text-muted); flex: 1; font-family: 'SF Mono', 'Fira Code', monospace; }
+    .ap-tc-arrow { color: var(--text-dim); margin-left: auto; font-size: 13px; }
+
+    /* Done bar */
+    .ap-done-bar {
+      display: flex; align-items: center; gap: 14px; margin-top: 16px;
+      padding: 14px 18px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(34,197,94,0.06), rgba(99,102,241,0.06));
+      border: 1px solid rgba(34,197,94,0.2);
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .ap-done-bar.visible { opacity: 1; }
+    .ap-done-icon { font-size: 18px; }
+    .ap-done-text { font-size: 13px; color: #16a34a; font-weight: 600; flex: 1; }
+    .ap-done-sub { font-size: 12px; color: var(--text-muted); }
+    .ap-view-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--accent), #818cf8);
+      border: none; color: #fff; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: opacity var(--transition); white-space: nowrap;
+    }
+    .ap-view-btn:hover { opacity: 0.88; }
   </style>
 </head>
 <body>
@@ -2847,8 +2973,11 @@
     document.getElementById('panelAgent').classList.remove('active');
   });
 
-  /* ── Agent Result Page JS ────────────────────────────────── */
-  const agentResultPage = document.getElementById('agentResultPage');
+  /* ══════════════════════════════════════════════════════════
+     Agent Process Page & Result Page
+  ══════════════════════════════════════════════════════════ */
+  const agentResultPage  = document.getElementById('agentResultPage');
+  const agentProcessPage = document.getElementById('agentProcessPage');
 
   const agentMeta = {
     '行业一页纸':       { subtitle: '新能源车',   doc: '新能源汽车 · 行业一页纸' },
@@ -2859,17 +2988,194 @@
     '行业热点跟踪':     { subtitle: '实时',       doc: '行业热点 · 最新动态' },
   };
 
+  // Steps data per agent
+  const agentSteps = {
+    default: [
+      {
+        text: '正在初始化分析框架，读取行业配置文件与数据库连接…',
+        tools: [{ name: 'read_config', label: 'read' }, { name: 'init_db', label: 'read' }]
+      },
+      {
+        text: '检索最新券商深度报告、行业数据与专家纪要，筛选高相关度参考资料…',
+        tools: [{ name: 'search_reports', label: 'search' }, { name: 'search_data', label: 'search' }, { name: 'fetch_expert', label: 'read' }]
+      },
+      {
+        text: '调用行业景气度分析技能，交叉验证上中下游多维度数据，提炼周期位置…',
+        tools: [{ name: 'skill:行业景气度分析', label: 'skill' }, { name: 'cross_validate', label: 'exec' }]
+      },
+      {
+        text: '梳理核心投资逻辑，构建看多/看空分析框架，生成 AI 研判结论…',
+        tools: [{ name: 'build_logic_frame', label: 'exec' }, { name: 'ai_verdict', label: 'exec' }]
+      },
+      {
+        text: '整合参考资料引用，格式化输出行业一页纸报告，校验数据准确性…',
+        tools: [{ name: 'generate_report', label: 'exec' }, { name: 'verify_citations', label: 'read' }]
+      }
+    ],
+    '主题选股': [
+      {
+        text: '加载主题选股框架，解析当前市场热点信号与资金流向数据…',
+        tools: [{ name: 'read_theme_config', label: 'read' }, { name: 'load_fund_flow', label: 'read' }]
+      },
+      {
+        text: '检索近期政策催化、产业事件与龙头公告，识别主题驱动因素…',
+        tools: [{ name: 'search_policy', label: 'search' }, { name: 'search_events', label: 'search' }]
+      },
+      {
+        text: '调用主题映射技能，从行业逻辑推导至具体投资标的…',
+        tools: [{ name: 'skill:主题标的映射', label: 'skill' }, { name: 'filter_stocks', label: 'exec' }]
+      },
+      {
+        text: '计算标的估值合理性，筛选性价比最优个股组合…',
+        tools: [{ name: 'valuation_check', label: 'exec' }, { name: 'rank_candidates', label: 'exec' }]
+      }
+    ],
+    '供应链映射': [
+      {
+        text: '读取产业链结构数据库，初始化上中下游节点关系图…',
+        tools: [{ name: 'read_supply_db', label: 'read' }, { name: 'load_node_graph', label: 'read' }]
+      },
+      {
+        text: '抓取上下游价格数据，分析传导路径与弹性系数…',
+        tools: [{ name: 'fetch_price_data', label: 'search' }, { name: 'calc_elasticity', label: 'exec' }]
+      },
+      {
+        text: '调用供应链分析技能，识别价格冲击传导关键节点…',
+        tools: [{ name: 'skill:供应链分析', label: 'skill' }, { name: 'trace_impact', label: 'exec' }]
+      },
+      {
+        text: '生成产业链映射图谱，标注核心受益/受损环节…',
+        tools: [{ name: 'generate_graph', label: 'exec' }, { name: 'annotate_risks', label: 'exec' }]
+      }
+    ]
+  };
+
+  let elapsedTimer = null;
+  let elapsedSec = 0;
+
+  function startProcessPage(agentName) {
+    const meta  = agentMeta[agentName] || agentMeta['行业一页纸'];
+    const steps = agentSteps[agentName] || agentSteps.default;
+
+    // Set titles
+    ['apPageTitle','arPageTitle'].forEach(id => document.getElementById(id).textContent = agentName);
+    ['apPageSubtitle','arPageSubtitle'].forEach(id => document.getElementById(id).textContent = meta.subtitle);
+    document.getElementById('arDocTitle').textContent = meta.doc;
+
+    // Reset process page
+    const stepsContainer = document.getElementById('apStepsContainer');
+    stepsContainer.innerHTML = '';
+    document.getElementById('apDoneBar').classList.remove('visible');
+    document.getElementById('apRunningBadge').style.display = 'flex';
+
+    // Reset timer
+    clearInterval(elapsedTimer);
+    elapsedSec = 0;
+    document.getElementById('apElapsed').textContent = '已耗时 0 秒';
+    document.getElementById('apRefCount').textContent = '正在检索资料…';
+    elapsedTimer = setInterval(() => {
+      elapsedSec++;
+      document.getElementById('apElapsed').textContent = `已耗时 ${elapsedSec} 秒`;
+      if (elapsedSec === 3) document.getElementById('apRefCount').textContent = '已检索 6 篇资料';
+      if (elapsedSec === 5) document.getElementById('apRefCount').textContent = '已检索 11 篇资料';
+      if (elapsedSec === 8) document.getElementById('apRefCount').textContent = '已检索 14 篇资料 · 引用 8 处';
+    }, 1000);
+
+    // Show process page
+    agentProcessPage.style.display = 'flex';
+
+    // Build & animate steps
+    let stepDelay = 200;
+    steps.forEach((step, si) => {
+      const isLast = si === steps.length - 1;
+
+      // Build DOM
+      const group = document.createElement('div');
+      group.className = 'ap-step-group';
+      group.innerHTML = `
+        <div class="ap-step-left">
+          <div class="ap-step-dot running" id="apDot${si}"></div>
+          ${!isLast ? '<div class="ap-step-line"></div>' : ''}
+        </div>
+        <div class="ap-step-right">
+          <div class="ap-step-text">${step.text}</div>
+          <div class="ap-tools-wrap" id="apTools${si}"></div>
+        </div>`;
+      stepsContainer.appendChild(group);
+
+      // Show step text
+      setTimeout(() => {
+        group.classList.add('visible');
+        group.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Show tool calls sequentially
+        const wrap = document.getElementById(`apTools${si}`);
+        step.tools.forEach((tool, ti) => {
+          const toolEl = document.createElement('div');
+          toolEl.className = 'ap-tool';
+          toolEl.innerHTML = `
+            <div class="ap-tc-check" id="apTc${si}_${ti}">
+              <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2 6 5 9 10 3"/></svg>
+            </div>
+            <div class="ap-tc-icon">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+            </div>
+            <span class="ap-tc-name">${tool.label}</span>
+            <span class="ap-tc-arrow">›</span>`;
+          wrap.appendChild(toolEl);
+
+          setTimeout(() => {
+            toolEl.classList.add('visible');
+            // Mark done after brief delay
+            setTimeout(() => {
+              toolEl.querySelector('.ap-tc-check').classList.add('done');
+            }, 400);
+          }, (ti + 1) * 320);
+        });
+
+        // Mark step dot done after all tools
+        const stepDoneDelta = (step.tools.length + 1) * 320 + 200;
+        setTimeout(() => {
+          const dot = document.getElementById(`apDot${si}`);
+          if (dot) { dot.classList.remove('running'); dot.classList.add('done'); }
+          // Last step: show done bar
+          if (isLast) {
+            clearInterval(elapsedTimer);
+            document.getElementById('apRunningBadge').style.display = 'none';
+            setTimeout(() => {
+              document.getElementById('apDoneBar').classList.add('visible');
+              document.getElementById('apDoneBar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+          }
+        }, stepDoneDelta);
+
+      }, stepDelay);
+
+      stepDelay += step.tools.length * 340 + 700;
+    });
+  }
+
+  // Card click → process page
   document.querySelectorAll('.agent-card').forEach(card => {
     card.addEventListener('click', () => {
       const name = card.querySelector('.agent-name')?.textContent?.trim() || '行业一页纸';
-      const meta = agentMeta[name] || agentMeta['行业一页纸'];
-      document.getElementById('arPageTitle').textContent = name;
-      document.getElementById('arPageSubtitle').textContent = meta.subtitle;
-      document.getElementById('arDocTitle').textContent = meta.doc;
-      agentResultPage.style.display = 'flex';
+      startProcessPage(name);
     });
   });
 
+  // Process page back
+  document.getElementById('apBackBtn').addEventListener('click', () => {
+    clearInterval(elapsedTimer);
+    agentProcessPage.style.display = 'none';
+  });
+
+  // View result button
+  document.getElementById('apViewResultBtn').addEventListener('click', () => {
+    agentProcessPage.style.display = 'none';
+    agentResultPage.style.display = 'flex';
+  });
+
+  // Result page back
   document.getElementById('arBackBtn').addEventListener('click', () => {
     agentResultPage.style.display = 'none';
   });
@@ -2887,6 +3193,63 @@
 <!-- ══════════════════════════════════════════════════════════
      Agent Result Page (full-screen overlay)
 ════════════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     Agent Process Page (thinking steps overlay)
+════════════════════════════════════════════════════════════ -->
+<div id="agentProcessPage" class="agent-process-page" style="display:none;">
+
+  <!-- Top bar -->
+  <div class="ap-topbar">
+    <button class="ar-back-btn" id="apBackBtn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      返回
+    </button>
+    <div class="ap-title">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <span id="apPageTitle">行业一页纸</span>
+      <span style="color:var(--text-dim);font-weight:400;">·</span>
+      <span id="apPageSubtitle" style="color:var(--text-muted);font-weight:400;font-size:13px;">新能源车</span>
+      <div class="ap-running-badge" id="apRunningBadge">
+        <div class="ap-running-dot"></div>
+        深度研判中
+      </div>
+    </div>
+    <div style="width:80px;"></div>
+  </div>
+
+  <!-- Status bar -->
+  <div class="ap-statusbar">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span style="color:var(--accent);font-weight:600;">GPT-4o + RAG</span>
+    <span style="color:var(--border);">·</span>
+    <span id="apElapsed">已耗时 0 秒</span>
+    <span style="color:var(--border);">·</span>
+    <span id="apRefCount">正在检索资料…</span>
+  </div>
+
+  <!-- Scrollable steps -->
+  <div class="ap-scroll">
+    <div class="ap-body">
+      <div class="ap-steps-hdr">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        思考步骤
+      </div>
+      <div id="apStepsContainer"></div>
+      <div class="ap-done-bar" id="apDoneBar">
+        <div class="ap-done-icon">✅</div>
+        <div>
+          <div class="ap-done-text">深度研判完成</div>
+          <div class="ap-done-sub">已生成完整行业分析报告，引用 8 处参考资料</div>
+        </div>
+        <button class="ap-view-btn" id="apViewResultBtn">
+          查看完整报告
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="agentResultPage" class="agent-result-page" style="display:none;">
 
   <!-- ── Left Sidebar ── -->
