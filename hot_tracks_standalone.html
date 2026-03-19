@@ -1381,18 +1381,15 @@ a {
 .analysis-layout {
     display: flex;
     gap: 24px;
-    height: 500px;
-    overflow: hidden;
+    align-items: flex-start;
 }
 
 .analysis-charts {
     flex: 2;
-    min-height: 0;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    overflow-y: auto;
-    padding-right: 12px;
 }
 
 .chart-section {
@@ -2236,15 +2233,14 @@ a {
    SMART QA — REDESIGNED
    ============================================= */
 .smart-qa {
-    flex: 1;
-    min-height: 0;
+    flex: 0 0 360px;
+    max-height: 600px;
     border: 1px solid var(--ht-border);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     background: #fff;
     overflow: hidden;
-    min-width: 0;
 }
 
 .qa-body {
