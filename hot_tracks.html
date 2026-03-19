@@ -1603,23 +1603,91 @@
 
                         </div>
 
-                        <!-- Right: Smart QA -->
-                        <div class="smart-qa">
-                            <div class="qa-header">
-                                <i class="fa-solid fa-message-bot"></i> 智能问答
-                            </div>
-                            <div class="qa-body slim-scroll" id="qa-chat-box">
-                                <div class="msg msg-agent">
-                                    您好！我是您的智能分析助手。您可以基于左侧的 AI 核心观点向我提问，例如：“帮我把时间区间切换到近半年” 或 “深入分析品牌A下沉市场的水分”。
+                        <!-- Right: Smart QA (Redesigned) -->
+                        <div class=”smart-qa”>
+                            <!-- Chat History -->
+                            <div class=”qa-body slim-scroll” id=”qa-chat-box”>
+                                <div class=”msg msg-agent”>
+                                    您好！我是您的智能分析助手，可基于当前赛道数据提问，也支持创建专属<strong>技能</strong>来自动化重复分析任务。
+                                    <div class=”demo-trigger-wrap”>
+                                        <button class=”demo-trigger-btn” onclick=”startSkillDemo()”>
+                                            <i class=”fa-solid fa-play”></i> 观看技能演示
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="qa-footer">
-                                <div class="qa-input-box">
-                                    <input type="text" class="qa-input" id="qa-input-field" placeholder="基于当前分析结果提问..."
-                                        onkeypress="handleQaKeyPress(event)">
-                                    <button class="qa-btn" onclick="sendQaMessage()"><i
-                                            class="fa-solid fa-paper-plane"></i></button>
+
+                            <!-- Input Panel -->
+                            <div class=”qa-panel”>
+                                <!-- Suggested Questions -->
+                                <div class=”qa-suggest-row”>
+                                    <button class=”qa-suggest-chip” onclick=”fillSuggestion(this)”>
+                                        <i class=”fa-solid fa-route”></i>
+                                        <span>新能源车企目前上险量维度的渠道库存压力趋势是怎样的？</span>
+                                    </button>
+                                    <button class=”qa-suggest-chip” onclick=”fillSuggestion(this)”>
+                                        <i class=”fa-solid fa-rotate”></i>
+                                        <span>北向资金近期持仓变化有哪些值得关注的板块和个股异动？</span>
+                                    </button>
+                                    <button class=”qa-suggest-chip” onclick=”fillSuggestion(this)”>
+                                        <i class=”fa-solid fa-arrow-trend-up”></i>
+                                        <span>消费行业卖方分析师盈利预期近期是否出现明显上修趋势？</span>
+                                    </button>
                                 </div>
+
+                                <!-- Input Row -->
+                                <div class=”qa-input-row” id=”qaInputRow”>
+                                    <i class=”fa-solid fa-paperclip qa-input-icon”></i>
+                                    <input type=”text” class=”qa-input-new” id=”qa-input-field”
+                                        placeholder=”别来简单的，大胆地问”
+                                        onkeypress=”handleQaKeyPress(event)”>
+                                    <i class=”fa-solid fa-microphone qa-input-icon”></i>
+                                    <button class=”qa-send-btn” onclick=”sendQaMessage()”>
+                                        <i class=”fa-solid fa-paper-plane”></i>
+                                    </button>
+                                </div>
+
+                                <!-- Toolbar -->
+                                <div class=”qa-toolbar-row”>
+                                    <button class=”qa-tool active” id=”toolFinance”>
+                                        <i class=”fa-solid fa-circle-question”></i> 金融问答
+                                    </button>
+                                    <button class=”qa-tool” id=”toolDeep”>
+                                        <i class=”fa-solid fa-magnifying-glass”></i> 深度研究
+                                        <span class=”new-badge”>NEW</span>
+                                    </button>
+                                    <button class=”qa-tool” id=”toolFact”>
+                                        <i class=”fa-regular fa-file-lines”></i> 事实核查
+                                    </button>
+                                    <button class=”qa-tool skill-create-btn” id=”createSkillBtn” onclick=”openCreateSkill()”>
+                                        <i class=”fa-solid fa-plus”></i> 创建技能
+                                        <span class=”new-badge”>NEW</span>
+                                    </button>
+                                    <div class=”qa-dropdown-wrap” id=”useSkillWrap”>
+                                        <button class=”qa-tool use-skill-btn” id=”useSkillBtn”
+                                            onclick=”toggleQaDropdown('useSkillMenu')”>
+                                            使用技能 <span class=”new-badge”>NEW</span>
+                                            <i class=”fa-solid fa-chevron-down” style=”font-size:10px;margin-left:2px;”></i>
+                                        </button>
+                                        <div class=”qa-dropdown” id=”useSkillMenu”>
+                                            <div class=”qa-dropdown-empty”>暂无技能，请先创建</div>
+                                        </div>
+                                    </div>
+                                    <div class=”qa-dropdown-wrap”>
+                                        <button class=”qa-tool” onclick=”toggleQaDropdown('expertMenu')”>
+                                            <i class=”fa-regular fa-circle-user”></i> @专家
+                                            <i class=”fa-solid fa-chevron-down” style=”font-size:10px;margin-left:2px;”></i>
+                                        </button>
+                                        <div class=”qa-dropdown” id=”expertMenu”>
+                                            <div class=”qa-dropdown-item” onclick=”mentionExpert('新能源分析师')”>@新能源分析师</div>
+                                            <div class=”qa-dropdown-item” onclick=”mentionExpert('宏观策略师')”>@宏观策略师</div>
+                                            <div class=”qa-dropdown-item” onclick=”mentionExpert('创新药专家')”>@创新药专家</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Disclaimer -->
+                                <div class=”qa-disclaimer”>内容由AI生成，查看查重要信息</div>
                             </div>
                         </div>
                     </div>
@@ -1893,6 +1961,49 @@
             </div>
         </div>
     </div> <!-- End of app-container -->
+
+    <!-- Skill Panel Overlay -->
+    <div class="skill-overlay" id="skillOverlay" onclick="closeSkillPanel()"></div>
+
+    <!-- Create / Edit Skill Panel -->
+    <div class="skill-panel" id="skillPanel">
+        <div class="skill-panel-hd">
+            <div class="skill-panel-title" id="skillPanelTitle">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> 创建技能
+            </div>
+            <i class="fa-solid fa-xmark skill-close-btn" onclick="closeSkillPanel()"></i>
+        </div>
+        <div class="skill-panel-bd">
+            <div class="skill-field">
+                <label>技能名称</label>
+                <input type="text" class="skill-field-input" id="skillNameInput"
+                    placeholder="例：新能源行业日报生成">
+            </div>
+            <div class="skill-field">
+                <label>技能描述 / 指令</label>
+                <textarea class="skill-field-textarea" id="skillDescInput" rows="4"
+                    placeholder="描述技能要完成的任务，越详细效果越好..."></textarea>
+            </div>
+            <div class="skill-field">
+                <label>适用场景</label>
+                <div class="skill-scene-tags" id="skillSceneTags">
+                    <span class="skill-scene-tag active" onclick="toggleSceneTag(this)">销售潜力分析</span>
+                    <span class="skill-scene-tag" onclick="toggleSceneTag(this)">库存压力分析</span>
+                    <span class="skill-scene-tag" onclick="toggleSceneTag(this)">竞争力分析</span>
+                    <span class="skill-scene-tag" onclick="toggleSceneTag(this)">产业链分析</span>
+                </div>
+            </div>
+        </div>
+        <div class="skill-panel-ft">
+            <button class="skill-btn-sec" onclick="closeSkillPanel()">取消</button>
+            <button class="skill-btn-pri" id="skillSaveBtn" onclick="saveSkill()">
+                <i class="fa-solid fa-check"></i> 保存技能
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="skill-toast" id="skillToast"></div>
 
     <!-- Page Specific Script -->
     <script src="js/hot_tracks.js"></script>
