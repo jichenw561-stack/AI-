@@ -1579,38 +1579,52 @@
 .ht-ai-trigger {
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    padding: 5px 12px 5px 6px;
+    gap: 5px;
+    padding: 5px 14px 5px 10px;
     background: #fff;
-    border: 1.5px solid #E2E5EB;
-    border-radius: 8px;
-    font-size: 13px;
+    border: none;
+    border-radius: 20px;
+    font-size: 12.5px;
     font-family: inherit;
-    color: #444;
     cursor: pointer;
     flex-shrink: 0;
-    margin-bottom: 16px;
-    transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+    position: relative;
+    margin-bottom: 2px;
+    transition: background 0.18s ease, box-shadow 0.18s ease;
+}
+/* gradient border via mask trick */
+.ht-ai-trigger::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #4B85E6 0%, #9333EA 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 .ht-ai-trigger:hover {
-    border-color: #4B85E6;
-    background: #F5F8FF;
-    color: #2D68FF;
-    box-shadow: 0 2px 8px rgba(75, 133, 230, 0.14);
+    background: linear-gradient(135deg, rgba(75,133,230,0.06) 0%, rgba(147,51,234,0.06) 100%);
+    box-shadow: 0 2px 12px rgba(100, 100, 230, 0.15);
 }
 .ht-ai-trigger-icon {
-    width: 24px;
-    height: 24px;
     background: linear-gradient(135deg, #4B85E6 0%, #9333EA 100%);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 11px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 12px;
     flex-shrink: 0;
 }
-.ht-ai-trigger-label { font-weight: 500; }
+.ht-ai-trigger-label {
+    background: linear-gradient(135deg, #4B85E6 0%, #9333EA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
 
 /* ===== AI Assistant Right Drawer ===== */
 .ht-ai-drawer {
