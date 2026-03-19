@@ -97,6 +97,46 @@ window.addEventListener('resize', () => {
     // Only resize if there are any remaining echarts on the page
 });
 
+// ===== AI Assistant Floating Panel =====
+function htOpenAssistant() {
+    document.getElementById('htAiOverlay').classList.add('active');
+    document.getElementById('htAiInput').focus();
+}
+
+function htCloseAssistant(e) {
+    const overlay = document.getElementById('htAiOverlay');
+    // Close when clicking the backdrop or the close button (no event = button click)
+    if (!e || e.target === overlay) {
+        overlay.classList.remove('active');
+    }
+}
+
+function htFillInput(el) {
+    const text = el.innerText.trim();
+    const input = document.getElementById('htAiInput');
+    input.value = text;
+    input.focus();
+}
+
+function htSendMessage() {
+    const input = document.getElementById('htAiInput');
+    if (!input.value.trim()) return;
+    // Placeholder — wire to real API when ready
+    input.value = '';
+}
+
+function htToggleTool(el) {
+    const toolbar = el.closest('.ht-ai-toolbar');
+    toolbar.querySelectorAll('.ht-ai-tool').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        document.getElementById('htAiOverlay')?.classList.remove('active');
+    }
+});
+
 // ---------- Data Workshop -> Data Browser Navigation ---------- //
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.data-panel .ht-table tbody tr').forEach(row => {
