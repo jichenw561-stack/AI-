@@ -1381,15 +1381,18 @@ a {
 .analysis-layout {
     display: flex;
     gap: 24px;
-    align-items: flex-start;
+    height: 560px;          /* 固定高度：左侧图表区可滚动，右侧问答区撑满 */
 }
 
 .analysis-charts {
-    flex: 2;
+    flex: 1;
     min-width: 0;
+    min-height: 0;          /* 允许 flex item 收缩到 height 限制内 */
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow-y: auto;       /* 内容超出时在此区域内滚动 */
+    padding-right: 4px;
 }
 
 .chart-section {
@@ -2233,8 +2236,8 @@ a {
    SMART QA — REDESIGNED
    ============================================= */
 .smart-qa {
-    flex: 0 0 360px;
-    max-height: 600px;
+    flex: 0 0 360px;        /* 固定宽度 360px，撑满父容器高度 (560px) */
+    min-height: 0;
     border: 1px solid var(--ht-border);
     border-radius: 8px;
     display: flex;
