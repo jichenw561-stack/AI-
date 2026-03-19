@@ -350,8 +350,9 @@
                                     <div class="fa-tab" data-tab="fa-tab-chain">产业链分析</div>
                                 </div>
                             </div>
-                            <button class="ht-ai-btn" onclick="htOpenAssistant()">
-                                <i class="fa-solid fa-sparkles"></i> AI 助手
+                            <button class="ht-ai-trigger" onclick="htOpenAssistant()">
+                                <span class="ht-ai-trigger-icon"><i class="fa-solid fa-sparkles"></i></span>
+                                <span class="ht-ai-trigger-label">AI 助手</span>
                             </button>
                         </div>
                     </div>
@@ -1880,43 +1881,49 @@
         </div>
     </div> <!-- End of app-container -->
 
-    <!-- AI Assistant Floating Panel -->
-    <div class="ht-ai-overlay" id="htAiOverlay" onclick="htCloseAssistant(event)">
-        <div class="ht-ai-panel">
-            <button class="ht-ai-panel-close" onclick="htCloseAssistant()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <!-- AI Assistant Right Drawer -->
+    <div class="ht-ai-drawer" id="htAiDrawer">
+        <!-- Collapse / Expand handle on the left edge -->
+        <button class="ht-ai-handle" id="htAiHandle" onclick="htToggleCollapse()" title="收起 / 展开">
+            <i class="fa-solid fa-chevron-right" id="htAiHandleIcon"></i>
+        </button>
 
-            <!-- Brand -->
-            <div class="ht-ai-brand">
-                <div class="ht-ai-logo">RIS</div>
-                <div>
-                    <div class="ht-ai-brand-name">AI RIS</div>
-                    <div class="ht-ai-brand-sub">Research Intelligence System · 华泰证券</div>
+        <div class="ht-ai-drawer-inner">
+            <!-- Header -->
+            <div class="ht-ai-drawer-header">
+                <div class="ht-ai-brand">
+                    <div class="ht-ai-logo">RIS</div>
+                    <div>
+                        <div class="ht-ai-brand-name">AI RIS</div>
+                        <div class="ht-ai-brand-sub">Research Intelligence System · 华泰证券</div>
+                    </div>
+                </div>
+                <button class="ht-ai-close-btn" onclick="htCloseAssistant()" title="关闭">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="ht-ai-drawer-body slim-scroll">
+                <div class="ht-ai-greeting">有什么可以帮你?</div>
+                <div class="ht-ai-suggestions">
+                    <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        新能源车企目前上险量维度的渠道库存压力趋势是怎样的?
+                    </div>
+                    <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
+                        <i class="fa-solid fa-rotate"></i>
+                        北向资金近期持仓变化有哪些值得关注的板块和个股异动?
+                    </div>
+                    <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                        消费行业卖方分析师盈利预期近期是否出现明显上修趋势?
+                    </div>
                 </div>
             </div>
 
-            <!-- Greeting -->
-            <div class="ht-ai-greeting">有什么可以帮你?</div>
-
-            <!-- Suggested Questions -->
-            <div class="ht-ai-suggestions">
-                <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
-                    <i class="fa-solid fa-comment-dots"></i>
-                    新能源车企目前上险量维度的渠道库存压力趋势是怎样的?
-                </div>
-                <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
-                    <i class="fa-solid fa-rotate"></i>
-                    北向资金近期持仓变化有哪些值得关注的板块和个股异动?
-                </div>
-                <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
-                    <i class="fa-solid fa-arrow-trend-up"></i>
-                    消费行业卖方分析师盈利预期近期是否出现明显上修趋势?
-                </div>
-            </div>
-
-            <!-- Input Area -->
-            <div class="ht-ai-input-area">
+            <!-- Footer: Input -->
+            <div class="ht-ai-drawer-footer">
                 <div class="ht-ai-input-box">
                     <button class="ht-ai-attach-btn" title="附件"><i class="fa-solid fa-paperclip"></i></button>
                     <input type="text" class="ht-ai-input" id="htAiInput" placeholder="别来简单的，大胆问"
@@ -1926,8 +1933,6 @@
                         <i class="fa-solid fa-arrow-up"></i>
                     </button>
                 </div>
-
-                <!-- Toolbar -->
                 <div class="ht-ai-toolbar">
                     <button class="ht-ai-tool active" onclick="htToggleTool(this)">
                         <i class="fa-solid fa-circle-dot"></i> 金融问答
@@ -1952,7 +1957,6 @@
                         <i class="fa-solid fa-chevron-down" style="font-size:10px;"></i>
                     </button>
                 </div>
-
                 <div class="ht-ai-footer-note">内容由AI生成，查核重要信息</div>
             </div>
         </div>

@@ -97,17 +97,29 @@ window.addEventListener('resize', () => {
     // Only resize if there are any remaining echarts on the page
 });
 
-// ===== AI Assistant Floating Panel =====
+// ===== AI Assistant Right Drawer =====
 function htOpenAssistant() {
-    document.getElementById('htAiOverlay').classList.add('active');
-    document.getElementById('htAiInput').focus();
+    const drawer = document.getElementById('htAiDrawer');
+    drawer.classList.remove('collapsed');
+    drawer.classList.add('open');
+    document.getElementById('htAiHandleIcon').className = 'fa-solid fa-chevron-right';
+    setTimeout(() => document.getElementById('htAiInput').focus(), 320);
 }
 
-function htCloseAssistant(e) {
-    const overlay = document.getElementById('htAiOverlay');
-    // Close when clicking the backdrop or the close button (no event = button click)
-    if (!e || e.target === overlay) {
-        overlay.classList.remove('active');
+function htCloseAssistant() {
+    const drawer = document.getElementById('htAiDrawer');
+    drawer.classList.remove('open', 'collapsed');
+}
+
+function htToggleCollapse() {
+    const drawer = document.getElementById('htAiDrawer');
+    const icon = document.getElementById('htAiHandleIcon');
+    if (drawer.classList.contains('collapsed')) {
+        drawer.classList.remove('collapsed');
+        icon.className = 'fa-solid fa-chevron-right';
+    } else {
+        drawer.classList.add('collapsed');
+        icon.className = 'fa-solid fa-chevron-left';
     }
 }
 
@@ -126,15 +138,12 @@ function htSendMessage() {
 }
 
 function htToggleTool(el) {
-    const toolbar = el.closest('.ht-ai-toolbar');
-    toolbar.querySelectorAll('.ht-ai-tool').forEach(t => t.classList.remove('active'));
+    el.closest('.ht-ai-toolbar').querySelectorAll('.ht-ai-tool').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
 }
 
 document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') {
-        document.getElementById('htAiOverlay')?.classList.remove('active');
-    }
+    if (e.key === 'Escape') htCloseAssistant();
 });
 
 // ---------- Data Workshop -> Data Browser Navigation ---------- //
