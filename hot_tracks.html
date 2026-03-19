@@ -1904,22 +1904,49 @@
             </div>
 
             <!-- Body -->
-            <div class="ht-ai-drawer-body slim-scroll">
-                <div class="ht-ai-greeting">有什么可以帮你?</div>
-                <div class="ht-ai-suggestions">
-                    <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
-                        <i class="fa-solid fa-comment-dots"></i>
-                        新能源车企目前上险量维度的渠道库存压力趋势是怎样的?
+            <div class="ht-ai-drawer-body slim-scroll" id="htAiDrawerBody">
+
+                <!-- Welcome Screen -->
+                <div id="htAiWelcome">
+                    <div class="ht-ai-greeting">有什么可以帮你?</div>
+                    <div class="ht-demo-row">
+                        <span class="ht-demo-label"><i class="fa-solid fa-circle-play"></i> 演示案例</span>
+                        <div class="ht-demo-btns">
+                            <button class="ht-demo-btn" onclick="htPlayDemo(1)">
+                                <i class="fa-solid fa-chart-column"></i> 因子分析
+                            </button>
+                            <button class="ht-demo-btn" onclick="htPlayDemo(2)">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> 创建技能
+                            </button>
+                        </div>
                     </div>
-                    <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
-                        <i class="fa-solid fa-rotate"></i>
-                        北向资金近期持仓变化有哪些值得关注的板块和个股异动?
-                    </div>
-                    <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
-                        <i class="fa-solid fa-arrow-trend-up"></i>
-                        消费行业卖方分析师盈利预期近期是否出现明显上修趋势?
+                    <div class="ht-ai-suggestions">
+                        <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            新能源车企目前上险量维度的渠道库存压力趋势是怎样的?
+                        </div>
+                        <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
+                            <i class="fa-solid fa-rotate"></i>
+                            北向资金近期持仓变化有哪些值得关注的板块和个股异动?
+                        </div>
+                        <div class="ht-ai-suggestion-item" onclick="htFillInput(this)">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                            消费行业卖方分析师盈利预期近期是否出现明显上修趋势?
+                        </div>
                     </div>
                 </div>
+
+                <!-- Chat Screen (hidden by default) -->
+                <div id="htAiChat" style="display:none; width:100%;">
+                    <div class="ht-chat-topbar">
+                        <button class="ht-chat-back" onclick="htResetChat()">
+                            <i class="fa-solid fa-arrow-left"></i> 返回
+                        </button>
+                        <span class="ht-chat-demo-tag">演示模式</span>
+                    </div>
+                    <div id="htAiMessages"></div>
+                </div>
+
             </div>
 
             <!-- Footer: Input -->
