@@ -200,32 +200,43 @@ function _htHideTyping(delay) {
     _htAt(delay, () => { const el = document.getElementById('htTyping'); if (el) el.remove(); });
 }
 
-function _htProcessCard(title, id, delay) {
+// ── Think block (image-1 style): intro text + file-path bullets + done text ──
+function _htThinkStart(intro, id, delay) {
     _htAt(delay, () => {
         const msgs = document.getElementById('htAiMessages');
         if (!msgs) return;
         const el = document.createElement('div');
-        el.className = 'ht-process-card'; el.id = id;
-        el.innerHTML = `<div class="ht-process-header"><i class="fa-solid fa-bolt"></i> ${title}</div><div id="${id}_s"></div>`;
+        el.className = 'ht-think-msg'; el.id = id;
+        el.innerHTML = `<div class="ht-think-intro">${intro}</div><div class="ht-think-tools" id="${id}_t"></div><div class="ht-think-done" id="${id}_d"></div>`;
         msgs.appendChild(el); _htScroll();
     });
 }
-
-function _htStep(cardId, stepId, name, sub, delay) {
+function _htToolLine(blockId, label, path, ms, delay) {
     _htAt(delay, () => {
-        const c = document.getElementById(cardId + '_s');
+        const c = document.getElementById(blockId + '_t');
         if (!c) return;
         const el = document.createElement('div');
-        el.className = 'ht-process-step';
-        el.innerHTML = `<span class="ht-step-icon spin" id="${stepId}"><i class="fa-solid fa-circle-notch fa-spin"></i></span><span class="ht-step-content"><span class="ht-step-name">${name}</span><span class="ht-step-sub">${sub}</span></span>`;
+        el.className = 'ht-tool-item';
+        el.innerHTML = `<span class="ht-tool-bullet">•</span><span class="ht-tool-label">${label}</span><span class="ht-tool-path">${path}</span><span class="ht-tool-ms">${ms}ms</span><span class="ht-tool-dot2">•</span>`;
         c.appendChild(el); _htScroll();
     });
 }
-function _htDone(stepId, delay) {
+function _htThinkDone(blockId, html, delay) {
     _htAt(delay, () => {
-        const ic = document.getElementById(stepId);
-        if (ic) { ic.innerHTML = '<i class="fa-solid fa-circle-check"></i>'; ic.className = 'ht-step-icon done'; }
+        const d = document.getElementById(blockId + '_d');
+        if (d) d.innerHTML = html;
+        _htScroll();
     });
+}
+
+// ── Report document (image-2 style) ──
+function _htDocReport(html, delay) {
+    _htAppend(`<div class="ht-rdoc">${html}</div>`, delay);
+}
+
+// ── Modification summary block (image-1 table style) ──
+function _htSummaryBlock(html, delay) {
+    _htAppend(`<div class="ht-summary-block">${html}</div>`, delay);
 }
 
 function htPlayDemo(n) {
@@ -243,7 +254,6 @@ function htResetChat() {
     document.getElementById('htAiWelcome').style.display = '';
     document.getElementById('htAiChat').style.display = 'none';
     document.getElementById('htAiMessages').innerHTML = '';
-    // restore toolbar default
     document.querySelectorAll('.ht-ai-tool').forEach((b, i) => {
         b.classList.toggle('active', i === 0);
     });
@@ -251,72 +261,54 @@ function htResetChat() {
 
 // ── Demo 1: 因子分析 ──────────────────────────────────────────────────
 function _htDemo1() {
-    let t = 300;
+    let t = 400;
 
-    _htUserMsg('新能源车企目前上险量维度的渠道库存压力趋势是怎么样的', t); t += 700;
-    _htShowTyping(t); t += 900; _htHideTyping(t);
+    _htUserMsg('新能源车企目前上险量维度的渠道库存压力趋势是怎么样的', t); t += 900;
+    _htShowTyping(t); t += 1600; _htHideTyping(t);
 
-    _htProcessCard('调用因子 SKILL · 上险量-累库分析', 'D1', t); t += 300;
-
-    const steps1 = [
-        ['D1s1', '步骤 1 &nbsp;原始数据获取', '上险量 · 产量 · 出口量 · 零售销量（8 家主要车企 · 近 12 个月）'],
-        ['D1s2', '步骤 2 &nbsp;因子加工', '累库量 = 产量 − 出口量 − 上险量 &nbsp;|&nbsp; 累库深度 = 累库量 ÷ 近 90 日均零售'],
-        ['D1s3', '步骤 3 &nbsp;可视化', '生成近 12 个月累库量柱状图 + 累库深度折线图'],
-        ['D1s4', '步骤 4 &nbsp;分析概括', '异动检测 · 趋势解读 · 推荐关注指标'],
+    _htThinkStart('好的，正在调用因子 SKILL 计算新能源车企渠道库存水位。', 'D1', t); t += 500;
+    const tools1 = [
+        ['读取上险量数据',    'RIS/insurance_reg_2025',       312],
+        ['读取产量数据',      'RIS/production_vol_2025',      248],
+        ['读取出口量数据',    'RIS/export_vol_2025',          198],
+        ['读取零售销量数据',  'RIS/retail_sales_2025',        276],
+        ['计算累库因子',      'Factor/accum_inventory',        89],
+        ['生成可视化图表',    'Renderer/chart_inventory',     143],
     ];
-    steps1.forEach(([sid, name, sub]) => {
-        _htStep('D1', sid, name, sub, t); t += 550;
-        _htDone(sid, t); t += 150;
-    });
+    tools1.forEach(([label, path, ms]) => { _htToolLine('D1', label, path, ms, t); t += 900; });
+    _htThinkDone('D1', '<strong>分析完成！</strong>', t); t += 1200;
 
-    // Chart
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const w = document.createElement('div');
-        w.className = 'ht-chart-wrap';
-        w.innerHTML = `<div class="ht-chart-title">比亚迪 · 渠道累库趋势（2025年）</div>${_htChartSVG()}<div class="ht-chart-legend"><span class="ht-legend-bar">累库量（万辆）</span><span class="ht-legend-line">累库深度（%）</span></div>`;
-        msgs.appendChild(w); _htScroll();
-    }); t += 700;
-
-    // Stat chips
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const el = document.createElement('div');
-        el.className = 'ht-stat-row';
-        el.innerHTML = `
-          <div class="ht-stat-chip"><span class="val">13.77</span><span class="unit">万辆 · 累库量</span><div class="delta delta-down"><i class="fa-solid fa-caret-down"></i> −4.39万 MoM</div></div>
-          <div class="ht-stat-chip"><span class="val">−30%</span><span class="unit">累库深度 MoM</span><div class="delta delta-down"><i class="fa-solid fa-caret-down"></i> 趋势向好</div></div>`;
-        msgs.appendChild(el); _htScroll();
-    }); t += 500;
-
-    // Report
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const el = document.createElement('div');
-        el.className = 'ht-report-card';
-        el.innerHTML = `
-          <div class="ht-report-title"><i class="fa-solid fa-file-lines" style="color:#4B85E6"></i> 渠道库存压力简报</div>
-          <div class="ht-report-meta">截至 2025年12月 · 覆盖 8 家主要新能源车企</div>
-          <div class="ht-report-section">
-            <div class="ht-report-section-title">⚠ 异动指标</div>
-            <div class="ht-report-item"><i class="fa-solid fa-circle-exclamation" style="color:#F59E0B"></i><span><strong>比亚迪</strong> 累库量 13.77 万辆，较上月减少 4.39 万辆；累库深度下降 30%，绝对值仍偏高，需持续跟踪</span></div>
-            <div class="ht-report-item"><i class="fa-solid fa-circle-dot" style="color:#C0C8D8"></i><span>行业总累库量约 62.4 万辆，环比下降 7.2%；7 家车企深度改善，1 家（理想）小幅上升</span></div>
-          </div>
-          <div class="ht-report-section">
-            <div class="ht-report-section-title">☆ 推荐关注指标</div>
-            <div class="ht-report-item"><i class="fa-solid fa-star" style="color:#4B85E6"></i><span>终端销量（上险量）— 最直接的真实需求信号</span></div>
-            <div class="ht-report-item"><i class="fa-solid fa-star" style="color:#4B85E6"></i><span>车企门店数量 — 渠道扩张速度与压库关联</span></div>
-            <div class="ht-report-item"><i class="fa-solid fa-star" style="color:#4B85E6"></i><span>零公里二手车挂牌量 — 渠道压力的领先指标</span></div>
-          </div>`;
-        msgs.appendChild(el); _htScroll();
-    });
+    _htDocReport(`
+      <div class="ht-rdoc-hdr">
+        <div class="ht-rdoc-title">新能源渠道库存压力周报：累库拐点初现</div>
+        <div class="ht-rdoc-tag">行业追踪</div>
+      </div>
+      <div class="ht-rdoc-meta">2025年12月 &nbsp;|&nbsp; 新能源汽车</div>
+      <div class="ht-rdoc-lead"><strong>核心观点：</strong>本周新能源渠道累库压力明显改善，比亚迪累库深度环比下降 30%，行业总累库量环比下降 7.2%，去化趋势初步确立。建议重点跟踪终端上险量与门店扩张匹配度，零公里二手车挂牌量为最佳领先指标。</div>
+      <div class="ht-rdoc-sh">一、主要车企渠道库存水位（2025年12月）</div>
+      <p class="ht-rdoc-body">截至 12 月末，头部品牌压力分化明显，比亚迪累库绝对量仍偏高但趋势向好，理想小幅上升需关注。</p>
+      <table class="ht-rdoc-tbl">
+        <thead><tr><th>车企</th><th>累库量（万辆）</th><th>累库深度</th><th>月环比</th></tr></thead>
+        <tbody>
+          <tr><td>比亚迪</td><td>13.77</td><td>中</td><td class="ht-rdoc-pos">-30%</td></tr>
+          <tr><td>问界</td><td>2.36</td><td>低</td><td class="ht-rdoc-pos">-12%</td></tr>
+          <tr><td>特斯拉</td><td>3.21</td><td>低</td><td class="ht-rdoc-pos">-8%</td></tr>
+          <tr><td>理想</td><td>2.84</td><td>低</td><td class="ht-rdoc-neg">+5%</td></tr>
+          <tr><td>小鹏</td><td>1.92</td><td>中</td><td class="ht-rdoc-pos">-15%</td></tr>
+        </tbody>
+      </table>
+      <div class="ht-rdoc-sh">二、累库趋势（比亚迪 · 近12个月）</div>
+      ${_htChartSVG()}
+      <div class="ht-rdoc-chart-legend"><span class="ht-rdoc-leg-bar">累库量（万辆）</span><span class="ht-rdoc-leg-line">累库深度（%）</span></div>
+      <div class="ht-rdoc-sh">三、推荐关注指标</div>
+      <div class="ht-rdoc-bul"><strong>终端销量（上险量）</strong>：最直接的真实需求信号，优先于批发量</div>
+      <div class="ht-rdoc-bul"><strong>车企门店数量</strong>：渠道扩张速度与压库关联，扩店快时需警惕隐性库存</div>
+      <div class="ht-rdoc-bul"><strong>零公里二手车挂牌量</strong>：渠道去化压力的领先指标，领先正式数据 1-2 个月</div>
+    `, t);
 }
 
 function _htChartSVG() {
-    const vw = 320, vh = 140, pL = 32, pR = 8, pT = 10, pB = 24;
+    const vw = 310, vh = 130, pL = 30, pR = 8, pT = 8, pB = 22;
     const cW = vw - pL - pR, cH = vh - pT - pB, n = 12;
     const vol = [16.8,13.2,19.5,15.4,12.6,17.2,20.1,18.3,15.8,17.4,18.16,13.77];
     const dep = [42,35,48,39,32,43,51,46,40,44,52,36];
@@ -324,136 +316,160 @@ function _htChartSVG() {
     let bars = '', pts = '', xlbl = '';
     for (let i = 0; i < n; i++) {
         const bx = pL + i * slot + (slot - bw) / 2;
-        const bh = (vol[i] / maxV) * cH;
-        const by = pT + cH - bh;
-        bars += `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="2" fill="${i===11?'#4B85E6':'#BFCFE9'}"/>`;
+        const bh = (vol[i] / maxV) * cH, by = pT + cH - bh;
+        bars += `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${bw.toFixed(1)}" height="${bh.toFixed(1)}" rx="2" fill="${i===11?'#4B85E6':'#C4D7F0'}"/>`;
         const lx = pL + i * slot + slot / 2, ly = pT + cH - (dep[i] / maxD) * cH;
         pts += `${lx.toFixed(1)},${ly.toFixed(1)} `;
         if (i % 3 === 0 || i === 11)
-            xlbl += `<text x="${(pL+i*slot+slot/2).toFixed(1)}" y="${vh-3}" text-anchor="middle" font-size="8.5" fill="#B0B8C8">${i+1}月</text>`;
+            xlbl += `<text x="${(pL+i*slot+slot/2).toFixed(1)}" y="${vh-4}" text-anchor="middle" font-size="8" fill="#AAB4C8">${i+1}月</text>`;
     }
     const yLines = [0,10,20].map(v => {
         const y = (pT + cH - (v/maxV)*cH).toFixed(1);
-        return `<text x="${pL-3}" y="${y}" text-anchor="end" dominant-baseline="middle" font-size="8" fill="#C0C8D8">${v}</text><line x1="${pL}" y1="${y}" x2="${pL+cW}" y2="${y}" stroke="#F0F2F5" stroke-width="1"/>`;
+        return `<text x="${pL-3}" y="${y}" text-anchor="end" dominant-baseline="middle" font-size="7.5" fill="#C8CFD8">${v}</text><line x1="${pL}" y1="${y}" x2="${pL+cW}" y2="${y}" stroke="#F3F5F8" stroke-width="1"/>`;
     }).join('');
-    const lbx = (pL + 11*slot + slot/2).toFixed(1);
-    const lby = (pT + cH - (vol[11]/maxV)*cH - 5).toFixed(1);
-    return `<svg viewBox="0 0 ${vw} ${vh}" width="100%">${yLines}${bars}<polyline points="${pts.trim()}" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>${xlbl}<text x="${lbx}" y="${lby}" text-anchor="middle" font-size="8.5" fill="#2D68FF" font-weight="bold">13.77</text></svg>`;
+    const lbx = (pL + 11*slot + slot/2).toFixed(1), lby = (pT + cH - (vol[11]/maxV)*cH - 5).toFixed(1);
+    return `<svg viewBox="0 0 ${vw} ${vh}" width="100%" style="margin:6px 0;">${yLines}${bars}<polyline points="${pts.trim()}" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>${xlbl}<text x="${lbx}" y="${lby}" text-anchor="middle" font-size="8" fill="#2D68FF" font-weight="bold">13.77</text></svg>`;
 }
 
 // ── Demo 2: 创建技能 ──────────────────────────────────────────────────
 function _htDemo2() {
-    let t = 300;
+    let t = 400;
 
-    // Highlight toolbar
     _htAt(t, () => {
         document.querySelectorAll('.ht-ai-tool').forEach(b => {
             b.classList.toggle('active', b.textContent.includes('创建技能'));
         });
-    }); t += 600;
+    }); t += 800;
 
-    _htUserMsg('帮我生成一个新能源汽车行业销售潜力分析技能', t); t += 700;
-    _htShowTyping(t); t += 1000; _htHideTyping(t);
+    _htUserMsg('帮我生成一个新能源汽车行业销售潜力分析技能', t); t += 900;
+    _htShowTyping(t); t += 1600; _htHideTyping(t);
 
-    _htProcessCard('调用 skill-create · 技能生成器', 'D2A', t); t += 300;
-    _htStep('D2A','D2As1','解析需求','新能源汽车 · 销售潜力 · 行业分析', t); t+=550; _htDone('D2As1',t); t+=150;
-    _htStep('D2A','D2As2','生成技能框架','规划分析模块 · 配置数据源 · 生成执行逻辑', t); t+=700; _htDone('D2As2',t); t+=150;
-    _htStep('D2A','D2As3','等待用户确认','请确认技能配置后执行', t); t+=200;
+    // Phase 1: Skill create
+    _htThinkStart('好的，我来为你生成「新能源销售潜力分析」技能。', 'D2A', t); t += 500;
+    [['解析需求', 'skill-create/parse_intent', 189],
+     ['生成技能框架', 'skill-create/gen_framework', 312],
+     ['配置数据源', 'skill-create/bind_datasource', 234],
+     ['写入技能文件', 'skills/nev-sales-potential/SKILL.md', 198],
+    ].forEach(([l, p, m]) => { _htToolLine('D2A', l, p, m, t); t += 900; });
+    _htThinkDone('D2A', '<strong>技能已生成！</strong><br><span style="font-size:11px;color:#888;">请确认以下配置，确认后立即执行。</span>', t); t += 700;
 
-    // Skill draft card
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const el = document.createElement('div');
-        el.className = 'ht-skill-card';
-        el.innerHTML = `
-          <div class="ht-skill-card-title"><i class="fa-solid fa-puzzle-piece"></i> 新技能草稿</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">1</span> 终端销量趋势分析</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">2</span> 渠道库存水位评估</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">3</span> 价格带分布与竞争分析</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">4</span> 下沉市场渗透率追踪</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">5</span> 竞品销量对比</div>
-          <div class="ht-skill-actions">
-            <button class="ht-skill-confirm-btn"><i class="fa-solid fa-check"></i> 确认执行</button>
-            <button class="ht-skill-modify-btn"><i class="fa-solid fa-pen"></i> 修改</button>
-          </div>`;
-        msgs.appendChild(el); _htScroll();
-    }); t += 1800;
+    _htAppend(`<div class="ht-skill-card">
+      <div class="ht-skill-card-title"><i class="fa-solid fa-puzzle-piece"></i> 新技能草稿 · 新能源销售潜力分析</div>
+      <div class="ht-skill-module"><span class="ht-skill-module-num">1</span> 终端销量趋势分析</div>
+      <div class="ht-skill-module"><span class="ht-skill-module-num">2</span> 渠道库存水位评估</div>
+      <div class="ht-skill-module"><span class="ht-skill-module-num">3</span> 价格带分布与竞争分析</div>
+      <div class="ht-skill-module"><span class="ht-skill-module-num">4</span> 下沉市场渗透率追踪</div>
+      <div class="ht-skill-module"><span class="ht-skill-module-num">5</span> 竞品销量对比</div>
+      <div class="ht-skill-actions">
+        <button class="ht-skill-confirm-btn"><i class="fa-solid fa-check"></i> 确认执行</button>
+        <button class="ht-skill-modify-btn"><i class="fa-solid fa-pen"></i> 修改</button>
+      </div></div>`, t); t += 2200;
 
-    // Auto confirm
-    _htAt(t, () => { const ic = document.getElementById('D2As3'); if(ic){ic.innerHTML='<i class="fa-solid fa-circle-check"></i>';ic.className='ht-step-icon done';} });
-    _htUserMsg('确认执行', t); t += 600;
-    _htShowTyping(t); t += 700; _htHideTyping(t);
+    _htUserMsg('确认执行', t); t += 900;
+    _htShowTyping(t); t += 1600; _htHideTyping(t);
 
-    // Execute skill
-    _htProcessCard('执行技能 · 新能源销售潜力分析 v1', 'D2B', t); t += 300;
-    const exec = [
-        ['D2Bs1','模块 1 &nbsp;终端销量趋势分析','加载上险量 · 批发量 · 终端交付数据'],
-        ['D2Bs2','模块 2 &nbsp;渠道库存水位评估','计算各车企渠道库存深度及压库风险系数'],
-        ['D2Bs3','模块 3 &nbsp;价格带分布分析','15-20万 / 20-30万 / 30万+ 各档竞争格局'],
-        ['D2Bs4','模块 4 &nbsp;下沉市场渗透追踪','三四线城市上险量同比增速与渗透率变化'],
-        ['D2Bs5','模块 5 &nbsp;竞品销量对比','比亚迪 / 特斯拉 / 理想 / 小米 市场份额'],
-    ];
-    exec.forEach(([sid,name,sub]) => { _htStep('D2B',sid,name,sub,t); t+=480; _htDone(sid,t); t+=120; });
-    t += 300;
+    // Phase 2: Execute skill
+    _htThinkStart('好的，开始执行「新能源销售潜力分析」技能。', 'D2B', t); t += 500;
+    [['执行模块 1  终端销量趋势分析',  'skills/nev-sales-potential/m1_terminal',   456],
+     ['执行模块 2  渠道库存水位评估',  'skills/nev-sales-potential/m2_inventory',  398],
+     ['执行模块 3  价格带分布分析',    'skills/nev-sales-potential/m3_pricebelt',  412],
+     ['执行模块 4  下沉市场渗透追踪',  'skills/nev-sales-potential/m4_sinking',    387],
+     ['执行模块 5  竞品销量对比',      'skills/nev-sales-potential/m5_competitor', 421],
+     ['生成分析报告',                  'Renderer/report_generator',                267],
+    ].forEach(([l, p, m]) => { _htToolLine('D2B', l, p, m, t); t += 900; });
+    _htThinkDone('D2B', '<strong>技能执行完成！</strong>', t); t += 1200;
 
-    // Result v1
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const el = document.createElement('div');
-        el.className = 'ht-report-card';
-        el.innerHTML = `
-          <div class="ht-report-title"><i class="fa-solid fa-chart-line" style="color:#10B981"></i> 销售潜力分析简报 · v1</div>
-          <div class="ht-report-meta">已完成 5 个模块 · 数据截至 2025年12月</div>
-          <div class="ht-report-item"><i class="fa-solid fa-circle-check" style="color:#10B981"></i><span>全年终端累计增速 28.4%，12 月环比回升，旺季拉动明显</span></div>
-          <div class="ht-report-item"><i class="fa-solid fa-circle-exclamation" style="color:#F59E0B"></i><span>20-30 万档竞争最激烈，理想 / 问界 / 小米三方厮杀；30万+ 特斯拉份额持续下滑</span></div>
-          <div class="ht-report-item"><i class="fa-solid fa-circle-check" style="color:#10B981"></i><span>三四线城市新增上险量占比由 21% 升至 29%，下沉市场潜力显著</span></div>`;
-        msgs.appendChild(el); _htScroll();
-    }); t += 1200;
+    _htDocReport(`
+      <div class="ht-rdoc-hdr">
+        <div class="ht-rdoc-title">新能源汽车销售潜力分析</div>
+        <div class="ht-rdoc-tag">行业分析</div>
+      </div>
+      <div class="ht-rdoc-meta">2025年12月 &nbsp;|&nbsp; 新能源汽车</div>
+      <div class="ht-rdoc-lead"><strong>核心观点：</strong>2025年全年终端增速 28.4%，旺季 12 月环比回升；20-30 万价格带竞争最为激烈，三四线城市渗透率快速提升至 29%，下沉市场成为核心增量来源。</div>
+      <div class="ht-rdoc-sh">一、终端销量趋势（2025年12月）</div>
+      <table class="ht-rdoc-tbl">
+        <thead><tr><th>指标</th><th>本月</th><th>月环比</th><th>年同比</th></tr></thead>
+        <tbody>
+          <tr><td>终端销量（万辆）</td><td>39.4</td><td class="ht-rdoc-pos">+12.6%</td><td class="ht-rdoc-pos">+28.4%</td></tr>
+          <tr><td>上险量（万辆）</td><td>38.7</td><td class="ht-rdoc-pos">+11.9%</td><td class="ht-rdoc-pos">+27.1%</td></tr>
+          <tr><td>批发量（万辆）</td><td>43.2</td><td class="ht-rdoc-pos">+8.4%</td><td class="ht-rdoc-pos">+22.3%</td></tr>
+          <tr><td>批零差（万辆）</td><td>4.5</td><td class="ht-rdoc-neg">+0.7</td><td class="ht-rdoc-neu">持平</td></tr>
+        </tbody>
+      </table>
+      <div class="ht-rdoc-sh">二、价格带竞争格局</div>
+      <table class="ht-rdoc-tbl">
+        <thead><tr><th>价格带</th><th>主要竞争车型</th><th>份额变化</th></tr></thead>
+        <tbody>
+          <tr><td>15-20 万</td><td>比亚迪海豚 / 秦Plus EV</td><td class="ht-rdoc-neg">-2pp</td></tr>
+          <tr><td>20-30 万</td><td>问界M5 / 理想L6 / 小米SU7</td><td class="ht-rdoc-pos">+5pp</td></tr>
+          <tr><td>30 万+</td><td>问界M9 / 理想L9 / 蔚来ET9</td><td class="ht-rdoc-pos">+3pp</td></tr>
+        </tbody>
+      </table>
+      <div class="ht-rdoc-sh">三、下沉市场渗透</div>
+      <div class="ht-rdoc-bul"><strong>三四线城市新增上险量占比</strong>由 21% 升至 29%，增量市场重心持续下移</div>
+      <div class="ht-rdoc-bul"><strong>县域新能源渗透率</strong>同比 +8pp，充电桩布局提速是核心催化剂</div>
+    `, t); t += 2500;
 
     // User unsatisfied
-    _htUserMsg('分析还不够全面，请增加「区域渗透率热力图」分析模块', t); t += 700;
-    _htShowTyping(t); t += 900; _htHideTyping(t);
+    _htUserMsg('分析还不够全面，请增加「区域渗透率热力图」分析模块', t); t += 900;
+    _htShowTyping(t); t += 1600; _htHideTyping(t);
 
-    // Updated skill card
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const el = document.createElement('div');
-        el.className = 'ht-skill-card';
-        el.innerHTML = `
-          <div class="ht-skill-card-title"><i class="fa-solid fa-rotate"></i> 技能已更新（+1 模块）</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">1</span> 终端销量趋势分析</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">2</span> 渠道库存水位评估</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">3</span> 价格带分布与竞争分析</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">4</span> 下沉市场渗透率追踪</div>
-          <div class="ht-skill-module"><span class="ht-skill-module-num">5</span> 竞品销量对比</div>
-          <div class="ht-skill-module ht-new-mod"><span class="ht-skill-module-num">6</span> ✦ 区域渗透率热力图（新增）</div>`;
-        msgs.appendChild(el); _htScroll();
-    }); t += 600;
+    // Phase 3: Modify skill
+    _htThinkStart('好的，我来修改 Skill 并进行测试验证。', 'D2C', t); t += 500;
+    [['读取技能文件',  'skills/nev-sales-potential/SKILL.md',  178],
+     ['新增分析模块',  'skill-create/add_module',               312],
+     ['更新数据绑定',  'skill-create/bind_datasource',          198],
+     ['写入技能文件',  'skills/nev-sales-potential/SKILL.md',  234],
+    ].forEach(([l, p, m]) => { _htToolLine('D2C', l, p, m, t); t += 900; });
+    _htThinkDone('D2C', '<strong>Skill 已修改完成！</strong>', t); t += 700;
+
+    _htSummaryBlock(`
+      <div class="ht-ms-label">修改摘要：</div>
+      <table class="ht-ms-table">
+        <thead><tr><th>修改项</th><th>变更内容</th></tr></thead>
+        <tbody>
+          <tr><td>新增步骤</td><td>增加了"第六步：区域渗透率热力图分析"</td></tr>
+          <tr><td>分析维度</td><td>华东、华南、华中、西部、东北 5 大区域</td></tr>
+          <tr><td>数据来源</td><td>省级上险量数据 + 渗透率计算模型</td></tr>
+          <tr><td>输出格式</td><td>省份渗透率热力图 + TOP5 高潜力区域标注</td></tr>
+        </tbody>
+      </table>
+      <p>下次执行"新能源销售潜力分析"时，报告将同时包含：</p>
+      <ul>
+        <li><strong>区域渗透率视角：</strong>省级渗透率热力图、高潜力市场识别</li>
+        <li><strong>原有五大模块：</strong>终端销量 · 库存水位 · 价格带 · 下沉市场 · 竞品对比</li>
+      </ul>
+      <p>随时可以对"新能源销售潜力分析" skill 继续提出调整。</p>
+    `, t); t += 1800;
 
     // Re-run
-    _htProcessCard('重新执行 · 新能源销售潜力分析 v2', 'D2C', t); t += 300;
-    const rerun = [
-        ['D2Cs1','模块 1-5 &nbsp;复用上次结果','数据未变，跳过重算，直接加载缓存'],
-        ['D2Cs2','模块 6 &nbsp;区域渗透率热力图','按省份加载上险量 · 计算渗透率 · 生成热力分布'],
-    ];
-    rerun.forEach(([sid,name,sub]) => { _htStep('D2C',sid,name,sub,t); t+=600; _htDone(sid,t); t+=150; });
-    t += 400;
+    _htThinkStart('好的，重新执行技能，新增区域渗透率模块。', 'D2D', t); t += 500;
+    [['复用模块 1-5 缓存结果',        'skills/nev-sales-potential/cache',          89],
+     ['执行模块 6  区域渗透率热力图',  'skills/nev-sales-potential/m6_regional',   612],
+     ['生成更新报告',                  'Renderer/report_generator',                298],
+    ].forEach(([l, p, m]) => { _htToolLine('D2D', l, p, m, t); t += 1000; });
+    _htThinkDone('D2D', '<strong>技能执行完成！</strong>', t); t += 1200;
 
-    // Final result v2
-    _htAt(t, () => {
-        const msgs = document.getElementById('htAiMessages');
-        if (!msgs) return;
-        const el = document.createElement('div');
-        el.className = 'ht-report-card';
-        el.innerHTML = `
-          <div class="ht-report-title"><i class="fa-solid fa-chart-line" style="color:#10B981"></i> 销售潜力分析简报 · v2</div>
-          <div class="ht-report-meta">已完成 6 个模块 · 含区域热力图 · 数据截至 2025年12月</div>
-          <div class="ht-report-item"><i class="fa-solid fa-circle-check" style="color:#10B981"></i><span>华东 / 华南渗透率领先（35%-42%），西部省份仍低于 15%，区域分化显著</span></div>
-          <div class="ht-report-item"><i class="fa-solid fa-star" style="color:#4B85E6"></i><span>新疆、甘肃、内蒙古渗透率同比增速最快（+12 ppt），是下一阶段重点布局区域</span></div>
-          <div class="ht-report-item" style="color:#059669; font-weight:500;"><i class="fa-solid fa-circle-check" style="color:#059669"></i><span>技能「新能源销售潜力分析 v2」已保存至技能库，可随时复用</span></div>`;
-        msgs.appendChild(el); _htScroll();
-    });
+    _htDocReport(`
+      <div class="ht-rdoc-hdr">
+        <div class="ht-rdoc-title">新能源汽车销售潜力分析 · v2</div>
+        <div class="ht-rdoc-tag">行业分析</div>
+      </div>
+      <div class="ht-rdoc-meta">2025年12月 &nbsp;|&nbsp; 新能源汽车 &nbsp;· 含区域渗透率模块</div>
+      <div class="ht-rdoc-lead"><strong>核心观点：</strong>新增区域维度分析显示，华东/华南渗透率领先（35-42%），西部省份增速最快（+12pp）；建议优先布局西部及东北下沉市场，是下一阶段销量增量的核心来源。</div>
+      <div class="ht-rdoc-sh">四、区域渗透率分析（新增）</div>
+      <table class="ht-rdoc-tbl">
+        <thead><tr><th>区域</th><th>渗透率</th><th>同比变化</th></tr></thead>
+        <tbody>
+          <tr><td>华东</td><td>42%</td><td class="ht-rdoc-pos">+8pp</td></tr>
+          <tr><td>华南</td><td>38%</td><td class="ht-rdoc-pos">+7pp</td></tr>
+          <tr><td>华中</td><td>28%</td><td class="ht-rdoc-pos">+9pp</td></tr>
+          <tr><td>西部</td><td>14%</td><td class="ht-rdoc-pos">+12pp</td></tr>
+          <tr><td>东北</td><td>18%</td><td class="ht-rdoc-pos">+6pp</td></tr>
+        </tbody>
+      </table>
+      <div class="ht-rdoc-bul"><strong>新疆、甘肃、内蒙古</strong>渗透率同比增速最快（+12pp），是下一阶段重点布局区域</div>
+      <div class="ht-rdoc-bul"><strong>一至三模块结论不变</strong>，完整报告见上方 v1 输出</div>
+      <div class="ht-rdoc-bul" style="color:#059669; font-weight:500;">技能「新能源销售潜力分析 v2」已保存至技能库，可随时复用</div>
+    `, t);
 }
