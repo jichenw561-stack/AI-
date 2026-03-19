@@ -1,0 +1,1901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIS 投资研究平台 - 热门赛道</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hot_tracks.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <header class="top-navbar">
+            <div class="logo">
+                <i class="fa-brands fa-researchgate logo-icon"></i>
+                <span class="logo-text">RIS</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="#">行业研究</a></li>
+                    <li><a href="#">公司研究</a></li>
+                    <li class="active"><a href="hot_tracks.html">热门赛道</a></li>
+                    <li><a href="data_browser.html">数据浏览器</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="查询赛道、报告、工具">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+                <div class="icon-group">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="lang-switch">中文 | EN</span>
+                    <i class="fa-solid fa-desktop"></i>
+                    <span class="user-name"><i class="fa-regular fa-circle-user" style="margin-right:4px;"></i>
+                        蜡海波</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Layout Area with Left Sidebar -->
+        <div class="main-layout" style="padding: 0; background: var(--ht-bg);">
+            <!-- Left Sidebar -->
+            <aside class="left-sidebar slim-scroll"
+                style="height: 100%; border-radius: 0; border-right: 1px solid var(--border-color); box-shadow: none;">
+                <div class="accordion-menu">
+                    <div class="menu-item">
+                        <div class="menu-title active"
+                            style="color: var(--primary-blue); font-weight: bold; background-color: var(--accent-bg);">
+                            <i class="fa-solid fa-car" style="margin-right: 8px;"></i>
+                            新能源汽车
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-title">
+                            <i class="fa-solid fa-microchip"
+                                style="margin-right: 8px; color: var(--text-secondary);"></i>
+                            智能驾驶
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-title">
+                            <i class="fa-solid fa-pills" style="margin-right: 8px; color: var(--text-secondary);"></i>
+                            创新药
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Content (Hot Tracks Default: 新能源汽车) -->
+            <div class="ht-layout slim-scroll" style="padding: 24px;">
+
+                <!-- Module 1: AGENT 全景矩阵 -->
+                <section class="ht-module" style="padding: 24px 32px;">
+                    <div class="ht-module-header">
+                        <div class="ht-module-title">
+                            <div class="matrix-logo"><i class="fa-solid fa-brain"></i></div>
+                            睿思·AI智研引擎
+                            <span class="title-badge">13个智能体</span>
+                        </div>
+                        <div class="matrix-tabs" id="agentFilterTabs">
+                            <div class="matrix-tab" data-filter="常用">常用</div>
+                            <div class="matrix-tab active" data-filter="全部">全部</div>
+                            <div class="matrix-tab" data-filter="通用">通用</div>
+                            <div class="matrix-tab" data-filter="增强">增强</div>
+                            <div class="matrix-tab" data-filter="行业特色">行业特色</div>
+                            <div class="matrix-tab-icon"><i class="fa-solid fa-chevron-up"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="agent-grid">
+                        <!-- Card 1 -->
+                        <div class="agent-card" style="--card-color: #E66666;"
+                            onclick="window.location.href='agent_detail.html?agent=one_pager'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #FCE8E8; color: #E66666;"><i
+                                            class="fa-regular fa-file-lines"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">行业一页纸</span>
+                                        <span class="agent-tag agent-tag-blue">通用</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-fire agent-action-icon" style="color: #E66666;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>快速认知行业、建立行业投资框架</p>
+                                <span>路演/会议前准备 · 新行业覆盖 · 投委会材料</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="agent-card" style="--card-color: #4B85E6;"
+                            onclick="window.location.href='agent_detail.html?agent=theme_stock'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #EAF0FA; color: #4B85E6;"><i
+                                            class="fa-solid fa-crosshairs"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">主题选股</span>
+                                        <span class="agent-tag agent-tag-blue">通用</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-bolt agent-action-icon" style="color: #E6A23C;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>行业投资逻辑映射投资标的</p>
+                                <span>热点出现 · 主题交易</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="agent-card" style="--card-color: #9333EA;"
+                            onclick="window.location.href='agent_detail.html?agent=prosperity'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #F3E8FF; color: #9333EA;"><i
+                                            class="fa-solid fa-chart-line"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">行业景气度透视</span>
+                                        <span class="agent-tag agent-tag-purple">增强</span>
+                                    </div>
+                                </div>
+                                <i class="fa-regular fa-gem agent-action-icon" style="color: #9333EA;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>公司纪要反推行业趋势, 横纵多源交叉验证</p>
+                                <span>财报季 · 策略会 · 产业链调研</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="agent-card" style="--card-color: #10B981;"
+                            onclick="window.location.href='agent_detail.html?agent=news_summary'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #E6F4EA; color: #10B981;"><i
+                                            class="fa-regular fa-newspaper"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">周度行业新闻总结</span>
+                                        <span class="agent-tag agent-tag-blue">通用</span>
+                                    </div>
+                                </div>
+                                <i class="fa-regular fa-calendar agent-action-icon" style="color: #999;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>信息聚合与趋势提炼</p>
+                                <span>周报撰写</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="agent-card" style="--card-color: #F59E0B;"
+                            onclick="window.location.href='agent_detail.html?agent=drug_catalyst'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #FEF3C7; color: #F59E0B;"><i
+                                            class="fa-solid fa-pills"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">创新药催化追踪</span>
+                                        <span class="agent-tag agent-tag-green">创新药</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-capsules agent-action-icon" style="color: #4B85E6;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>追踪临床读出、BD交易、适应症拓展与商业化放量</p>
+                                <span>JPM大会 · ASCO/ACR · 三期读出 · BD传闻</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="agent-card" style="--card-color: #F87171;"
+                            onclick="window.location.href='agent_detail.html?agent=smart_driving'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #FEE2E2; color: #F87171;"><i
+                                            class="fa-solid fa-car"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">智驾渗透率追踪</span>
+                                        <span class="agent-tag agent-tag-green">汽车/科技</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-car-side agent-action-icon" style="color: #999;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>L2+/NOA渗透率、域控/激光雷达份额及政策强标</p>
+                                <span>月度数据 · 政策落地 · 配置率变化 · Robotaxi</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 7 -->
+                        <div class="agent-card" style="--card-color: #059669;"
+                            onclick="window.location.href='agent_detail.html?agent=commodity'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #D1FAE5; color: #059669;"><i
+                                            class="fa-solid fa-chart-pie"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">大宗商品历史复盘</span>
+                                        <span class="agent-tag agent-tag-green">周期</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chart-pie agent-action-icon" style="color: #059669;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>价格-利润弹性周期对比</p>
+                                <span>价格大涨跌 · 周期拐点 · 利润弹性测算</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 8 -->
+                        <div class="agent-card" style="--card-color: #F59E0B;"
+                            onclick="window.location.href='agent_detail.html?agent=supply_chain'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #FEF3C7; color: #F59E0B;"><i
+                                            class="fa-solid fa-diagram-project"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">供应链映射</span>
+                                        <span class="agent-tag agent-tag-purple">增强</span>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-bolt agent-action-icon" style="color: #F59E0B;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>产业链结构拆解与价格/需求传导路径分析</p>
+                                <span>新赛道梳理 · 上下游价格变动 · 冲击传导</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Card 9 -->
+                        <div class="agent-card" style="--card-color: #EF4444;"
+                            onclick="window.location.href='agent_detail.html?agent=global_compare'">
+                            <div class="agent-header">
+                                <div class="agent-header-left">
+                                    <div class="agent-icon" style="background: #FEE2E2; color: #EF4444;"><i
+                                            class="fa-solid fa-globe"></i></div>
+                                    <div class="agent-title-wrap">
+                                        <span class="agent-title">全球可比公司分析</span>
+                                        <span class="agent-tag agent-tag-purple">增强</span>
+                                    </div>
+                                </div>
+                                <i class="fa-regular fa-gem agent-action-icon" style="color: #9333EA;"></i>
+                            </div>
+                            <div class="agent-desc">
+                                <p>建立估值锚与国际对标</p>
+                                <span>新赛道估值讨论</span>
+                            </div>
+                            <div class="agent-footer">
+                                <div class="agent-f-icon" title="数据库"><i class="fa-solid fa-database"></i></div>
+                                <div class="agent-f-icon" title="上传"><i class="fa-solid fa-upload"></i></div>
+                                <div class="agent-f-icon" title="插件"><i class="fa-solid fa-puzzle-piece"></i></div>
+                                <div class="agent-f-icon" title="对话"><i class="fa-regular fa-comment-dots"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 2: 特色分析 -->
+                <section class="ht-module">
+                    <div class="ht-module-header" style="border-bottom: 1px solid var(--ht-border); padding-bottom: 0;">
+                        <div style="display: flex; align-items: center; gap: 24px;">
+                            <div class="ht-module-title" style="margin-bottom: 16px;">
+                                <div class="matrix-logo" style="background: #9333EA;"><i
+                                        class="fa-solid fa-chart-pie"></i>
+                                </div>
+                                特色分析
+                            </div>
+                            <div class="fa-tabs">
+                                <div class="fa-tab active" data-tab="fa-tab-sales">销售潜力分析</div>
+                                <div class="fa-tab" data-tab="fa-tab-inventory">库存压力分析</div>
+                                <div class="fa-tab" data-tab="fa-tab-compete">竞争力分析</div>
+                                <div class="fa-tab" data-tab="fa-tab-chain">产业链分析</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analysis-layout" style="margin-top: 24px;">
+                        <!-- Left: Charts (Tab Contents) -->
+                        <div class="analysis-charts slim-scroll">
+
+                            <!-- TAB 1: 销售潜力 (Sales Potential) -->
+                            <div class="fa-tab-content active" id="fa-tab-sales">
+                                <div class="agent-narrative-box">
+                                    <div class="narrative-header">
+                                        <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
+                                            核心观点：销售潜力与下沉市场爆发</div>
+                                        <div class="narrative-badge">深度洞察</div>
+                                    </div>
+                                    <div class="narrative-body">
+                                        <p>综合乘联会与交强险数据深度测算：当前赛道总体保持高景气度（近3年CAGR达15.2%）。但值得注意的是，<strong>增量市场正快速向三四线城市（下沉市场）转移</strong>。
+                                        </p>
+                                        <p>我们观察到头部品牌A的区域零售渗透率与门店扩张速度出现错配，部分二线渠道存在“压库促开票”的现象，短期账面数据存在 12%
+                                            左右的合理“水分”。建议重点关注其实际终端交付能力（上险量）而非单一批发量。</p>
+                                    </div>
+                                </div>
+                                <div class="evidence-dashboard">
+                                    <div class="data-card-row">
+                                        <div class="data-card">
+                                            <div class="dc-title">1月终端销量</div>
+                                            <div class="dc-value">71.2<span>万辆</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 同比 +38.6%
+                                            </div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">1月门店数量</div>
+                                            <div class="dc-value">4,471<span>家</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 同比 +5.4%</div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">单店月均销量</div>
+                                            <div class="dc-value">159.4<span>辆</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 环比 +31.5%
+                                            </div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">新车速递本月</div>
+                                            <div class="dc-value">23<span>款</span></div>
+                                            <div class="dc-trend down"><i class="fa-solid fa-caret-down"></i> 环比 -2款
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="data-table-row">
+                                        <div class="data-table-container">
+                                            <div class="dt-header"><span class="dt-mark"></span>主要车企终端销量与门店数对比 (2025-12)
+                                            </div>
+                                            <table class="custom-table" style="font-size: 13px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>排名</th>
+                                                        <th>车企</th>
+                                                        <th>终端销量(万辆)</th>
+                                                        <th>环比</th>
+                                                        <th>趋势</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">1</span></td>
+                                                        <td>比亚迪</td>
+                                                        <td>47.46</td>
+                                                        <td class="val-up">+5.30%</td>
+                                                        <td>
+                                                            <div class="mini-bars">
+                                                                <div class="mini-bar" style="height:40%"></div>
+                                                                <div class="mini-bar" style="height:50%"></div>
+                                                                <div class="mini-bar" style="height:70%"></div>
+                                                                <div class="mini-bar" style="height:80%"></div>
+                                                                <div class="mini-bar" style="height:100%"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">2</span></td>
+                                                        <td>上汽集团</td>
+                                                        <td>14.01</td>
+                                                        <td class="val-down">-4.79%</td>
+                                                        <td>
+                                                            <div class="mini-bars">
+                                                                <div class="mini-bar" style="height:100%"></div>
+                                                                <div class="mini-bar" style="height:90%"></div>
+                                                                <div class="mini-bar" style="height:80%"></div>
+                                                                <div class="mini-bar" style="height:60%"></div>
+                                                                <div class="mini-bar" style="height:40%"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">3</span></td>
+                                                        <td>理想汽车</td>
+                                                        <td>11.60</td>
+                                                        <td class="val-up">+1.67%</td>
+                                                        <td>
+                                                            <div class="mini-bars">
+                                                                <div class="mini-bar" style="height:30%"></div>
+                                                                <div class="mini-bar" style="height:50%"></div>
+                                                                <div class="mini-bar" style="height:60%"></div>
+                                                                <div class="mini-bar" style="height:80%"></div>
+                                                                <div class="mini-bar" style="height:100%"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">4</span></td>
+                                                        <td>广汽集团</td>
+                                                        <td>9.07</td>
+                                                        <td class="val-down">-0.95%</td>
+                                                        <td>
+                                                            <div class="mini-bars">
+                                                                <div class="mini-bar" style="height:100%"></div>
+                                                                <div class="mini-bar" style="height:95%"></div>
+                                                                <div class="mini-bar" style="height:85%"></div>
+                                                                <div class="mini-bar" style="height:60%"></div>
+                                                                <div class="mini-bar" style="height:55%"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">5</span></td>
+                                                        <td>吉利汽车</td>
+                                                        <td>8.94</td>
+                                                        <td class="val-up">+2.11%</td>
+                                                        <td>
+                                                            <div class="mini-bars">
+                                                                <div class="mini-bar" style="height:40%"></div>
+                                                                <div class="mini-bar" style="height:50%"></div>
+                                                                <div class="mini-bar" style="height:70%"></div>
+                                                                <div class="mini-bar" style="height:90%"></div>
+                                                                <div class="mini-bar" style="height:100%"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">6</span></td>
+                                                        <td>特斯拉中国</td>
+                                                        <td>7.28</td>
+                                                        <td class="val-down">-8.40%</td>
+                                                        <td>
+                                                            <div class="mini-bars">
+                                                                <div class="mini-bar" style="height:100%"></div>
+                                                                <div class="mini-bar" style="height:80%"></div>
+                                                                <div class="mini-bar" style="height:60%"></div>
+                                                                <div class="mini-bar" style="height:40%"></div>
+                                                                <div class="mini-bar" style="height:20%"></div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="data-table-container">
+                                            <div class="dt-header"><span class="dt-mark"></span>终端销量数据真实性分析 (2025-12)
+                                            </div>
+                                            <table class="custom-table" style="font-size: 13px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>车企</th>
+                                                        <th>批售量(万辆)</th>
+                                                        <th>零售量(万辆)</th>
+                                                        <th>差值</th>
+                                                        <th>异常信号</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>比亚迪</td>
+                                                        <td>47.46</td>
+                                                        <td>46.30</td>
+                                                        <td class="val-up">+1.16</td>
+                                                        <td><span class="status-tag st-normal">√ 正常</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>上汽集团</td>
+                                                        <td>16.20</td>
+                                                        <td>14.01</td>
+                                                        <td class="val-up">+2.19</td>
+                                                        <td><span class="status-tag st-warn">△ 关注</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>理想汽车</td>
+                                                        <td>11.43</td>
+                                                        <td>11.60</td>
+                                                        <td class="val-down">-0.17</td>
+                                                        <td><span class="status-tag st-normal">√ 正常</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>广汽集团</td>
+                                                        <td>11.82</td>
+                                                        <td>9.07</td>
+                                                        <td class="val-up">+2.75</td>
+                                                        <td><span class="status-tag st-danger">△ 压货</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>吉利汽车</td>
+                                                        <td>9.18</td>
+                                                        <td>8.94</td>
+                                                        <td class="val-up">+0.24</td>
+                                                        <td><span class="status-tag st-normal">√ 正常</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>特斯拉中国</td>
+                                                        <td>7.35</td>
+                                                        <td>7.28</td>
+                                                        <td class="val-up">+0.07</td>
+                                                        <td><span class="status-tag st-normal">√ 正常</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 2: 库存压力 (Inventory Pressure) -->
+                            <div class="fa-tab-content" id="fa-tab-inventory">
+                                <div class="agent-narrative-box">
+                                    <div class="narrative-header">
+                                        <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
+                                            核心观点：全通道库存水位预警
+                                        </div>
+                                        <div class="narrative-badge alert">高能预警</div>
+                                    </div>
+                                    <div class="narrative-body">
+                                        <p>通过多模态数据拟合监控产业链库存健康度：当前<strong>全行业广义库存天数已攀升至 86 天，突破 75 天安全警戒水位</strong>。</p>
+                                        <p>结构性问题突出：厂端库存可控，但渠道（经销商）库存积压严重。预计 Q3
+                                            将迎来激烈的“以价换量”价格战，二线品牌面临严峻的存货跌价计提风险，利润表修复将延后至明年
+                                            Q1。</p>
+                                    </div>
+                                </div>
+                                <div class="evidence-dashboard">
+                                    <div class="data-card-row">
+                                        <div class="data-card">
+                                            <div class="dc-title">行业库存周转天数</div>
+                                            <div class="dc-value">31.5<span>天</span></div>
+                                            <div class="dc-trend down"><i class="fa-solid fa-caret-down"></i> 环比 -3.2天
+                                            </div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">高压车企数量</div>
+                                            <div class="dc-value">4<span>家</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 较上月 +1家</div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">行业产销率</div>
+                                            <div class="dc-value">96.3<span>%</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 环比 +1.8pct
+                                            </div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">渠道库存总量</div>
+                                            <div class="dc-value">113<span>万辆</span></div>
+                                            <div class="dc-trend down"><i class="fa-solid fa-caret-down"></i> 环比 -7万辆
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="data-table-row">
+                                        <div class="data-table-container">
+                                            <div class="dt-header"><span class="dt-mark"></span>车企库存压力排名 (CRMS, 2025-12)
+                                            </div>
+                                            <table class="custom-table" style="font-size: 13px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>车企</th>
+                                                        <th>库存周转(天)</th>
+                                                        <th style="width:140px;">压力指数</th>
+                                                        <th>环比</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>广汽集团</td>
+                                                        <td>58.4</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill red" style="width:80%">
+                                                                    </div>
+                                                                </div><span class="val-up">高</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="val-up">+8.1天</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>长安汽车</td>
+                                                        <td>47.2</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill red" style="width:65%">
+                                                                    </div>
+                                                                </div><span class="val-up">高</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="val-up">+3.5天</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>上汽集团</td>
+                                                        <td>42.8</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill orange"
+                                                                        style="width:50%">
+                                                                    </div>
+                                                                </div><span class="val-warn">中</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="val-down">-1.2天</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>吉利汽车</td>
+                                                        <td>34.6</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill orange"
+                                                                        style="width:40%">
+                                                                    </div>
+                                                                </div><span class="val-warn">中</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="val-down">-2.4天</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>理想汽车</td>
+                                                        <td>18.3</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width:20%">
+                                                                    </div>
+                                                                </div><span class="val-down">低</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="val-down">-4.1天</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>比亚迪</td>
+                                                        <td>14.7</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width:15%">
+                                                                    </div>
+                                                                </div><span class="val-down">低</span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="val-down">-1.8天</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="data-table-container">
+                                            <div class="dt-header"><span class="dt-mark"></span>行业产销月度分析 (2025)</div>
+                                            <table class="custom-table" style="font-size: 13px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>月份</th>
+                                                        <th>产量(万辆)</th>
+                                                        <th>批售量(万辆)</th>
+                                                        <th>产销率</th>
+                                                        <th>库存变化</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2025-07</td>
+                                                        <td>98.4</td>
+                                                        <td>94.2</td>
+                                                        <td>95.7%</td>
+                                                        <td class="val-up">+4.2</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025-08</td>
+                                                        <td>101.2</td>
+                                                        <td>99.8</td>
+                                                        <td>98.6%</td>
+                                                        <td class="val-up">+1.4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025-09</td>
+                                                        <td>107.6</td>
+                                                        <td>108.3</td>
+                                                        <td>100.6%</td>
+                                                        <td class="val-down">-0.7</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025-10</td>
+                                                        <td>112.4</td>
+                                                        <td>110.1</td>
+                                                        <td>97.9%</td>
+                                                        <td class="val-up">+2.3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025-11</td>
+                                                        <td>118.7</td>
+                                                        <td>116.9</td>
+                                                        <td>98.5%</td>
+                                                        <td class="val-up">+1.8</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2025-12</td>
+                                                        <td>124.3</td>
+                                                        <td>127.1</td>
+                                                        <td>102.2%</td>
+                                                        <td class="val-down">-2.8</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 3: 竞争力 (Competitiveness) -->
+                            <div class="fa-tab-content" id="fa-tab-compete">
+                                <div class="agent-narrative-box">
+                                    <div class="narrative-header">
+                                        <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
+                                            核心观点：多维护城河重塑与份额争夺</div>
+                                        <div class="narrative-badge">竞争格局</div>
+                                    </div>
+                                    <div class="narrative-body">
+                                        <p>马太效应加剧，<strong>CR3 份额已达 65%
+                                                并持续吸链</strong>。传统的“性价比”单点壁垒正在失效，竞争逻辑已转变为“成本控制+智驾技术+品牌心智”的全要素对抗。</p>
+                                        <p>领先企业通过极端的供应链垂直整合剥离低效成本，在维持 15% 以上毛利率的同时发动降维打击。落后产能出清速度正在加快，预计年底将有 3-5
+                                            家尾部厂商退出核心牌桌。</p>
+                                    </div>
+                                </div>
+                                <div class="evidence-dashboard">
+                                    <div class="data-card-row">
+                                        <div class="data-card">
+                                            <div class="dc-title">市场格局 CR3</div>
+                                            <div class="dc-value">53.7<span>%</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 较去年 +3.2pct
+                                            </div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">行业第一销量</div>
+                                            <div class="dc-value" style="color:#F5222D;">47.46<span>万辆</span></div>
+                                            <div class="dc-trend up">比亚迪</div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">新势力合计占比</div>
+                                            <div class="dc-value">16.2<span>%</span></div>
+                                            <div class="dc-trend up"><i class="fa-solid fa-caret-up"></i> 较去年 +2.8pct
+                                            </div>
+                                        </div>
+                                        <div class="data-card">
+                                            <div class="dc-title">外资品牌占比</div>
+                                            <div class="dc-value">8.4<span>%</span></div>
+                                            <div class="dc-trend down"><i class="fa-solid fa-caret-down"></i> 较去年
+                                                -4.1pct
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="data-table-row">
+                                        <div class="data-table-container">
+                                            <div class="dt-header"><span class="dt-mark"></span>车企销量 Top10 (2025-12,
+                                                新能源)
+                                            </div>
+                                            <table class="custom-table" style="font-size:12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>排名</th>
+                                                        <th>车企</th>
+                                                        <th>销量(万辆)</th>
+                                                        <th style="width:120px;">市占率</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">1</span></td>
+                                                        <td>比亚迪</td>
+                                                        <td>47.46</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:100%">
+                                                                    </div>
+                                                                </div><span class="td-label">30.1%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">2</span></td>
+                                                        <td>上汽集团</td>
+                                                        <td>14.01</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:30%">
+                                                                    </div>
+                                                                </div><span class="td-label">8.9%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">3</span></td>
+                                                        <td>理想汽车</td>
+                                                        <td>11.60</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:25%">
+                                                                    </div>
+                                                                </div><span class="td-label">7.4%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">4</span></td>
+                                                        <td>广汽集团</td>
+                                                        <td>9.07</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:20%">
+                                                                    </div>
+                                                                </div><span class="td-label">5.8%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">5</span></td>
+                                                        <td>吉利汽车</td>
+                                                        <td>8.94</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:19%">
+                                                                    </div>
+                                                                </div><span class="td-label">5.7%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">6</span></td>
+                                                        <td>特斯拉中国</td>
+                                                        <td>7.28</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:15%">
+                                                                    </div>
+                                                                </div><span class="td-label">4.6%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">7</span></td>
+                                                        <td>华为问界</td>
+                                                        <td>6.41</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:13%">
+                                                                    </div>
+                                                                </div><span class="td-label">4.1%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">8</span></td>
+                                                        <td>长安汽车</td>
+                                                        <td>5.87</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width:12%">
+                                                                    </div>
+                                                                </div><span class="td-label">3.7%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">9</span></td>
+                                                        <td>小鹏汽车</td>
+                                                        <td>4.08</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue" style="width:8%">
+                                                                    </div>
+                                                                </div><span class="td-label">2.6%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">10</span></td>
+                                                        <td>蔚来</td>
+                                                        <td>3.12</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue" style="width:6%">
+                                                                    </div>
+                                                                </div><span class="td-label">2.0%</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="data-table-container">
+                                            <div class="dt-header"><span class="dt-mark"></span>主力车型竞争力排行 (2025-12)
+                                            </div>
+                                            <table class="custom-table" style="font-size:12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>排名</th>
+                                                        <th>车型</th>
+                                                        <th>车企</th>
+                                                        <th>月销量(辆)</th>
+                                                        <th>环比</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">1</span></td>
+                                                        <td>海鸥</td>
+                                                        <td>比亚迪</td>
+                                                        <td>38,210</td>
+                                                        <td class="val-up">+12.4%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">2</span></td>
+                                                        <td>秦 PLUS</td>
+                                                        <td>比亚迪</td>
+                                                        <td>35,640</td>
+                                                        <td class="val-up">+8.7%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge top3">3</span></td>
+                                                        <td>L6</td>
+                                                        <td>理想</td>
+                                                        <td>31,480</td>
+                                                        <td class="val-up">+15.2%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">4</span></td>
+                                                        <td>Model Y</td>
+                                                        <td>特斯拉</td>
+                                                        <td>28,930</td>
+                                                        <td class="val-down">-5.1%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">5</span></td>
+                                                        <td>宋 PLUS</td>
+                                                        <td>比亚迪</td>
+                                                        <td>27,150</td>
+                                                        <td class="val-up">+3.8%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">6</span></td>
+                                                        <td>问界M7</td>
+                                                        <td>华为</td>
+                                                        <td>22,480</td>
+                                                        <td class="val-up">+7.3%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">7</span></td>
+                                                        <td>极氪001</td>
+                                                        <td>吉利</td>
+                                                        <td>19,720</td>
+                                                        <td class="val-up">+4.2%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="rank-badge">8</span></td>
+                                                        <td>小米SU7</td>
+                                                        <td>小米</td>
+                                                        <td>18,600</td>
+                                                        <td class="val-up">+22.1%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- TAB 4: 产业链 (Industry Chain) -->
+                            <div class="fa-tab-content" id="fa-tab-chain">
+                                <div class="agent-narrative-box">
+                                    <div class="narrative-header">
+                                        <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
+                                            核心观点：利润池漂移与卡脖子环节</div>
+                                        <div class="narrative-badge">宏观透视</div>
+                                    </div>
+                                    <div class="narrative-body">
+                                        <p>产业链价值创造与利润分配发生结构性扭曲：<strong>上游资源端（如锂辉石/碳酸锂）仍攫取了全链条约 42% 的利润</strong>。</p>
+                                        <p>中游电池及系统集成环节受限于产能过剩（产能利用率不足 60%），议价权极其微弱，毛利被严重挤压。下游整机厂通过出海战略（单车海外净利高出国内
+                                            35%）勉强维持利润增长曲线，出海率将成为核心估值锚点。</p>
+                                    </div>
+                                </div>
+                                <!-- NEW: Industry Chain Dashboard (Map + Table) -->
+                                <div class="chain-dashboard">
+                                    <!-- Top Part: Chain Map -->
+                                    <div class="chain-map-container">
+                                        <div class="cm-header">产业链概览</div>
+                                        <div class="cm-body">
+                                            <!-- Columns -->
+                                            <div class="cm-col">
+                                                <div class="cm-col-title">零部件(三级分类)</div>
+                                                <div class="cm-level-1">
+                                                    <div class="cm-tree-node"><i class="fa-solid fa-plus-circle"></i> 电芯
+                                                    </div>
+                                                    <div class="cm-tree-node"><i class="fa-solid fa-plus-circle"></i>
+                                                        线束/连接器
+                                                    </div>
+                                                    <div class="cm-tree-node"><i class="fa-solid fa-caret-right"></i> 壳体
+                                                    </div>
+                                                    <div class="cm-tree-percent">64.7%</div>
+                                                </div>
+                                            </div>
+                                            <div class="cm-col">
+                                                <div class="cm-col-title">零部件(二级分类)</div>
+                                                <div class="cm-box-list">
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-battery-full cb-icon"></i> 电池</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-bolt cb-icon"></i> 电机</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-microchip cb-icon"></i> 电控</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-oil-can cb-icon"></i> 发动机/增...</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-cogs cb-icon"></i> 变速箱总成</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-circle-notch cb-icon"></i> 驱动半轴</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-dharmachakra cb-icon"></i> 差速器</div>
+                                                    <div class="cm-box"><i class="fa-solid fa-plus-circle"></i> <i
+                                                            class="fa-solid fa-arrows-alt-h cb-icon"></i> 传动轴</div>
+                                                </div>
+                                            </div>
+                                            <div class="cm-col cm-center-col">
+                                                <div class="cm-col-title">零部件(一级分类)</div>
+                                                <div class="cm-circle-list">
+                                                    <div class="cm-circle blue">电子电气<br>系统</div>
+                                                    <div class="cm-circle green">动力<br>系统</div>
+                                                    <div class="cm-circle purple">热管理<br>系统</div>
+                                                    <div class="cm-circle teal">底盘<br>系统</div>
+                                                </div>
+                                            </div>
+                                            <div class="cm-col cm-main-col">
+                                                <div class="cm-col-title">新能源整车</div>
+                                                <div class="cm-car-core">
+                                                    <div class="cm-car-rings">
+                                                        <div class="ring r1"></div>
+                                                        <div class="ring r2"></div>
+                                                        <div class="ring r3"></div>
+                                                        <div class="car-icon-wrap"><i class="fa-solid fa-car-side"></i>
+                                                        </div>
+                                                        <div class="sat sat-top">车身<br>系统</div>
+                                                        <div class="sat sat-right">智能驾驶<br>系统</div>
+                                                        <div class="sat sat-bottom">底盘<br>系统</div>
+                                                    </div>
+                                                    <div class="cm-btn-green"><i class="fa-solid fa-check-circle"></i>
+                                                        成本拆解
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="cm-col cm-right-col">
+                                                <div class="cm-col-title">下游</div>
+                                                <div class="cm-right-group">
+                                                    <div class="crg-icon blue">汽车<br>经销商</div>
+                                                    <div class="crg-list">
+                                                        <div class="crg-box"><i class="fa-solid fa-car-crash"></i>
+                                                            汽车配件及维保
+                                                        </div>
+                                                        <div class="crg-box"><i class="fa-solid fa-key"></i> 汽车租赁</div>
+                                                        <div class="crg-box"><i class="fa-solid fa-exchange-alt"></i>
+                                                            二手车
+                                                        </div>
+                                                        <div class="crg-box"><i class="fa-solid fa-credit-card"></i>
+                                                            汽车金融
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cm-right-group">
+                                                    <div class="crg-icon teal">后市场</div>
+                                                    <div class="crg-list">
+                                                        <div class="crg-box"><i class="fa-solid fa-recycle"></i> 报废回收
+                                                        </div>
+                                                        <div class="crg-box"><i class="fa-solid fa-shield-alt"></i> 汽车保险
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="cm-right-group">
+                                                    <div class="crg-icon orange">充电桩</div>
+                                                    <div class="crg-list">
+                                                        <div class="crg-box"><i
+                                                                class="fa-solid fa-charging-station"></i>
+                                                            充电桩运营</div>
+                                                        <div class="crg-box"><i class="fa-solid fa-industry"></i> 充电桩制造
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bottom Part: Survival Analysis Table -->
+                                    <div class="chain-table-container">
+                                        <div class="ct-header">
+                                            <div class="ct-title-area"><span class="dt-mark"></span> 产业链生存能力分析 <i
+                                                    class="fa-solid fa-info-circle info-ico"></i> <span
+                                                    class="ct-report">报告期: 2025Q3</span></div>
+                                            <div class="ct-actions">
+                                                <div class="ct-toggle"><span class="active">最新季度</span><span>最新年度</span>
+                                                </div>
+                                                <button class="ct-btn"><i class="fa-solid fa-external-link-alt"></i>
+                                                    了解更多</button>
+                                            </div>
+                                        </div>
+                                        <div class="ct-tabs">
+                                            <span
+                                                class="active">盈利能力</span><span>成长性</span><span>供应链传导压力</span><span>债务压力</span><span>现金流表现</span><span>偿债能力</span>
+                                        </div>
+                                        <div class="ct-table-wrap slim-scroll">
+                                            <table class="custom-table" style="font-size:12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 40px;">层级</th>
+                                                        <th>环节</th>
+                                                        <th style="width: 28%;">毛利率(%)</th>
+                                                        <th style="width: 28%;">净利率(%)</th>
+                                                        <th style="width: 28%;">ROE(%)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Upstream -->
+                                                    <tr>
+                                                        <td rowspan="10" class="vertical-text" style="color:#4B85E6;">上游
+                                                        </td>
+                                                        <td>玻璃</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 74%">
+                                                                    </div>
+                                                                </div><span class="td-label">37.36</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 42%">
+                                                                    </div>
+                                                                </div><span class="td-label">21.22</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 39%">
+                                                                    </div>
+                                                                </div><span class="td-label">19.93</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>车厢内部</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 25%">
+                                                                    </div>
+                                                                </div><span class="td-label">12.56</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 9%">
+                                                                    </div>
+                                                                </div><span class="td-label">4.48</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 16%">
+                                                                    </div>
+                                                                </div><span class="td-label">8.09</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>座椅</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 24%">
+                                                                    </div>
+                                                                </div><span class="td-label">12.29</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 8%">
+                                                                    </div>
+                                                                </div><span class="td-label">3.88</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 15%">
+                                                                    </div>
+                                                                </div><span class="td-label">7.58</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>智能驾驶系统</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 30%">
+                                                                    </div>
+                                                                </div><span class="td-label">14.92</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 7%">
+                                                                    </div>
+                                                                </div><span class="td-label">3.44</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 12%">
+                                                                    </div>
+                                                                </div><span class="td-label">5.91</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>智能座舱系统</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 35%">
+                                                                    </div>
+                                                                </div><span class="td-label">17.27</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 7%">
+                                                                    </div>
+                                                                </div><span class="td-label">3.35</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 7%">
+                                                                    </div>
+                                                                </div><span class="td-label">3.32</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>车灯系统</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 25%">
+                                                                    </div>
+                                                                </div><span class="td-label">12.91</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 9%">
+                                                                    </div>
+                                                                </div><span class="td-label">4.40</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 14%">
+                                                                    </div>
+                                                                </div><span class="td-label">6.97</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>线束</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 24%">
+                                                                    </div>
+                                                                </div><span class="td-label">12.37</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 11%">
+                                                                    </div>
+                                                                </div><span class="td-label">5.75</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 25%">
+                                                                    </div>
+                                                                </div><span class="td-label">12.73</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>电池</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 45%">
+                                                                    </div>
+                                                                </div><span class="td-label">22.85</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 30%">
+                                                                    </div>
+                                                                </div><span class="td-label">15.26</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 24%">
+                                                                    </div>
+                                                                </div><span class="td-label">12.44</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>热管理</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 50%">
+                                                                    </div>
+                                                                </div><span class="td-label">25.02</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 21%">
+                                                                    </div>
+                                                                </div><span class="td-label">10.81</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 20%">
+                                                                    </div>
+                                                                </div><span class="td-label">9.98</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>悬架系统</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 39%">
+                                                                    </div>
+                                                                </div><span class="td-label">19.96</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 15%">
+                                                                    </div>
+                                                                </div><span class="td-label">7.87</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 15%">
+                                                                    </div>
+                                                                </div><span class="td-label">7.95</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Midstream -->
+                                                    <tr>
+                                                        <td class="vertical-text" style="color:#52C41A;">中游</td>
+                                                        <td>新能源整车</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 35%">
+                                                                    </div>
+                                                                </div><span class="td-label">17.90</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 4%">
+                                                                    </div>
+                                                                </div><span class="td-label">2.00</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 8%">
+                                                                    </div>
+                                                                </div><span class="td-label">4.26</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- Downstream -->
+                                                    <tr>
+                                                        <td rowspan="2" class="vertical-text" style="color:#FAAD14;">下游
+                                                        </td>
+                                                        <td>汽车经销商</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 9%">
+                                                                    </div>
+                                                                </div><span class="td-label">4.89</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 1%">
+                                                                    </div>
+                                                                </div><span class="td-label">0.76</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 5%">
+                                                                    </div>
+                                                                </div><span class="td-label">2.66</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>充电桩制造</td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill blue"
+                                                                        style="width: 53%">
+                                                                    </div>
+                                                                </div><span class="td-label">26.52</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill green"
+                                                                        style="width: 23%">
+                                                                    </div>
+                                                                </div><span class="td-label">11.66</span>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="td-progress-wrap">
+                                                                <div class="td-progress-bar">
+                                                                    <div class="td-progress-fill purple"
+                                                                        style="width: 17%">
+                                                                    </div>
+                                                                </div><span class="td-label">8.66</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right: Smart QA -->
+                        <div class="smart-qa">
+                            <div class="qa-header">
+                                <i class="fa-solid fa-message-bot"></i> 智能问答
+                            </div>
+                            <div class="qa-body slim-scroll" id="qa-chat-box">
+                                <div class="msg msg-agent">
+                                    您好！我是您的智能分析助手。您可以基于左侧的 AI 核心观点向我提问，例如：“帮我把时间区间切换到近半年” 或 “深入分析品牌A下沉市场的水分”。
+                                </div>
+                            </div>
+                            <div class="qa-footer">
+                                <div class="qa-input-box">
+                                    <input type="text" class="qa-input" id="qa-input-field" placeholder="基于当前分析结果提问..."
+                                        onkeypress="handleQaKeyPress(event)">
+                                    <button class="qa-btn" onclick="sendQaMessage()"><i
+                                            class="fa-solid fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Module 3: 数据工坊 -->
+                <section class="ht-module">
+                    <div class="ht-module-header" style="margin-bottom: 16px; padding-bottom: 16px;">
+                        <div class="ht-module-title">
+                            <div class="matrix-logo" style="background: #10B981;"><i class="fa-solid fa-database"></i>
+                            </div>
+                            数据工坊
+                        </div>
+                    </div>
+
+                    <div class="data-workshop-grid">
+                        <!-- Category 1: 新能源汽车产销数据 -->
+                        <div class="data-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">新能源汽车产销数据</div>
+                            </div>
+                            <div class="panel-content slim-scroll" style="max-height: 250px; overflow-y: auto;">
+                                <table class="ht-table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 35%;">指标名称</th>
+                                            <th style="width: 20%;">更新频率</th>
+                                            <th style="width: 25%;">数据源</th>
+                                            <th style="width: 20%; text-align: right;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>产量</td>
+                                            <td>月度</td>
+                                            <td>乘联会</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>零售量</td>
+                                            <td>月度</td>
+                                            <td>乘联会</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>批发量</td>
+                                            <td>月度</td>
+                                            <td>乘联会</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>上险量</td>
+                                            <td>周度/月度</td>
+                                            <td>交强险</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>上牌量</td>
+                                            <td>月度</td>
+                                            <td>车管所</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>出口量</td>
+                                            <td>月度</td>
+                                            <td>海关总署</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>经销商门店数量</td>
+                                            <td>季度/年度</td>
+                                            <td>流通协会</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Category 2: 二手车数据 -->
+                        <div class="data-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">二手车数据</div>
+                            </div>
+                            <div class="panel-content slim-scroll" style="max-height: 250px; overflow-y: auto;">
+                                <table class="ht-table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 45%;">指标名称</th>
+                                            <th style="width: 15%;">更新频率</th>
+                                            <th style="width: 20%;">数据源</th>
+                                            <th style="width: 20%; text-align: right;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>零公里二手车挂牌量</td>
+                                            <td>周度</td>
+                                            <td>懂车帝/汽车之家</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>零公里二手车挂牌价格折扣率</td>
+                                            <td>周度</td>
+                                            <td>懂车帝/汽车之家</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Category 3: 库存数据 -->
+                        <div class="data-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">库存数据</div>
+                            </div>
+                            <div class="panel-content slim-scroll" style="max-height: 250px; overflow-y: auto;">
+                                <table class="ht-table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 40%;">指标名称</th>
+                                            <th style="width: 15%;">更新频率</th>
+                                            <th style="width: 25%;">数据源</th>
+                                            <th style="width: 20%; text-align: right;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>广义累库量</td>
+                                            <td>月度</td>
+                                            <td>RIS计算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>广义累库深度</td>
+                                            <td>月度</td>
+                                            <td>RIS计算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>渠道累库量</td>
+                                            <td>月度</td>
+                                            <td>RIS计算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>渠道累库深度</td>
+                                            <td>月度</td>
+                                            <td>RIS计算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>经销商库存预警指数</td>
+                                            <td>月度</td>
+                                            <td>中国汽车流通协会</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>经销商库存系数</td>
+                                            <td>月度</td>
+                                            <td>中国汽车流通协会</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Category 4: 成本数据 -->
+                        <div class="data-panel">
+                            <div class="panel-header">
+                                <div class="panel-title">成本数据</div>
+                            </div>
+                            <div class="panel-content slim-scroll" style="max-height: 250px; overflow-y: auto;">
+                                <table class="ht-table compact-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 35%;">指标名称</th>
+                                            <th style="width: 20%;">更新频率</th>
+                                            <th style="width: 25%;">数据源</th>
+                                            <th style="width: 20%; text-align: right;">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>单车平均售价</td>
+                                            <td>季度</td>
+                                            <td>企业财报/RIS测算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>单车平均成本</td>
+                                            <td>季度</td>
+                                            <td>企业财报/RIS测算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>单车净利润</td>
+                                            <td>季度</td>
+                                            <td>企业财报/RIS测算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>单车净利率</td>
+                                            <td>季度</td>
+                                            <td>企业财报/RIS测算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>单车毛利率</td>
+                                            <td>季度</td>
+                                            <td>企业财报/RIS测算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>单车毛利润</td>
+                                            <td>季度</td>
+                                            <td>企业财报/RIS测算</td>
+                                            <td style="text-align: right;"><button class="btn-link">查看 <i
+                                                        class="fa-solid fa-arrow-up-right-from-square"
+                                                        style="font-size: 10px;"></i></button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div> <!-- End of app-container -->
+
+    <!-- Page Specific Script -->
+    <script src="js/hot_tracks.js"></script>
+</body>
+
+</html>

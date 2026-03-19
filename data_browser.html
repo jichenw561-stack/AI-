@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIS 投资研究平台 - 数据浏览器 (专业版)</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/data_browser.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+
+<body class="pro-terminal-body">
+    <div class="app-container pro-terminal-container">
+        <!-- Top Navigation -->
+        <header class="top-navbar">
+            <div class="logo">
+                <i class="fa-brands fa-researchgate logo-icon"></i>
+                <span class="logo-text">RIS</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="#">行业研究</a></li>
+                    <li><a href="#">公司研究</a></li>
+                    <li><a href="hot_tracks.html">热门赛道</a></li>
+                    <li class="active"><a href="data_browser.html">数据浏览器</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="查询赛道、报告、工具">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+                <div class="icon-group">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="lang-switch">中文 | EN</span>
+                    <i class="fa-solid fa-desktop"></i>
+                    <span class="user-name"><i class="fa-regular fa-circle-user" style="margin-right:4px;"></i>
+                        蜡海波</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Layout Area (3 Columns: Left Nav, Center Workspace, Right AI Chat) -->
+        <div class="terminal-layout">
+
+            <!-- Left Sidebar: Indicator Tree -->
+            <aside class="term-left-pane">
+                <!-- Search Indicators -->
+                <div class="term-sidebar-search">
+                    <input type="text" placeholder="宏观行业公司数据搜素" id="indicator-search-input">
+                    <i class="fa-solid fa-search"></i>
+                </div>
+
+                <div class="term-tree-tabs">
+                    <div class="tt-tab active">指标库</div>
+                    <div class="tt-tab">按频次</div>
+                    <div class="tt-tab">按来源</div>
+                </div>
+
+                <!-- Tree Content -->
+                <div class="indicator-tree slim-scroll">
+                    <!-- Master Category 1 -->
+                    <div class="tree-category active">
+                        <div class="tree-category-header" onclick="toggleTree(this)">
+                            <i class="fa-solid fa-caret-down"></i>
+                            <span>新能源汽车产销数据</span>
+                        </div>
+                        <div class="tree-items">
+                            <div class="tree-item" data-indicator="东风汽车:产量:汽车:当月值">东风汽车:产量:汽车:当月值</div>
+                            <div class="tree-item" data-indicator="零售量">零售量</div>
+                            <div class="tree-item" data-indicator="批发量">批发量</div>
+                            <div class="tree-item" data-indicator="上险量">上险量</div>
+                            <div class="tree-item" data-indicator="上牌量">上牌量</div>
+                        </div>
+                    </div>
+
+                    <!-- Master Category 2 -->
+                    <div class="tree-category active">
+                        <div class="tree-category-header" onclick="toggleTree(this)">
+                            <i class="fa-solid fa-caret-down"></i>
+                            <span>宏观利率数据</span>
+                        </div>
+                        <div class="tree-items">
+                            <div class="tree-item" data-indicator="美国:国债收益率:2年">美国:国债收益率:2年</div>
+                            <div class="tree-item" data-indicator="美国:国债收益率:10年">美国:国债收益率:10年</div>
+                            <div class="tree-item" data-indicator="美国:国债收益率利差:10年-2年">美国:国债收益率利差:10年-2年</div>
+                        </div>
+                    </div>
+
+                    <!-- Master Category 3 -->
+                    <div class="tree-category">
+                        <div class="tree-category-header" onclick="toggleTree(this)">
+                            <i class="fa-solid fa-caret-right"></i>
+                            <span>库存数据</span>
+                        </div>
+                        <div class="tree-items" style="display:none;">
+                            <div class="tree-item" data-indicator="广义累库量">广义累库量</div>
+                            <div class="tree-item" data-indicator="渠道累库量">渠道累库量</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Content: Workspace (Split Top/Bottom) -->
+            <main class="term-center-pane">
+
+                <!-- Complex Center Toolbar -->
+                <div class="term-toolbar top-toolbar">
+                    <div class="tt-btn-group">
+                        <button class="tt-btn primary"><i class="fa-solid fa-play"></i> 提取数据</button>
+                        <button class="tt-btn"><i class="fa-solid fa-robot"></i> 智能 <i
+                                class="fa-solid fa-caret-down mini-caret"></i></button>
+                        <button class="tt-btn"><i class="fa-solid fa-download"></i> 数据导出 <i
+                                class="fa-solid fa-caret-down mini-caret"></i></button>
+                        <span class="tt-divider"></span>
+                        <button class="tt-btn"><i class="fa-regular fa-file"></i> 新建模板</button>
+                        <button class="tt-btn"><i class="fa-regular fa-folder-open"></i> 打开模板</button>
+                        <button class="tt-btn"><i class="fa-regular fa-save"></i> 保存模板 <i
+                                class="fa-solid fa-caret-down mini-caret"></i></button>
+                        <span class="tt-divider"></span>
+                        <button class="tt-btn text-muted"><i class="fa-solid fa-share-nodes"></i> 分享</button>
+                        <button class="tt-btn"><i class="fa-solid fa-gear"></i> 偏好设置</button>
+                    </div>
+                    <div class="tt-btn-group">
+                        <button class="tt-btn"><i class="fa-regular fa-circle-question"></i> 帮助中心 <i
+                                class="fa-solid fa-caret-down mini-caret"></i></button>
+                        <button class="tt-btn"><i class="fa-solid fa-clock-rotate-left"></i> 历史</button>
+                    </div>
+                </div>
+
+                <div class="term-toolbar sub-toolbar">
+                    <div class="sub-tab active">指标</div>
+                    <div class="sub-tab">数据</div>
+                    <div class="sub-tab">图形</div>
+                    <div class="sub-tab">地图</div>
+                    <div class="sub-tab">RIS洞察</div>
+                </div>
+
+                <div class="term-toolbar sub-toolbar-actions">
+                    <div class="tt-btn-group">
+                        <button class="tt-btn text-danger"><i class="fa-regular fa-trash-can"></i> 删除</button>
+                        <button class="tt-btn"><i class="fa-regular fa-copy"></i> 复制</button>
+                        <button class="tt-btn">分组 <i class="fa-solid fa-caret-down mini-caret"></i></button>
+                        <span class="tt-divider"></span>
+                        <button class="tt-btn text-muted"><i class="fa-solid fa-grip-lines"></i> 分隔线</button>
+                        <button class="tt-btn"><i class="fa-solid fa-arrow-right-arrow-left"></i> 替换</button>
+                        <button class="tt-btn"><i class="fa-solid fa-arrows-up-down-left-right"></i> 移动</button>
+                        <button class="tt-btn"><i class="fa-solid fa-chart-line"></i> 数据提取 <i
+                                class="fa-solid fa-caret-down mini-caret"></i></button>
+                        <span class="tt-divider"></span>
+                        <button class="tt-btn"><i class="fa-solid fa-check-double"></i> 空间</button>
+                        <button class="tt-btn"><i class="fa-solid fa-calculator"></i> 指标运算 <i
+                                class="fa-solid fa-caret-down mini-caret"></i></button>
+                    </div>
+                </div>
+
+                <!-- Upper Split: Selected Indicators Metadata Table -->
+                <div class="term-upper-pane slim-scroll">
+                    <table class="term-table meta-table" id="metadata-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px; text-align: center;"><input type="checkbox"></th>
+                                <th style="width: 25%;">指标名称</th>
+                                <th>指标ID</th>
+                                <th>公式</th>
+                                <th>智能频度</th>
+                                <th>智能单位</th>
+                                <th>起始时间</th>
+                                <th>结束时间</th>
+                                <th>更新时间</th>
+                                <th>来源</th>
+                                <th>国家</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Injection via JS -->
+                        </tbody>
+                    </table>
+                    <div class="add-indicator-row">
+                        <button class="add-ind-btn"><i class="fa-solid fa-plus"></i> 指标联想</button>
+                    </div>
+                </div>
+
+                <!-- Resizer Line -->
+                <div class="term-resizer" id="vertical-resizer"></div>
+
+                <!-- Lower Split: Chart + Data Grid -->
+                <div class="term-lower-pane">
+
+                    <!-- Chart Tools -->
+                    <div class="term-toolbar chart-toolbar">
+                        <div class="tt-btn-group">
+                            <span style="font-size: 12px; color: #666;">[缩放总数] <span id="ind-count-disp">0</span> [适中横轴]
+                                0</span>
+                        </div>
+                        <div class="tt-btn-group">
+                            <div class="tt-toggle-group">
+                                <button class="tt-btn toggle active">二维</button>
+                                <button class="tt-btn toggle">全图</button>
+                            </div>
+                            <span class="tt-divider"></span>
+                            <button class="tt-btn active"><i class="fa-solid fa-table"></i> 表格</button>
+                            <button class="tt-btn"><i class="fa-regular fa-calendar"></i> 设置日期</button>
+                            <button class="tt-btn"><i class="fa-solid fa-text-height"></i> 格式</button>
+                            <button class="tt-btn"><i class="fa-solid fa-chart-pie"></i> 统计</button>
+                            <button class="tt-btn"><i class="fa-solid fa-arrows-to-dot"></i> 定位</button>
+                            <button class="tt-btn"><i class="fa-solid fa-filter"></i> 智能选定 <i
+                                    class="fa-solid fa-caret-down mini-caret"></i></button>
+                            <span class="tt-divider"></span>
+                            <button class="tt-btn"><i class="fa-solid fa-eye-slash"></i> 表头隐藏</button>
+                            <button class="tt-btn">单元格 <i class="fa-solid fa-caret-down mini-caret"></i></button>
+                            <span class="tt-divider"></span>
+                            <button class="tt-btn text-muted"><i class="fa-solid fa-palette"></i> 色阶 <i
+                                    class="fa-solid fa-caret-down mini-caret"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Split Chart and Value Table -->
+                    <div class="chart-data-split">
+
+                        <!-- Left: ECharts -->
+                        <div class="chart-container-pane">
+                            <div id="main-chart" style="width: 100%; height: 100%;"></div>
+                        </div>
+
+                        <!-- Right: Value Table -->
+                        <div class="data-grid-pane slim-scroll">
+                            <table class="term-table value-table" id="data-value-table">
+                                <!-- Injection via JS -->
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px; text-align: center;">序号</th>
+                                        <th>日期</th>
+                                        <th>数据</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
+
+            <!-- Right Sidebar: AI Chat (Alice) -->
+            <aside class="term-right-pane ai-chat-pane">
+                <div class="chat-header">
+                    <div class="ch-info">
+                        <img src="https://ui-avatars.com/api/?name=Alice&background=4B85E6&color=fff" alt="Alice"
+                            class="ai-avatar-small">
+                        <div class="ch-text">
+                            <strong>RIS洞察</strong>
+                            <span>智能研报助手</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-messages slim-scroll" id="ai-chat-box">
+                    <div class="msg-bubble ai">
+                        <div class="msg-avatar"><img
+                                src="https://ui-avatars.com/api/?name=Alice&background=4B85E6&color=fff" alt="Alice">
+                        </div>
+                        <div class="msg-content">
+                            <p><strong>Hi 我是您的 RIS 智能助手！</strong></p>
+                            <p>您可以向我提出投资研究的主题，我可以用宏观/微观设定行业板块；也可以向我提出作图要求，我会为您提供最贴合金融场景的专业图形。</p>
+                            <ul class="chat-suggestions">
+                                <li><strong>1.</strong> 提取并对比近2年美国、10年国债收益率，画出线性图</li>
+                                <li><strong>2.</strong> 2024年以来中国社融、新增人民币贷款的实际值和预测值，做图点图</li>
+                                <li><strong>3.</strong> 计算近10年沪深300、深证成指、创业板指的年度涨跌幅，作图并显示标签</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Chat logs will go here -->
+                </div>
+
+                <div class="chat-input-area" id="chat-input-area">
+                    <div class="chat-input-controls">
+                        <button class="btn-icon" title="深度思考"><i class="fa-regular fa-lightbulb"></i> 深度思考(R1)</button>
+                        <div style="flex:1"></div>
+                        <button class="btn-icon"><i class="fa-solid fa-broom"></i></button>
+                        <button class="btn-icon"><i class="fa-regular fa-clock"></i></button>
+                    </div>
+                    <div class="chat-input-box">
+                        <textarea placeholder="输入您的问题指令... (例如：提取并作图...)" id="ai-prompt-input"
+                            onkeypress="handleAIChatPress(event)"></textarea>
+                        <button class="chat-send-btn" onclick="sendAIChat()"><i
+                                class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div> <!-- End of app-container -->
+
+    <script src="js/data_browser.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行业一页纸 - RIS 智能体</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Base App Styles (for scrollbars, basic resets if any) -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Dedicated Page Styles -->
+    <link rel="stylesheet" href="css/agent_detail.css">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="ad-header">
+        <a href="hot_tracks.html" class="ad-header-left">
+            <i class="fa-solid fa-arrow-left"></i> 返回智能体库
+        </a>
+
+        <div class="ad-header-center">
+            <div class="ad-title-layer">
+                <i class="fa-solid fa-file-lines ad-title-icon" id="ad-dynamic-icon"></i>
+                <span><span id="ad-dynamic-title">行业一页纸</span> <span class="ad-title-sub" id="ad-dynamic-subtitle">·
+                        通用</span></span>
+            </div>
+            <div class="ad-steps">
+                <div class="ad-step-dot active"></div>
+                <div class="ad-step-line"></div>
+                <div class="ad-step-dot"></div>
+                <div class="ad-step-line"></div>
+                <div class="ad-step-dot"></div>
+                <div class="ad-step-line"></div>
+                <div class="ad-step-dot"></div>
+            </div>
+        </div>
+
+        <div class="ad-header-right">
+            <div class="ad-profile-icon">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <div class="ad-workspace">
+
+        <!-- Left Sidebar: Data Sources & Uploads -->
+        <aside class="ad-sidebar">
+
+            <div class="ad-section-title">
+                <span>核心</span>
+                <span class="ad-select-all-btn" id="data-source-select-all">全选 | 全不选</span>
+            </div>
+            <div class="ad-source-list">
+                <!-- Item 1 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-file-pdf ad-source-icon" style="color: #E66666;"></i>
+                    <span class="ad-source-name">华泰研报</span>
+                    <span class="ad-source-count">326篇</span>
+                </label>
+                <!-- Item 2 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-file-pdf ad-source-icon" style="color: #F59E0B;"></i>
+                    <span class="ad-source-name">外部研报</span>
+                    <span class="ad-source-count">1,240篇</span>
+                </label>
+                <!-- Item 3 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-regular fa-newspaper ad-source-icon" style="color: #4B85E6;"></i>
+                    <span class="ad-source-name">行业新闻</span>
+                    <span class="ad-source-count">近30日</span>
+                </label>
+                <!-- Item 4 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-user-tie ad-source-icon" style="color: #9333EA;"></i>
+                    <span class="ad-source-name">专家纪要</span>
+                    <span class="ad-source-count">42份</span>
+                </label>
+                <!-- Item 5 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-comments ad-source-icon" style="color: #9333EA;"></i>
+                    <span class="ad-source-name">会议纪要</span>
+                    <span class="ad-source-count">68份</span>
+                </label>
+                <!-- Item 6 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-link ad-source-icon" style="color: #4B85E6;"></i>
+                    <span class="ad-source-name">产业链数据</span>
+                    <span class="ad-source-count">实时</span>
+                </label>
+                <!-- Item 7 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-chart-simple ad-source-icon" style="color: #10B981;"></i>
+                    <span class="ad-source-name">财报数据</span>
+                    <span class="ad-source-count">2025Q3</span>
+                </label>
+                <!-- Item 8 -->
+                <label class="ad-source-item">
+                    <input type="checkbox" class="ad-source-checkbox" checked>
+                    <i class="fa-solid fa-bullhorn ad-source-icon" style="color: #F59E0B;"></i>
+                    <span class="ad-source-name">公告</span>
+                    <span class="ad-source-count">近60日</span>
+                </label>
+            </div>
+
+            <div class="ad-expand-btn">
+                <i class="fa-solid fa-chevron-down"></i> 查看全部数据源
+            </div>
+
+            <div class="ad-custom-source">
+                <div class="ad-section-title" style="font-size: 13px; font-weight: normal; margin-bottom: 8px;">添加自定义数据源
+                </div>
+                <div class="ad-input-group">
+                    <input type="text" placeholder="输入网址、关键词或机构名称...">
+                    <div class="ad-input-add"><i class="fa-solid fa-plus"></i></div>
+                </div>
+                <!-- Quick Tags -->
+                <div class="ad-quick-tags">
+                    <div class="ad-quick-tag">中汽协</div>
+                    <div class="ad-quick-tag">乘联会</div>
+                    <div class="ad-quick-tag">Marklines</div>
+                </div>
+                <!-- Added Source Tag -->
+                <div class="ad-added-source">
+                    <i class="fa-solid fa-tag"></i> 中国汽车工业协会
+                    <i class="fa-solid fa-xmark ad-remove-source"></i>
+                </div>
+            </div>
+
+            <div class="ad-upload-section">
+                <div class="ad-section-title">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-cloud-arrow-up" style="color:#4B85E6"></i> 上传资料
+                    </div>
+                    <div style="font-size: 11px; font-weight: normal; color: #999;">支持PDF、Word、Excel、纪要文本</div>
+                </div>
+                <div class="ad-upload-area">
+                    <i class="fa-solid fa-arrow-up-from-bracket ad-upload-icon"></i>
+                    <div class="ad-upload-text">拖拽文件到这里，或 <span>点击选择</span></div>
+                    <div class="ad-upload-subtext">单文件 ≤ 50MB · 支持 pdf / docx / xlsx / txt</div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Right Content: Skill Config -->
+        <main class="ad-main-content">
+
+            <!-- Skill Template Panel -->
+            <div class="ad-panel">
+                <div class="ad-panel-header">
+                    <div class="ad-panel-title">
+                        <i class="fa-solid fa-puzzle-piece ad-panel-title-icon" id="ad-dynamic-panel-icon"></i>
+                        <span id="ad-dynamic-panel-title">Skill 模板</span>
+                    </div>
+                    <div class="ad-panel-sub" id="ad-dynamic-panel-sub">定义报告需包含的模块（可拖拽排序）</div>
+                </div>
+
+                <div class="ad-skill-list" id="ad-dynamic-skill-list">
+                    <!-- Skill 1 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">行业一句话定义</span>
+                        <div class="ad-skill-badge">1</div>
+                    </label>
+                    <!-- Skill 2 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">当前周期判断</span>
+                        <div class="ad-skill-badge">2</div>
+                    </label>
+                    <!-- Skill 3 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">产业链结构</span>
+                        <div class="ad-skill-badge">3</div>
+                    </label>
+                    <!-- Skill 4 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">核心投资逻辑</span>
+                        <div class="ad-skill-badge">4</div>
+                    </label>
+                    <!-- Skill 5 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">关键跟踪指标</span>
+                        <div class="ad-skill-badge">5</div>
+                    </label>
+                    <!-- Skill 6 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">核心标的分层</span>
+                        <div class="ad-skill-badge">6</div>
+                    </label>
+                    <!-- Skill 7 -->
+                    <label class="ad-skill-item">
+                        <i class="fa-solid fa-grip-vertical ad-drag-handle"></i>
+                        <input type="checkbox" class="ad-skill-checkbox" checked>
+                        <span class="ad-skill-name">风险提示</span>
+                        <div class="ad-skill-badge">7</div>
+                    </label>
+                </div>
+
+                <!-- Custom Skill Input Area -->
+                <div class="ad-custom-skill-box">
+                    <div class="ad-cs-header">
+                        <div class="ad-cs-title">
+                            <i class="fa-solid fa-wand-magic-sparkles ad-cs-icon"></i> 自定义 Skill
+                            <span class="ad-cs-badge">AI</span>
+                        </div>
+                        <div class="ad-cs-sub">用自然语言描述，AI 自动生成分析模块</div>
+                    </div>
+
+                    <div class="ad-cs-input-wrapper">
+                        <input type="text" placeholder="描述你想要的分析维度，例如：分析管理层变动对公司战略的影响...">
+                        <button class="ad-cs-submit"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+
+                    <div class="ad-cs-tags" id="ad-dynamic-cs-tags">
+                        <div class="ad-cs-tag">海外对标分析</div>
+                        <div class="ad-cs-tag">机构动向追踪</div>
+                        <div class="ad-cs-tag">价格传导分析</div>
+                        <div class="ad-cs-tag">政策影响评估</div>
+                        <div class="ad-cs-tag">技术路线对比</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Supplementary Input Panel -->
+            <div class="ad-panel" style="margin-bottom: 80px;">
+                <div class="ad-panel-header">
+                    <div class="ad-panel-title">
+                        <i class="fa-solid fa-comment-dots ad-panel-title-icon" style="color:#4B85E6"></i> 补充说明
+                    </div>
+                    <div class="ad-panel-sub">用自然语言描述你的具体需求</div>
+                </div>
+                <textarea class="ad-textarea" placeholder="例如：请重点分析智能驾驶赛道的竞争格局变化，对比特斯拉FSD和国内方案的技术路线差异..."></textarea>
+
+                <div class="ad-supp-tags" style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+                    <div class="ad-supp-tag">估值分析</div>
+                    <div class="ad-supp-tag">海外对标</div>
+                    <div class="ad-supp-tag">风险分析</div>
+                    <div class="ad-supp-tag">边际变化</div>
+                    <div class="ad-supp-tag">投委会风格</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Sticky Bottom Fixed Action Bar -->
+    <div class="ad-action-bar">
+        <button class="ad-btn-generate">
+            <i class="fa-solid fa-bolt"></i> 开始生成 <span class="ad-btn-sub">· 预计 15-30 秒</span>
+        </button>
+    </div>
+
+    <!-- Page Specific Script -->
+    <script src="js/agent_detail.js"></script>
+</body>
+
+</html>
