@@ -47,33 +47,6 @@
 
         <!-- Main Layout Area with Left Sidebar -->
         <div class="main-layout" style="padding: 0; background: var(--ht-bg);">
-            <!-- Left Sidebar -->
-            <aside class="left-sidebar slim-scroll"
-                style="height: 100%; border-radius: 0; border-right: 1px solid var(--border-color); box-shadow: none;">
-                <div class="accordion-menu">
-                    <div class="menu-item">
-                        <div class="menu-title active"
-                            style="color: var(--primary-blue); font-weight: bold; background-color: var(--accent-bg);">
-                            <i class="fa-solid fa-car" style="margin-right: 8px;"></i>
-                            新能源汽车
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-title">
-                            <i class="fa-solid fa-microchip"
-                                style="margin-right: 8px; color: var(--text-secondary);"></i>
-                            智能驾驶
-                        </div>
-                    </div>
-                    <div class="menu-item">
-                        <div class="menu-title">
-                            <i class="fa-solid fa-pills" style="margin-right: 8px; color: var(--text-secondary);"></i>
-                            创新药
-                        </div>
-                    </div>
-                </div>
-            </aside>
-
             <!-- Center Content (Hot Tracks Default: 新能源汽车) -->
             <div class="ht-layout slim-scroll" style="padding: 24px;">
 
@@ -341,10 +314,10 @@
                         </div>
                         <div style="display: flex; align-items: center; justify-content: space-between;">
                             <div class="fa-tabs">
-                                <div class="fa-tab active" data-tab="fa-tab-sales">销售潜力分析</div>
+                                <div class="fa-tab active" data-tab="fa-tab-chain">产业链分析</div>
+                                <div class="fa-tab" data-tab="fa-tab-sales">销售潜力分析</div>
                                 <div class="fa-tab" data-tab="fa-tab-inventory">库存压力分析</div>
                                 <div class="fa-tab" data-tab="fa-tab-compete">竞争力分析</div>
-                                <div class="fa-tab" data-tab="fa-tab-chain">产业链分析</div>
                             </div>
                             <div class="ht-ai-trigger-wrap">
                                 <button class="ht-ai-trigger" onclick="htOpenAssistant()">
@@ -360,7 +333,7 @@
                         <div class="analysis-charts slim-scroll">
 
                             <!-- TAB 1: 销售潜力 (Sales Potential) -->
-                            <div class="fa-tab-content active" id="fa-tab-sales">
+                            <div class="fa-tab-content" id="fa-tab-sales">
                                 <div class="agent-narrative-box">
                                     <div class="narrative-header">
                                         <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
@@ -1050,7 +1023,7 @@
                             </div>
 
                             <!-- TAB 4: 产业链 (Industry Chain) -->
-                            <div class="fa-tab-content" id="fa-tab-chain">
+                            <div class="fa-tab-content active" id="fa-tab-chain">
                                 <div class="agent-narrative-box">
                                     <div class="narrative-header">
                                         <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
