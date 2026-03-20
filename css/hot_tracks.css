@@ -2686,3 +2686,118 @@
 .hte-vt-bull { background: #DCFCE7; color: #15803D; }
 .hte-vt-bear { background: #FEE2E2; color: #B91C1C; }
 .hte-vi-text { font-size: 11.5px; color: #555; line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════
+   销售潜力分析 — 四图面板 (sp-*)
+   ═══════════════════════════════════════════════════ */
+.sp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 2px 0;
+}
+.sp-panel {
+    background: #fff;
+    border: 1px solid #E6EAF2;
+    border-radius: 10px;
+    padding: 13px 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+.sp-panel-hdr {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.sp-panel-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #2A3650;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.sp-panel-title i { color: #4B85E6; margin-right: 5px; }
+.sp-panel-sub { font-size: 10.5px; font-weight: 400; color: #AAB4C8; margin-left: 4px; }
+
+/* Brand selector pills */
+.sp-brand-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    flex: 1;
+    justify-content: flex-end;
+}
+.sp-brand-pill {
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 10px;
+    cursor: pointer;
+    border: 1px solid #E6EAF2;
+    color: #8A97AA;
+    background: #F8F9FC;
+    transition: all 0.12s;
+    white-space: nowrap;
+    user-select: none;
+}
+.sp-brand-pill:hover { border-color: #9BB5E8; color: #4B85E6; }
+
+/* Chart type legend */
+.sp-chart-legend { display: flex; gap: 14px; align-items: center; }
+.sp-leg-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    color: #8A97AA;
+}
+.sp-leg-line {
+    display: inline-block;
+    width: 18px; height: 2px;
+    background: #8A97AA;
+    border-radius: 1px;
+}
+.sp-leg-dash {
+    display: inline-block;
+    width: 18px; height: 0;
+    border-top: 2px dashed #8A97AA;
+}
+.sp-leg-dotted {
+    display: inline-block;
+    width: 18px; height: 0;
+    border-top: 2px dotted #8A97AA;
+}
+.sp-chart-area { height: 240px; width: 100%; }
+
+/* New car grid */
+.sp-newcar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1;
+    max-height: 285px;
+}
+.sp-nc-card {
+    border: 1px solid #EEF0F5;
+    border-radius: 8px;
+    padding: 9px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    cursor: default;
+}
+.sp-nc-card:hover { border-color: #9BB5E8; box-shadow: 0 1px 6px rgba(75,133,230,0.1); }
+.sp-nc-top  { display: flex; align-items: center; justify-content: space-between; }
+.sp-nc-brand { font-size: 11px; font-weight: 600; color: #2A3650; }
+.sp-nc-fuel {
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+}
+.sp-nc-model { font-size: 12px; font-weight: 600; color: #1a2235; line-height: 1.4; }
+.sp-nc-bot  { display: flex; align-items: center; justify-content: space-between; margin-top: 1px; }
+.sp-nc-month { font-size: 10px; color: #B0B8C8; }
+.sp-nc-att  { font-size: 10px; letter-spacing: 0.5px; }

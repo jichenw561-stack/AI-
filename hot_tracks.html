@@ -335,7 +335,59 @@
 
                             <!-- TAB 1: 销售潜力 (Sales Potential) -->
                             <div class="fa-tab-content" id="fa-tab-sales">
-                                <div class="agent-narrative-box">
+                                <div class="sp-grid">
+
+                                    <!-- Panel 1: 门店数量 + 折扣率 -->
+                                    <div class="sp-panel">
+                                        <div class="sp-panel-hdr">
+                                            <div class="sp-panel-title"><i class="fa-solid fa-store"></i> 门店数量和终端销售折扣率跟踪</div>
+                                            <div class="sp-brand-selector" id="sp1-brands"></div>
+                                        </div>
+                                        <div class="sp-chart-legend">
+                                            <span class="sp-leg-item"><span class="sp-leg-line"></span> 门店数量</span>
+                                            <span class="sp-leg-item"><span class="sp-leg-dash"></span> 终端折扣率</span>
+                                        </div>
+                                        <div id="sp-chart-1" class="sp-chart-area"></div>
+                                    </div>
+
+                                    <!-- Panel 2: 销量真实性 -->
+                                    <div class="sp-panel">
+                                        <div class="sp-panel-hdr">
+                                            <div class="sp-panel-title"><i class="fa-solid fa-shield-halved"></i> 终端销量数据真实性分析</div>
+                                            <div class="sp-brand-selector" id="sp2-brands"></div>
+                                        </div>
+                                        <div class="sp-chart-legend">
+                                            <span class="sp-leg-item"><span class="sp-leg-line"></span> 上险量</span>
+                                            <span class="sp-leg-item"><span class="sp-leg-dash"></span> 零售量</span>
+                                            <span class="sp-leg-item"><span class="sp-leg-dotted"></span> 水分占比</span>
+                                        </div>
+                                        <div id="sp-chart-2" class="sp-chart-area"></div>
+                                    </div>
+
+                                    <!-- Panel 3: 零公里二手车 -->
+                                    <div class="sp-panel">
+                                        <div class="sp-panel-hdr">
+                                            <div class="sp-panel-title"><i class="fa-solid fa-car-burst"></i> 疑似零公里二手车程度分析</div>
+                                            <div class="sp-brand-selector" id="sp3-brands"></div>
+                                        </div>
+                                        <div class="sp-chart-legend">
+                                            <span class="sp-leg-item"><span class="sp-leg-line"></span> 挂牌量</span>
+                                            <span class="sp-leg-item"><span class="sp-leg-dash"></span> 程度指数</span>
+                                            <span class="sp-leg-item"><span class="sp-leg-dotted"></span> 挂牌折扣率</span>
+                                        </div>
+                                        <div id="sp-chart-3" class="sp-chart-area"></div>
+                                    </div>
+
+                                    <!-- Panel 4: 新车速递 -->
+                                    <div class="sp-panel">
+                                        <div class="sp-panel-hdr">
+                                            <div class="sp-panel-title"><i class="fa-solid fa-rocket"></i> 新车速递 <span class="sp-panel-sub">近3个月 · 15款</span></div>
+                                        </div>
+                                        <div id="sp-newcar-grid" class="sp-newcar-grid"></div>
+                                    </div>
+
+                                </div>
+                                <div class="agent-narrative-box" style="display:none">
                                     <div class="narrative-header">
                                         <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
                                             核心观点：销售潜力与下沉市场爆发</div>
