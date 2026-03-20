@@ -2901,7 +2901,7 @@
     white-space: nowrap;
 }
 .cmp-panel-title i {
-    color: #7C6AF6;
+    color: #4B85E6;
     margin-right: 5px;
 }
 .cmp-brand-selector {
@@ -2933,5 +2933,72 @@
     height: 220px;
 }
 .cmp-panel-wide .cmp-chart-area {
+    height: 240px;
+}
+
+/* ===== 产业链分析 Charts (chain-charts-*) ===== */
+.chain-charts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+.chain-chart-panel {
+    background: #fff;
+    border: 1px solid #e8ecf0;
+    border-radius: 10px;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+}
+.chain-chart-wide {
+    grid-column: 1 / -1;
+}
+.chain-chart-hdr {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.chain-chart-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    white-space: nowrap;
+}
+.chain-chart-title i {
+    color: #4B85E6;
+    margin-right: 5px;
+}
+.chain-seg-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+    justify-content: flex-end;
+}
+.chain-seg-pill {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1.5px solid #e0e4ea;
+    color: #666;
+    background: #f5f7fa;
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+}
+.chain-seg-pill.active {
+    border-color: transparent;
+    color: #fff;
+    font-weight: 600;
+}
+.chain-chart-area {
+    flex: 1;
+    min-height: 220px;
+    height: 220px;
+}
+.chain-chart-wide .chain-chart-area {
     height: 240px;
 }

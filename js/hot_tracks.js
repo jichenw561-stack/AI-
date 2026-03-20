@@ -88,6 +88,9 @@ function initFeatureTabs() {
             if (targetId === 'fa-tab-compete') {
                 setTimeout(initCmpPanels, 60);
             }
+            if (targetId === 'fa-tab-chain') {
+                setTimeout(initChainCharts, 60);
+            }
             // Trigger resize to fix ECharts rendering in hidden divs
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
@@ -878,7 +881,7 @@ const INV_PSR = {
     '哪吒汽车': [80,78,76,74,72,70,71,72,74,75,76,77],
 };
 
-function invColor(b) { return SP_COLORS[b] || '#999'; }
+function invColor(b) { return SP_COLORS[INV_BRANDS.indexOf(b)] || SP_COLORS[SP_BRANDS.indexOf(b)] || '#888'; }
 
 function invMakeSelector(containerId, callback, maxSel) {
     const wrap = document.getElementById(containerId);
@@ -1050,7 +1053,7 @@ const CMP_MATRIX = [
 ];
 const CMP_CAT_COLOR = { '自主':'#3B82F6', '外资':'#F97316', '新势力':'#8B5CF6' };
 
-function cmpColor(b) { return SP_COLORS[b] || '#999'; }
+function cmpColor(b) { return SP_COLORS[CMP_BRANDS.indexOf(b)] || SP_COLORS[SP_BRANDS.indexOf(b)] || '#888'; }
 
 function cmpMakeShareSelector(containerId, callback) {
     const wrap = document.getElementById(containerId);
@@ -1184,4 +1187,150 @@ function initCmpPanels() {
     cmpMakeShareSelector('cmp1-brands', cmpSetChart1);
     cmpMakeRadarSelector('cmp2-brands', cmpSetChart2);
     cmpSetChart3();
+}
+
+// ============================================================
+// 产业链分析 Charts
+// ============================================================
+const CHAIN_SEGS = ['锂矿开采','碳酸锂','正极材料','负极材料','电芯制造','动力电池','整车制造','智能驾驶','热管理','经销商'];
+const CHAIN_COLORS = ['#4B85E6','#F97316','#22C55E','#9333EA','#06B6D4','#EF4444','#84CC16','#F59E0B','#8B5CF6','#EC4899'];
+const CHAIN_DEFAULT = ['锂矿开采','动力电池','整车制造','经销商'];
+const CHAIN_MONTHS = ['3月','4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月'];
+
+// 毛利率 % (逐步下行叙事：上游资源/智驾高，中游电池中等，整车/经销商低)
+const CHAIN_GM = {
+    '锂矿开采':  [52,48,42,36,31,28,24,20,18,18,17,16],
+    '碳酸锂':    [48,44,38,32,27,24,21,18,16,16,15,14],
+    '正极材料':  [24,22,20,18,16,15,14,13,12,12,12,11],
+    '负极材料':  [28,26,24,22,20,19,18,17,16,15,15,14],
+    '电芯制造':  [20,19,18,17,16,15,14,14,13,13,13,12],
+    '动力电池':  [22,22,21,21,20,20,19,19,19,19,18,18],
+    '整车制造':  [16,16,15,14,14,13,13,12,12,12,12,12],
+    '智能驾驶':  [42,42,41,40,40,39,38,38,37,37,36,35],
+    '热管理':    [32,31,30,29,28,27,26,25,24,24,23,22],
+    '经销商':    [5,5,4,4,3,3,3,2,2,2,2,2],
+};
+
+// 产能利用率排行（降序排列供横向bar）
+const CHAIN_CAP_DATA = [
+    { name:'智能驾驶', val:88 },
+    { name:'热管理',   val:75 },
+    { name:'整车制造', val:68 },
+    { name:'动力电池', val:61 },
+    { name:'锂矿开采', val:58 },
+    { name:'负极材料', val:56 },
+    { name:'正极材料', val:55 },
+    { name:'碳酸锂',   val:52 },
+    { name:'电芯制造', val:49 },
+    { name:'经销商',   val:42 },
+];
+
+// 利润池分布（全产业链利润占比）
+const CHAIN_PROFIT_POOL = [
+    { name:'上游矿产',  value:42, itemStyle:{ color:'#4B85E6' } },
+    { name:'化学材料',  value:22, itemStyle:{ color:'#F97316' } },
+    { name:'电池系统',  value:18, itemStyle:{ color:'#22C55E' } },
+    { name:'整车制造',  value:11, itemStyle:{ color:'#9333EA' } },
+    { name:'经销服务',  value:7,  itemStyle:{ color:'#06B6D4' } },
+];
+
+function chainColor(s) { return CHAIN_COLORS[CHAIN_SEGS.indexOf(s)] || '#888'; }
+
+function chainMakeSelector(containerId, callback) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    let active = CHAIN_DEFAULT.slice();
+    CHAIN_SEGS.forEach(s => {
+        const pill = document.createElement('span');
+        pill.className = 'chain-seg-pill' + (active.includes(s) ? ' active' : '');
+        pill.textContent = s;
+        const c = chainColor(s);
+        if (active.includes(s)) pill.style.cssText = `background:${c};border-color:${c}`;
+        pill.addEventListener('click', () => {
+            if (pill.classList.contains('active')) {
+                if (active.length <= 1) return;
+                active = active.filter(x => x !== s);
+                pill.classList.remove('active');
+                pill.style.cssText = '';
+            } else {
+                if (active.length >= 6) return;
+                active.push(s);
+                pill.classList.add('active');
+                pill.style.cssText = `background:${c};border-color:${c}`;
+            }
+            callback(active);
+        });
+        wrap.appendChild(pill);
+    });
+    callback(active);
+}
+
+function chainSetChart1(sel) {
+    const el = document.getElementById('chain-chart-1');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'axis', formatter: params => {
+            const lines = params.map(p => `<span style="color:${p.color}">●</span> ${p.seriesName}: ${p.value}%`);
+            return params[0].name + '<br>' + lines.join('<br>');
+        }},
+        legend:{ show:false },
+        grid:{ top:8, bottom:32, left:42, right:16 },
+        xAxis:{ type:'category', data:CHAIN_MONTHS, axisLabel:{ fontSize:11 }, axisLine:{ lineStyle:{ color:'#ddd' } } },
+        yAxis:{ type:'value', name:'毛利率%', nameTextStyle:{ fontSize:10 }, axisLabel:{ formatter:'{value}%', fontSize:11 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } }, min:0 },
+        series: sel.map(s => ({
+            name:s, type:'line', smooth:true, data: CHAIN_GM[s]||[],
+            lineStyle:{ color:chainColor(s), width:2 }, itemStyle:{ color:chainColor(s) },
+            symbol:'none', emphasis:{ focus:'series' }
+        }))
+    }, true);
+}
+
+function chainSetChart2() {
+    const el = document.getElementById('chain-chart-2');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ formatter: p => `${p.name}: ${p.value}%` },
+        grid:{ top:8, bottom:8, left:72, right:44 },
+        xAxis:{ type:'value', max:100, axisLabel:{ formatter:'{value}%', fontSize:10 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } } },
+        yAxis:{ type:'category', data: CHAIN_CAP_DATA.map(d => d.name), axisLabel:{ fontSize:11 } },
+        series:[{
+            type:'bar', barWidth:12,
+            data: CHAIN_CAP_DATA.map(d => ({
+                value:d.val,
+                itemStyle:{ color: d.val>=80 ? '#22C55E' : d.val>=65 ? '#F59E0B' : '#EF4444', borderRadius:[0,4,4,0] }
+            })),
+            markLine:{ silent:true, data:[{ xAxis:65, lineStyle:{ color:'#F59E0B', type:'dashed', width:1.5 },
+                label:{ formatter:'健康线65%', fontSize:10, color:'#F59E0B' } }] }
+        }]
+    }, true);
+}
+
+function chainSetChart3() {
+    const el = document.getElementById('chain-chart-3');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ formatter: p => `${p.name}: ${p.value}%` },
+        legend:{ show:false },
+        series:[{
+            type:'pie', radius:['42%','70%'], center:['50%','50%'],
+            data: CHAIN_PROFIT_POOL,
+            label:{ formatter:'{b}\n{d}%', fontSize:10, lineHeight:14 },
+            emphasis:{ itemStyle:{ shadowBlur:8, shadowColor:'rgba(0,0,0,0.15)' } }
+        }]
+    }, true);
+}
+
+function initChainCharts() {
+    const el = document.getElementById('chain-chart-1');
+    if (!el || el.dataset.init) return;
+    el.dataset.init = '1';
+    chainMakeSelector('chain1-segs', chainSetChart1);
+    chainSetChart2();
+    chainSetChart3();
 }
