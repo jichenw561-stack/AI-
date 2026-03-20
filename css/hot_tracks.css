@@ -2603,8 +2603,12 @@
     text-align: center;
     flex: 1;
 }
-.hte-chain-svg-wrap { width: 100%; }
-.hte-chain-svg { width: 100%; height: auto; display: block; }
+.hte-force-graph-wrap {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #F9FAFB;
+}
 
 /* Bottom 2-col */
 .hte-bottom-row {

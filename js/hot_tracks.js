@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     initCharts();
     initFeatureTabs();
+    initHteForceGraph();
 });
 
 // Modal logic removed, pages navigate directly to agent detail.
@@ -472,4 +473,187 @@ function _htDemo2() {
       <div class="ht-rdoc-bul"><strong>一至三模块结论不变</strong>，完整报告见上方 v1 输出</div>
       <div class="ht-rdoc-bul" style="color:#059669; font-weight:500;">技能「新能源销售潜力分析 v2」已保存至技能库，可随时复用</div>
     `, t);
+}
+
+// ─────────────────────────────────────────────────────
+// 热点事件传导分析 · D3 力导向图
+// ─────────────────────────────────────────────────────
+function initHteForceGraph() {
+    const container = document.getElementById('hte-force-graph');
+    if (!container || container.dataset.init || typeof d3 === 'undefined') return;
+    container.dataset.init = '1';
+
+    const W = container.clientWidth || 700;
+    const H = 300;
+
+    // ── Node & link data ──────────────────────────────
+    const tierXPct = { trigger: 0.07, terminal: 0.23, t1: 0.46, t2: 0.67, material: 0.88 };
+    const tierColor = {
+        trigger:  '#D04A2E',
+        terminal: '#E8725A',
+        t1:       '#4B85E6',
+        t2:       '#7C3AED',
+        material: '#059669'
+    };
+    const strW = { strong: 3.5, mid: 2, weak: 1.1 };
+    const strC = { strong: '#F97316', mid: '#4B85E6', weak: '#94A3B8' };
+    const strO = { strong: 0.88, mid: 0.72, weak: 0.45 };
+
+    const nodes = [
+        { id: 'trigger', lines: ['关税政策', '升至145%'], tier: 'trigger',  r: 30 },
+        { id: 'ev',      lines: ['新能源整车'],           tier: 'terminal', r: 25 },
+        { id: 'battery', lines: ['动力电池组'],           tier: 't1',       r: 22 },
+        { id: 'motor',   lines: ['电机/电控'],            tier: 't1',       r: 19 },
+        { id: 'chip',    lines: ['芯片·MCU'],             tier: 't1',       r: 19 },
+        { id: 'cell',    lines: ['电芯'],                 tier: 't2',       r: 21 },
+        { id: 'cathode', lines: ['正极材料'],             tier: 't2',       r: 18 },
+        { id: 'anode',   lines: ['负极材料'],             tier: 't2',       r: 16 },
+        { id: 'sep',     lines: ['隔膜'],                 tier: 't2',       r: 14 },
+        { id: 'elec',    lines: ['电解液'],               tier: 't2',       r: 14 },
+        { id: 'licarb',  lines: ['碳酸锂'],              tier: 'material', r: 20 },
+        { id: 'liore',   lines: ['锂精矿'],              tier: 'material', r: 16 },
+    ];
+
+    const links = [
+        { source: 'trigger', target: 'ev',      strength: 'strong' },
+        { source: 'ev',      target: 'battery', strength: 'strong' },
+        { source: 'ev',      target: 'motor',   strength: 'mid'    },
+        { source: 'ev',      target: 'chip',    strength: 'mid'    },
+        { source: 'battery', target: 'cell',    strength: 'strong' },
+        { source: 'cell',    target: 'cathode', strength: 'mid'    },
+        { source: 'cell',    target: 'anode',   strength: 'mid'    },
+        { source: 'cell',    target: 'sep',     strength: 'weak'   },
+        { source: 'cell',    target: 'elec',    strength: 'weak'   },
+        { source: 'cathode', target: 'licarb',  strength: 'mid'    },
+        { source: 'licarb',  target: 'liore',   strength: 'weak'   },
+    ];
+
+    // Set guided initial positions
+    const tierCount = {}, tierIdx = {};
+    nodes.forEach(n => { tierCount[n.tier] = (tierCount[n.tier] || 0) + 1; });
+    nodes.forEach(n => {
+        if (tierIdx[n.tier] === undefined) tierIdx[n.tier] = 0;
+        const idx = tierIdx[n.tier]++;
+        const cnt = tierCount[n.tier];
+        n.x = tierXPct[n.tier] * W;
+        n.y = H / 2 + (cnt > 1 ? ((idx / (cnt - 1)) - 0.5) * (H * 0.72) : 0);
+    });
+
+    // ── SVG setup ──────────────────────────────────────
+    const svg = d3.select(container)
+        .append('svg')
+        .attr('width', W).attr('height', H)
+        .style('display', 'block').style('border-radius', '8px');
+
+    svg.append('rect').attr('width', W).attr('height', H)
+        .attr('fill', '#F9FAFB').attr('rx', 8);
+
+    // Arrowhead markers (one per strength level)
+    const defs = svg.append('defs');
+    Object.entries(strC).forEach(([s, color]) => {
+        defs.append('marker')
+            .attr('id', `hte-arr-${s}`)
+            .attr('viewBox', '-8 -3.5 8 7')
+            .attr('refX', 0).attr('refY', 0)
+            .attr('markerWidth', 5).attr('markerHeight', 5)
+            .attr('orient', 'auto')
+            .append('path').attr('d', 'M -8,-3.5 L 0,0 L -8,3.5 Z').attr('fill', color);
+    });
+
+    // ── Force simulation ──────────────────────────────
+    const sim = d3.forceSimulation(nodes)
+        .force('link',    d3.forceLink(links).id(d => d.id).distance(95).strength(0.55))
+        .force('charge',  d3.forceManyBody().strength(-220))
+        .force('x',       d3.forceX(d => tierXPct[d.tier] * W).strength(0.42))
+        .force('y',       d3.forceY(H / 2).strength(0.04))
+        .force('collide', d3.forceCollide(d => d.r + 11));
+
+    // ── Edges ─────────────────────────────────────────
+    const linkEls = svg.append('g').attr('class', 'hte-links')
+        .selectAll('line').data(links).join('line')
+        .attr('stroke',         d => strC[d.strength])
+        .attr('stroke-width',   d => strW[d.strength])
+        .attr('stroke-opacity', d => strO[d.strength])
+        .attr('marker-end',     d => `url(#hte-arr-${d.strength})`);
+
+    // ── Node groups ───────────────────────────────────
+    const nodeG = svg.append('g').attr('class', 'hte-nodes')
+        .selectAll('g').data(nodes).join('g')
+        .style('cursor', 'grab')
+        .call(d3.drag()
+            .on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+            .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+            .on('end',   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+    // Glow halo
+    nodeG.append('circle')
+        .attr('r', d => d.r + 5)
+        .attr('fill', d => tierColor[d.tier])
+        .attr('opacity', 0.09);
+
+    // Main circle
+    nodeG.append('circle')
+        .attr('r', d => d.r)
+        .attr('fill', d => tierColor[d.tier] + '1A')
+        .attr('stroke', d => tierColor[d.tier])
+        .attr('stroke-width', 1.8);
+
+    // Text labels
+    nodeG.each(function(d) {
+        const g = d3.select(this);
+        if (d.lines.length === 1) {
+            g.append('text')
+                .attr('text-anchor', 'middle').attr('dy', '0.35em')
+                .attr('font-size', d.r < 17 ? '9px' : '10px')
+                .attr('font-weight', '700')
+                .attr('fill', tierColor[d.tier])
+                .attr('font-family', 'PingFang SC, Helvetica, sans-serif')
+                .text(d.lines[0]);
+        } else {
+            const t = g.append('text').attr('text-anchor', 'middle')
+                .attr('font-family', 'PingFang SC, Helvetica, sans-serif');
+            d.lines.forEach((line, i) => {
+                t.append('tspan')
+                    .attr('x', 0)
+                    .attr('dy', i === 0 ? `${-(d.lines.length - 1) * 0.55}em` : '1.2em')
+                    .attr('font-size', '9.5px').attr('font-weight', '700')
+                    .attr('fill', tierColor[d.tier])
+                    .text(line);
+            });
+        }
+    });
+
+    // ── Tick ──────────────────────────────────────────
+    sim.on('tick', () => {
+        // Clamp nodes within bounds
+        nodes.forEach(d => {
+            d.x = Math.max(d.r + 4, Math.min(W - d.r - 4, d.x));
+            d.y = Math.max(d.r + 4, Math.min(H - d.r - 4, d.y));
+        });
+
+        // Draw edges from source-edge to target-edge
+        linkEls
+            .attr('x1', d => {
+                const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                return d.source.x + (dx / dist) * d.source.r;
+            })
+            .attr('y1', d => {
+                const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                return d.source.y + (dy / dist) * d.source.r;
+            })
+            .attr('x2', d => {
+                const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                return d.target.x - (dx / dist) * d.target.r;
+            })
+            .attr('y2', d => {
+                const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                return d.target.y - (dy / dist) * d.target.r;
+            });
+
+        nodeG.attr('transform', d => `translate(${d.x},${d.y})`);
+    });
 }
