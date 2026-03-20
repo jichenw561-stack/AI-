@@ -314,7 +314,8 @@
                         </div>
                         <div style="display: flex; align-items: center; justify-content: space-between;">
                             <div class="fa-tabs">
-                                <div class="fa-tab active" data-tab="fa-tab-chain">产业链分析</div>
+                                <div class="fa-tab active" data-tab="fa-tab-hotevents">热点事件传导分析</div>
+                                <div class="fa-tab" data-tab="fa-tab-chain">产业链分析</div>
                                 <div class="fa-tab" data-tab="fa-tab-sales">销售潜力分析</div>
                                 <div class="fa-tab" data-tab="fa-tab-inventory">库存压力分析</div>
                                 <div class="fa-tab" data-tab="fa-tab-compete">竞争力分析</div>
@@ -1023,7 +1024,289 @@
                             </div>
 
                             <!-- TAB 4: 产业链 (Industry Chain) -->
-                            <div class="fa-tab-content active" id="fa-tab-chain">
+                            <div class="fa-tab-content active" id="fa-tab-hotevents">
+
+                                <!-- ── Scanner Header ── -->
+                                <div class="hte-scanner-bar">
+                                    <div class="hte-scanner-info">
+                                        <i class="fa-solid fa-satellite-dish hte-scan-icon"></i>
+                                        <span class="hte-scan-label">全球热点扫描</span>
+                                        <span class="hte-live-badge"><i class="fa-solid fa-circle hte-live-dot"></i> LIVE</span>
+                                        <span class="hte-update-time">刚刚更新</span>
+                                    </div>
+                                    <div class="hte-filter-group">
+                                        <span class="hte-ftag hte-ftag-on">全部</span>
+                                        <span class="hte-ftag">地缘政治</span>
+                                        <span class="hte-ftag">经济政策</span>
+                                        <span class="hte-ftag">行业动态</span>
+                                        <span class="hte-ftag">突发事件</span>
+                                    </div>
+                                </div>
+
+                                <!-- ── Event Cards ── -->
+                                <div class="hte-event-row">
+                                    <div class="hte-ecard hte-ecard-on">
+                                        <div class="hte-ec-meta">
+                                            <span class="hte-ec-cat hte-cat-geo">地缘政治</span>
+                                            <span class="hte-ec-str hte-str-hi">强影响</span>
+                                        </div>
+                                        <div class="hte-ec-title">美对华汽车关税升至145%</div>
+                                        <div class="hte-ec-desc">特朗普签署行政令，对华电动车追加关税至145%，整车及核心零部件受波及</div>
+                                        <div class="hte-ec-foot">
+                                            <span class="hte-ec-time"><i class="fa-regular fa-clock"></i> 3小时前</span>
+                                            <span class="hte-ec-src">路透社</span>
+                                        </div>
+                                    </div>
+                                    <div class="hte-ecard">
+                                        <div class="hte-ec-meta">
+                                            <span class="hte-ec-cat hte-cat-policy">经济政策</span>
+                                            <span class="hte-ec-str hte-str-mid">中影响</span>
+                                        </div>
+                                        <div class="hte-ec-title">欧盟CBAM碳关税正式实施</div>
+                                        <div class="hte-ec-desc">碳边境调节机制覆盖汽车产业，出口欧洲的新能源车企需缴纳碳排放差价税</div>
+                                        <div class="hte-ec-foot">
+                                            <span class="hte-ec-time"><i class="fa-regular fa-clock"></i> 1天前</span>
+                                            <span class="hte-ec-src">欧盟委员会</span>
+                                        </div>
+                                    </div>
+                                    <div class="hte-ecard">
+                                        <div class="hte-ec-meta">
+                                            <span class="hte-ec-cat hte-cat-industry">行业动态</span>
+                                            <span class="hte-ec-str hte-str-hi">强影响</span>
+                                        </div>
+                                        <div class="hte-ec-title">宁德时代披露全固态电池量产时间表</div>
+                                        <div class="hte-ec-desc">2027年实现全固态电池小批量量产，液态电芯格局或迎重大洗牌，上游锂矿承压</div>
+                                        <div class="hte-ec-foot">
+                                            <span class="hte-ec-time"><i class="fa-regular fa-clock"></i> 6小时前</span>
+                                            <span class="hte-ec-src">宁德时代公告</span>
+                                        </div>
+                                    </div>
+                                    <div class="hte-ecard">
+                                        <div class="hte-ec-meta">
+                                            <span class="hte-ec-cat hte-cat-emerg">突发事件</span>
+                                            <span class="hte-ec-str hte-str-lo">弱影响</span>
+                                        </div>
+                                        <div class="hte-ec-title">澳大利亚锂矿出口新规生效</div>
+                                        <div class="hte-ec-desc">锂矿出口须经额外政府审查，短期影响有限，但供应链中期预期收紧</div>
+                                        <div class="hte-ec-foot">
+                                            <span class="hte-ec-time"><i class="fa-regular fa-clock"></i> 2天前</span>
+                                            <span class="hte-ec-src">澳大利亚政府</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ── Transmission Chain ── -->
+                                <div class="hte-chain-section">
+                                    <div class="hte-chain-hdr">
+                                        <div class="hte-chain-hdr-l">
+                                            <span class="hte-chain-ttl">传导链路分析</span>
+                                            <span class="hte-chain-event-tag"><i class="fa-solid fa-bolt"></i> 美对华汽车关税升至145%</span>
+                                        </div>
+                                        <div class="hte-chain-legend">
+                                            <span class="hte-leg-dot" style="background:#F97316"></span><span class="hte-leg-txt">强</span>
+                                            <span class="hte-leg-dot" style="background:#4B85E6"></span><span class="hte-leg-txt">中</span>
+                                            <span class="hte-leg-div"></span>
+                                            <span class="hte-leg-type" style="border-color:#4B85E6;color:#4B85E6">产业链传导</span>
+                                            <span class="hte-leg-type" style="border-color:#22C55E;color:#22C55E">协同关系</span>
+                                        </div>
+                                    </div>
+                                    <div class="hte-chain-col-hdr">
+                                        <span>触发事件</span>
+                                        <span>一级传导</span>
+                                        <span>二级传导</span>
+                                        <span>三级影响</span>
+                                    </div>
+                                    <div class="hte-chain-svg-wrap">
+                                        <svg class="hte-chain-svg" viewBox="0 0 800 210" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <marker id="arr-str" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#F97316"/></marker>
+                                                <marker id="arr-mid" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#4B85E6"/></marker>
+                                            </defs>
+                                            <!-- Connection lines -->
+                                            <path d="M 170,105 C 190,105 190,43 210,43"   stroke="#F97316" stroke-width="1.8" fill="none" marker-end="url(#arr-str)"/>
+                                            <path d="M 170,105 C 190,105 190,185 210,185" stroke="#4B85E6" stroke-width="1.5" fill="none" marker-end="url(#arr-mid)"/>
+                                            <path d="M 370,43  L 410,43"                  stroke="#F97316" stroke-width="1.8" fill="none" marker-end="url(#arr-str)"/>
+                                            <path d="M 370,43  C 390,43 390,114 410,114"  stroke="#4B85E6" stroke-width="1.5" fill="none" marker-end="url(#arr-mid)"/>
+                                            <path d="M 370,185 L 410,185"                 stroke="#F97316" stroke-width="1.8" fill="none" marker-end="url(#arr-str)"/>
+                                            <path d="M 570,43  L 610,43"                  stroke="#F97316" stroke-width="1.8" fill="none" marker-end="url(#arr-str)"/>
+                                            <path d="M 570,114 L 610,114"                 stroke="#4B85E6" stroke-width="1.5" fill="none" marker-end="url(#arr-mid)"/>
+                                            <path d="M 570,185 L 610,185"                 stroke="#F97316" stroke-width="1.8" fill="none" marker-end="url(#arr-str)"/>
+                                            <!-- L1: 触发事件 -->
+                                            <rect x="10"  y="78"  width="160" height="55" rx="8" fill="#FFF3EF" stroke="#E8725A" stroke-width="1.5"/>
+                                            <rect x="18"  y="85"  width="44"  height="14" rx="3" fill="#FDDDD8"/>
+                                            <text x="40"  y="95"  text-anchor="middle" font-size="8.5" fill="#C14B2E" font-family="sans-serif">触发事件</text>
+                                            <text x="90"  y="113" text-anchor="middle" font-size="11"  fill="#C14B2E" font-weight="700" font-family="sans-serif">美对华汽车</text>
+                                            <text x="90"  y="128" text-anchor="middle" font-size="11"  fill="#C14B2E" font-weight="700" font-family="sans-serif">关税升至145%</text>
+                                            <!-- L2a: 整车出口受阻 -->
+                                            <rect x="210" y="16"  width="160" height="55" rx="8" fill="#EEF3FF" stroke="#4B85E6" stroke-width="1.5"/>
+                                            <rect x="218" y="23"  width="52"  height="14" rx="3" fill="#D0E2FF"/>
+                                            <text x="244" y="33"  text-anchor="middle" font-size="8.5" fill="#2D5ECC" font-family="sans-serif">产业链 · 强</text>
+                                            <text x="290" y="52"  text-anchor="middle" font-size="11.5" fill="#1E3A6E" font-weight="600" font-family="sans-serif">整车出口</text>
+                                            <text x="290" y="67"  text-anchor="middle" font-size="11.5" fill="#1E3A6E" font-weight="600" font-family="sans-serif">受阻</text>
+                                            <!-- L2b: 进口零件涨价 -->
+                                            <rect x="210" y="158" width="160" height="55" rx="8" fill="#F4F8FF" stroke="#7DB3F0" stroke-width="1.5"/>
+                                            <rect x="218" y="165" width="52"  height="14" rx="3" fill="#E0EEFF"/>
+                                            <text x="244" y="175" text-anchor="middle" font-size="8.5" fill="#4477BB" font-family="sans-serif">产业链 · 中</text>
+                                            <text x="290" y="194" text-anchor="middle" font-size="11.5" fill="#2D4E88" font-weight="600" font-family="sans-serif">进口零件</text>
+                                            <text x="290" y="209" text-anchor="middle" font-size="11.5" fill="#2D4E88" font-weight="600" font-family="sans-serif">成本上升</text>
+                                            <!-- L3a: 国内产能过剩 -->
+                                            <rect x="410" y="16"  width="160" height="55" rx="8" fill="#EEF3FF" stroke="#4B85E6" stroke-width="1.5"/>
+                                            <rect x="418" y="23"  width="52"  height="14" rx="3" fill="#D0E2FF"/>
+                                            <text x="444" y="33"  text-anchor="middle" font-size="8.5" fill="#2D5ECC" font-family="sans-serif">产业链 · 强</text>
+                                            <text x="490" y="52"  text-anchor="middle" font-size="11.5" fill="#1E3A6E" font-weight="600" font-family="sans-serif">国内产能</text>
+                                            <text x="490" y="67"  text-anchor="middle" font-size="11.5" fill="#1E3A6E" font-weight="600" font-family="sans-serif">过剩加剧</text>
+                                            <!-- L3b: 供应链本地化 -->
+                                            <rect x="410" y="87"  width="160" height="55" rx="8" fill="#F0FDF4" stroke="#34D399" stroke-width="1.5"/>
+                                            <rect x="418" y="94"  width="46"  height="14" rx="3" fill="#C6F6E8"/>
+                                            <text x="441" y="104" text-anchor="middle" font-size="8.5" fill="#059669" font-family="sans-serif">协同 · 中</text>
+                                            <text x="490" y="123" text-anchor="middle" font-size="11.5" fill="#065F46" font-weight="600" font-family="sans-serif">供应链</text>
+                                            <text x="490" y="138" text-anchor="middle" font-size="11.5" fill="#065F46" font-weight="600" font-family="sans-serif">本地化压力</text>
+                                            <!-- L3c: 动力电池成本传导 -->
+                                            <rect x="410" y="158" width="160" height="55" rx="8" fill="#EEF3FF" stroke="#4B85E6" stroke-width="1.5"/>
+                                            <rect x="418" y="165" width="52"  height="14" rx="3" fill="#D0E2FF"/>
+                                            <text x="444" y="175" text-anchor="middle" font-size="8.5" fill="#2D5ECC" font-family="sans-serif">产业链 · 强</text>
+                                            <text x="490" y="194" text-anchor="middle" font-size="11.5" fill="#1E3A6E" font-weight="600" font-family="sans-serif">动力电池</text>
+                                            <text x="490" y="209" text-anchor="middle" font-size="11.5" fill="#1E3A6E" font-weight="600" font-family="sans-serif">成本传导</text>
+                                            <!-- L4a: 国内价格战加剧 -->
+                                            <rect x="610" y="16"  width="160" height="55" rx="8" fill="#FFFBEB" stroke="#F59E0B" stroke-width="1.5"/>
+                                            <rect x="618" y="23"  width="52"  height="14" rx="3" fill="#FEF3C7"/>
+                                            <text x="644" y="33"  text-anchor="middle" font-size="8.5" fill="#B45309" font-family="sans-serif">产业链 · 强</text>
+                                            <text x="690" y="52"  text-anchor="middle" font-size="11.5" fill="#92400E" font-weight="600" font-family="sans-serif">国内</text>
+                                            <text x="690" y="67"  text-anchor="middle" font-size="11.5" fill="#92400E" font-weight="600" font-family="sans-serif">价格战加剧</text>
+                                            <!-- L4b: 东南亚产能布局 -->
+                                            <rect x="610" y="87"  width="160" height="55" rx="8" fill="#F0FDF4" stroke="#34D399" stroke-width="1.5"/>
+                                            <rect x="618" y="94"  width="46"  height="14" rx="3" fill="#C6F6E8"/>
+                                            <text x="641" y="104" text-anchor="middle" font-size="8.5" fill="#059669" font-family="sans-serif">协同 · 中</text>
+                                            <text x="690" y="123" text-anchor="middle" font-size="11.5" fill="#065F46" font-weight="600" font-family="sans-serif">东南亚</text>
+                                            <text x="690" y="138" text-anchor="middle" font-size="11.5" fill="#065F46" font-weight="600" font-family="sans-serif">产能布局</text>
+                                            <!-- L4c: 整车毛利率承压 -->
+                                            <rect x="610" y="158" width="160" height="55" rx="8" fill="#FFF1F1" stroke="#EF4444" stroke-width="1.5"/>
+                                            <rect x="618" y="165" width="52"  height="14" rx="3" fill="#FEE2E2"/>
+                                            <text x="644" y="175" text-anchor="middle" font-size="8.5" fill="#B91C1C" font-family="sans-serif">产业链 · 强</text>
+                                            <text x="690" y="194" text-anchor="middle" font-size="11.5" fill="#991B1B" font-weight="600" font-family="sans-serif">整车</text>
+                                            <text x="690" y="209" text-anchor="middle" font-size="11.5" fill="#991B1B" font-weight="600" font-family="sans-serif">毛利率承压</text>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- ── Bottom Row: Market + Opinion ── -->
+                                <div class="hte-bottom-row">
+                                    <!-- Market Performance -->
+                                    <div class="hte-market-panel">
+                                        <div class="hte-panel-hdr">
+                                            <span class="hte-panel-ttl"><i class="fa-solid fa-chart-line"></i> 市场表现</span>
+                                            <span class="hte-panel-sub">事件发生后 24h · 2025-03-18</span>
+                                        </div>
+                                        <table class="hte-mkt-tbl">
+                                            <thead>
+                                                <tr>
+                                                    <th>标的</th>
+                                                    <th>类别</th>
+                                                    <th>最新价</th>
+                                                    <th>涨跌幅</th>
+                                                    <th>成交量变化</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="hte-mkt-name">比亚迪 <span class="hte-mkt-code">002594</span></td>
+                                                    <td><span class="hte-mkt-type">A股</span></td>
+                                                    <td>276.40</td>
+                                                    <td class="hte-neg">▼ -2.06%</td>
+                                                    <td class="hte-vol-up">+38%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hte-mkt-name">宁德时代 <span class="hte-mkt-code">300750</span></td>
+                                                    <td><span class="hte-mkt-type">A股</span></td>
+                                                    <td>241.30</td>
+                                                    <td class="hte-neg">▼ -1.99%</td>
+                                                    <td class="hte-vol-up">+44%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hte-mkt-name">小鹏汽车 <span class="hte-mkt-code">XPEV</span></td>
+                                                    <td><span class="hte-mkt-type hte-mkt-hk">港股</span></td>
+                                                    <td>92.35</td>
+                                                    <td class="hte-neg">▼ -5.52%</td>
+                                                    <td class="hte-vol-up">+127%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hte-mkt-name">特斯拉 <span class="hte-mkt-code">TSLA</span></td>
+                                                    <td><span class="hte-mkt-type hte-mkt-us">美股</span></td>
+                                                    <td>312.50</td>
+                                                    <td class="hte-pos">▲ +2.69%</td>
+                                                    <td class="hte-vol-up">+85%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hte-mkt-name">碳酸锂 <span class="hte-mkt-code">期货</span></td>
+                                                    <td><span class="hte-mkt-type hte-mkt-comm">大宗</span></td>
+                                                    <td>77,500</td>
+                                                    <td class="hte-neg">▼ -1.52%</td>
+                                                    <td class="hte-vol-up">+22%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="hte-mkt-name">美元/人民币</td>
+                                                    <td><span class="hte-mkt-type hte-mkt-fx">汇率</span></td>
+                                                    <td>7.2341</td>
+                                                    <td class="hte-pos">▲ +0.26%</td>
+                                                    <td class="hte-vol-na">—</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- Opinion Battle -->
+                                    <div class="hte-opinion-panel">
+                                        <div class="hte-panel-hdr">
+                                            <span class="hte-panel-ttl"><i class="fa-solid fa-scale-balanced"></i> 观点博弈</span>
+                                            <span class="hte-panel-sub">共 2,847 条观点</span>
+                                        </div>
+                                        <div class="hte-sentiment-wrap">
+                                            <div class="hte-sentiment-bar">
+                                                <div class="hte-sent-bull" style="width:42%">多方 42%</div>
+                                                <div class="hte-sent-neu"  style="width:19%">中性 19%</div>
+                                                <div class="hte-sent-bear" style="width:39%">空方 39%</div>
+                                            </div>
+                                            <div class="hte-sent-labels">
+                                                <span class="hte-sent-l-bull">● 看多</span>
+                                                <span class="hte-sent-l-neu">中性</span>
+                                                <span class="hte-sent-l-bear">看空 ●</span>
+                                            </div>
+                                        </div>
+                                        <div class="hte-view-list">
+                                            <div class="hte-view-item hte-vi-bull">
+                                                <div class="hte-vi-hdr">
+                                                    <span class="hte-vi-inst">中金公司</span>
+                                                    <span class="hte-vi-tag hte-vt-bull">多方</span>
+                                                </div>
+                                                <div class="hte-vi-text">BYD出口占比低于10%，短期利空被过度定价；国内替代逻辑持续强化，维持强烈推荐。</div>
+                                            </div>
+                                            <div class="hte-view-item hte-vi-bull">
+                                                <div class="hte-vi-hdr">
+                                                    <span class="hte-vi-inst">高盛</span>
+                                                    <span class="hte-vi-tag hte-vt-bull">多方</span>
+                                                </div>
+                                                <div class="hte-vi-text">上调国内新能源补贴政策预期，政策对冲力度或超市场预期，中国本土品牌受益。</div>
+                                            </div>
+                                            <div class="hte-view-item hte-vi-bear">
+                                                <div class="hte-vi-hdr">
+                                                    <span class="hte-vi-inst">摩根士丹利</span>
+                                                    <span class="hte-vi-tag hte-vt-bear">空方</span>
+                                                </div>
+                                                <div class="hte-vi-text">零部件厂商成本转嫁能力分化，建议规避高涉美原材料敞口标的，关注毛利率压缩风险。</div>
+                                            </div>
+                                            <div class="hte-view-item hte-vi-bull">
+                                                <div class="hte-vi-hdr">
+                                                    <span class="hte-vi-inst">国泰君安</span>
+                                                    <span class="hte-vi-tag hte-vt-bull">多方</span>
+                                                </div>
+                                                <div class="hte-vi-text">供应链重组加速东南亚产能布局，具备全球化能力的零部件企业长期受益，配置价值凸显。</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div><!-- /fa-tab-hotevents -->
+
+                            <div class="fa-tab-content" id="fa-tab-chain">
                                 <div class="agent-narrative-box">
                                     <div class="narrative-header">
                                         <div class="narrative-title"><i class="fa-solid fa-sparkles"></i> AI
