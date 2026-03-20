@@ -2801,3 +2801,137 @@
 .sp-nc-bot  { display: flex; align-items: center; justify-content: space-between; margin-top: 1px; }
 .sp-nc-month { font-size: 10px; color: #B0B8C8; }
 .sp-nc-att  { font-size: 10px; letter-spacing: 0.5px; }
+
+/* ===== 库存压力分析 Charts (inv-*) ===== */
+.inv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+.inv-panel {
+    background: #fff;
+    border: 1px solid #e8ecf0;
+    border-radius: 10px;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+}
+.inv-panel-wide {
+    grid-column: 1 / -1;
+}
+.inv-panel-hdr {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.inv-panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    white-space: nowrap;
+}
+.inv-panel-title i {
+    color: #4B85E6;
+    margin-right: 5px;
+}
+.inv-brand-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+    justify-content: flex-end;
+}
+.inv-brand-pill {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1.5px solid #e0e4ea;
+    color: #666;
+    background: #f5f7fa;
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+}
+.inv-brand-pill.active {
+    border-color: transparent;
+    color: #fff;
+    font-weight: 600;
+}
+.inv-chart-area {
+    flex: 1;
+    min-height: 220px;
+    height: 220px;
+}
+.inv-panel-wide .inv-chart-area {
+    height: 240px;
+}
+
+/* ===== 竞争力分析 Charts (cmp-*) ===== */
+.cmp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+}
+.cmp-panel {
+    background: #fff;
+    border: 1px solid #e8ecf0;
+    border-radius: 10px;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+}
+.cmp-panel-wide {
+    grid-column: 1 / -1;
+}
+.cmp-panel-hdr {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.cmp-panel-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    white-space: nowrap;
+}
+.cmp-panel-title i {
+    color: #7C6AF6;
+    margin-right: 5px;
+}
+.cmp-brand-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+    justify-content: flex-end;
+}
+.cmp-brand-pill {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    border: 1.5px solid #e0e4ea;
+    color: #666;
+    background: #f5f7fa;
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+}
+.cmp-brand-pill.active {
+    border-color: transparent;
+    color: #fff;
+    font-weight: 600;
+}
+.cmp-chart-area {
+    flex: 1;
+    min-height: 220px;
+    height: 220px;
+}
+.cmp-panel-wide .cmp-chart-area {
+    height: 240px;
+}

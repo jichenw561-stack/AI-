@@ -82,6 +82,12 @@ function initFeatureTabs() {
             if (targetId === 'fa-tab-sales') {
                 setTimeout(initSalesPanels, 60);
             }
+            if (targetId === 'fa-tab-inventory') {
+                setTimeout(initInvPanels, 60);
+            }
+            if (targetId === 'fa-tab-compete') {
+                setTimeout(initCmpPanels, 60);
+            }
             // Trigger resize to fix ECharts rendering in hidden divs
             setTimeout(() => {
                 window.dispatchEvent(new Event('resize'));
@@ -806,4 +812,376 @@ function initSalesPanels() {
     spSetChart2(SP_DEFAULT);
     spSetChart3(SP_DEFAULT);
     spBuildNewCars();
+}
+
+// ============================================================
+// 库存压力分析 Charts
+// ============================================================
+const INV_BRANDS = ['比亚迪','吉利汽车','广汽集团','长安汽车','上汽集团','特斯拉','理想汽车','蔚来','小鹏汽车','零跑汽车','华为问界','小米汽车','奇瑞汽车','长城汽车','哪吒汽车'];
+const INV_DEFAULT = ['比亚迪','理想汽车','广汽集团','长安汽车'];
+const INV_MONTHS = ['3月','4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月'];
+
+// 库存周转天数
+const INV_DAYS = {
+    '比亚迪':   [16,15,14,13,14,15,14,13,14,15,14,15],
+    '吉利汽车': [32,34,33,35,36,38,38,37,36,35,34,35],
+    '广汽集团': [52,55,58,60,62,65,68,65,62,60,58,58],
+    '长安汽车': [42,44,46,48,50,52,50,48,47,47,46,45],
+    '上汽集团': [38,40,42,44,46,48,46,44,42,43,42,41],
+    '特斯拉':   [20,21,19,18,20,22,21,20,19,18,18,19],
+    '理想汽车': [18,17,18,19,18,17,18,19,18,18,18,17],
+    '蔚来':     [45,47,50,52,55,58,56,54,52,50,48,47],
+    '小鹏汽车': [48,50,52,55,58,60,58,56,54,52,50,49],
+    '零跑汽车': [36,38,40,42,44,46,44,42,40,38,37,36],
+    '华为问界': [22,24,22,21,20,22,22,21,20,19,18,18],
+    '小米汽车': [12,11,10,11,12,13,12,11,10,10,10,10],
+    '奇瑞汽车': [40,42,44,46,48,50,48,46,44,42,40,40],
+    '长城汽车': [44,46,48,50,52,54,52,50,48,46,44,43],
+    '哪吒汽车': [62,65,68,72,75,78,76,74,72,70,68,67],
+};
+
+// 渠道库存系数（>1.5为警戒线）
+const INV_COEF = {
+    '比亚迪':   [0.6,0.6,0.5,0.5,0.5,0.6,0.5,0.5,0.5,0.6,0.5,0.5],
+    '吉利汽车': [1.1,1.2,1.1,1.2,1.3,1.4,1.4,1.3,1.3,1.2,1.2,1.2],
+    '广汽集团': [1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.2,2.1,2.1,2.0,2.0],
+    '长安汽车': [1.5,1.6,1.7,1.7,1.8,1.9,1.8,1.7,1.7,1.7,1.6,1.6],
+    '上汽集团': [1.3,1.4,1.5,1.6,1.7,1.8,1.7,1.6,1.5,1.5,1.5,1.4],
+    '特斯拉':   [0.7,0.8,0.7,0.7,0.7,0.8,0.8,0.7,0.7,0.7,0.7,0.7],
+    '理想汽车': [0.6,0.6,0.7,0.7,0.6,0.6,0.7,0.7,0.6,0.6,0.6,0.6],
+    '蔚来':     [1.6,1.7,1.8,1.9,2.0,2.1,2.0,1.9,1.8,1.8,1.7,1.7],
+    '小鹏汽车': [1.7,1.8,1.9,2.0,2.1,2.2,2.1,2.0,1.9,1.8,1.8,1.7],
+    '零跑汽车': [1.3,1.4,1.4,1.5,1.6,1.7,1.6,1.5,1.4,1.4,1.3,1.3],
+    '华为问界': [0.8,0.9,0.8,0.8,0.7,0.8,0.8,0.7,0.7,0.7,0.7,0.7],
+    '小米汽车': [0.4,0.4,0.4,0.4,0.5,0.5,0.4,0.4,0.4,0.4,0.4,0.4],
+    '奇瑞汽车': [1.4,1.5,1.6,1.7,1.7,1.8,1.7,1.6,1.5,1.5,1.4,1.4],
+    '长城汽车': [1.6,1.7,1.7,1.8,1.9,2.0,1.9,1.8,1.7,1.6,1.6,1.5],
+    '哪吒汽车': [2.2,2.3,2.4,2.6,2.7,2.8,2.7,2.6,2.5,2.4,2.4,2.3],
+};
+
+// 产销率 %
+const INV_PSR = {
+    '比亚迪':   [98,99,100,101,100,99,100,101,100,100,99,100],
+    '吉利汽车': [96,95,96,95,94,93,94,95,96,96,97,96],
+    '广汽集团': [88,86,84,82,80,78,79,81,83,84,85,86],
+    '长安汽车': [92,91,90,90,88,87,88,89,90,91,92,92],
+    '上汽集团': [94,93,92,91,90,89,90,91,92,93,93,94],
+    '特斯拉':   [97,98,99,100,98,97,98,99,100,100,99,99],
+    '理想汽车': [99,100,100,100,101,100,100,100,100,100,100,100],
+    '蔚来':     [90,89,88,87,86,85,86,87,88,89,90,91],
+    '小鹏汽车': [88,87,86,85,84,83,84,85,86,87,88,89],
+    '零跑汽车': [94,93,92,91,90,89,90,91,92,93,94,95],
+    '华为问界': [98,97,98,99,100,99,99,100,100,100,100,100],
+    '小米汽车': [101,102,103,102,101,100,101,102,103,103,102,102],
+    '奇瑞汽车': [93,92,91,90,89,88,89,90,91,92,93,93],
+    '长城汽车': [91,90,89,88,87,86,87,88,89,90,91,92],
+    '哪吒汽车': [80,78,76,74,72,70,71,72,74,75,76,77],
+};
+
+function invColor(b) { return SP_COLORS[b] || '#999'; }
+
+function invMakeSelector(containerId, callback, maxSel) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    let active = INV_DEFAULT.slice();
+    INV_BRANDS.forEach(b => {
+        const pill = document.createElement('span');
+        pill.className = 'inv-brand-pill' + (active.includes(b) ? ' active' : '');
+        pill.textContent = b;
+        const c = invColor(b);
+        if (active.includes(b)) pill.style.cssText = `background:${c};border-color:${c}`;
+        pill.addEventListener('click', () => {
+            if (pill.classList.contains('active')) {
+                if (active.length <= 1) return;
+                active = active.filter(x => x !== b);
+                pill.classList.remove('active');
+                pill.style.cssText = '';
+            } else {
+                const max = maxSel || 6;
+                if (active.length >= max) return;
+                active.push(b);
+                pill.classList.add('active');
+                pill.style.cssText = `background:${c};border-color:${c}`;
+            }
+            callback(active);
+        });
+        wrap.appendChild(pill);
+    });
+    callback(active);
+}
+
+function invLine(name, data, color, style) {
+    return { name, type:'line', smooth:true, data,
+        lineStyle:{ color, width:2, type: style||'solid' },
+        itemStyle:{ color }, symbol:'none', emphasis:{ focus:'series' } };
+}
+
+function invSetChart1(sel) {
+    const el = document.getElementById('inv-chart-1');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'axis' },
+        legend:{ show:false },
+        grid:{ top:8, bottom:32, left:48, right:16 },
+        xAxis:{ type:'category', data:INV_MONTHS, axisLabel:{ fontSize:11 }, axisLine:{ lineStyle:{ color:'#ddd' } } },
+        yAxis:{ type:'value', name:'天', nameTextStyle:{ fontSize:10 }, axisLabel:{ fontSize:11 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } },
+            max: v => Math.ceil(v.max * 1.15),
+            markLine:{ data:[{ yAxis:45, name:'警戒线', lineStyle:{ color:'#EF4444', type:'dashed', width:1.5 }, label:{ formatter:'警戒45天', color:'#EF4444', fontSize:10 } }] } },
+        series: sel.map(b => invLine(b, INV_DAYS[b]||[], invColor(b)))
+    }, true);
+}
+
+function invSetChart2(sel) {
+    const el = document.getElementById('inv-chart-2');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'axis', formatter: params => {
+            const lines = params.map(p => `<span style="color:${p.color}">●</span> ${p.seriesName}: ${p.value}`);
+            return params[0].name + '<br>' + lines.join('<br>');
+        }},
+        legend:{ show:false },
+        grid:{ top:8, bottom:32, left:42, right:16 },
+        xAxis:{ type:'category', data:INV_MONTHS, axisLabel:{ fontSize:11 }, axisLine:{ lineStyle:{ color:'#ddd' } } },
+        yAxis:{ type:'value', name:'系数', nameTextStyle:{ fontSize:10 }, axisLabel:{ fontSize:11 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } },
+            min:0, max: v => Math.ceil(v.max * 1.1 * 10) / 10 },
+        series: [
+            { type:'line', data: INV_MONTHS.map(() => 1.5), name:'警戒线',
+              lineStyle:{ color:'#EF4444', type:'dashed', width:1.5 }, symbol:'none',
+              itemStyle:{ color:'#EF4444' }, tooltip:{ show:false } },
+            ...sel.map(b => invLine(b, INV_COEF[b]||[], invColor(b)))
+        ]
+    }, true);
+}
+
+function invSetChart3(sel) {
+    const el = document.getElementById('inv-chart-3');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'axis' },
+        legend:{ show:false },
+        grid:{ top:8, bottom:32, left:48, right:48 },
+        xAxis:{ type:'category', data:INV_MONTHS, axisLabel:{ fontSize:11 }, axisLine:{ lineStyle:{ color:'#ddd' } } },
+        yAxis:[
+            { type:'value', name:'产销率%', nameTextStyle:{ fontSize:10 }, axisLabel:{ fontSize:11 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } }, min:65, max:110 },
+            { type:'value', name:'产销率%', show:false }
+        ],
+        series: sel.map(b => ({ name:b, type:'line', smooth:true, data: INV_PSR[b]||[],
+            lineStyle:{ color:invColor(b), width:2 }, itemStyle:{ color:invColor(b) }, symbol:'none', emphasis:{ focus:'series' } }))
+    }, true);
+}
+
+function initInvPanels() {
+    if (document.getElementById('inv-chart-1').dataset.init) return;
+    document.getElementById('inv-chart-1').dataset.init = '1';
+    invMakeSelector('inv1-brands', invSetChart1);
+    invMakeSelector('inv2-brands', invSetChart2);
+    invMakeSelector('inv3-brands', invSetChart3);
+}
+
+// ============================================================
+// 竞争力分析 Charts
+// ============================================================
+const CMP_BRANDS = ['比亚迪','吉利汽车','广汽集团','长安汽车','上汽集团','特斯拉','理想汽车','蔚来','小鹏汽车','零跑汽车','华为问界','小米汽车','奇瑞汽车','长城汽车','哪吒汽车'];
+const CMP_DEFAULT_SHARE = ['比亚迪','理想汽车','华为问界','特斯拉','上汽集团'];
+const CMP_DEFAULT_RADAR = ['比亚迪','理想汽车','华为问界'];
+const CMP_MONTHS = ['3月','4月','5月','6月','7月','8月','9月','10月','11月','12月','1月','2月'];
+
+// 市场份额 %
+const CMP_SHARE = {
+    '比亚迪':   [28.1,28.5,29.0,29.5,30.0,30.5,30.1,30.5,30.8,30.1,30.5,31.0],
+    '吉利汽车': [8.5,8.3,8.4,8.2,8.1,7.9,8.0,8.2,8.3,8.4,8.5,8.6],
+    '广汽集团': [7.2,7.0,6.8,6.5,6.2,6.0,5.8,5.9,6.0,5.8,5.7,5.6],
+    '长安汽车': [5.8,5.6,5.5,5.4,5.2,5.0,5.1,5.2,5.3,5.4,5.5,5.5],
+    '上汽集团': [10.2,10.0,9.8,9.5,9.2,8.9,8.8,8.9,9.0,8.9,8.8,8.7],
+    '特斯拉':   [5.5,5.3,5.2,5.0,4.8,4.6,4.7,4.8,4.9,4.6,4.7,4.8],
+    '理想汽车': [6.8,7.0,7.2,7.5,7.8,8.0,7.8,7.9,8.0,7.4,7.5,7.6],
+    '蔚来':     [2.8,2.7,2.6,2.5,2.4,2.3,2.4,2.5,2.5,2.0,2.1,2.2],
+    '小鹏汽车': [2.2,2.3,2.4,2.5,2.6,2.8,2.7,2.6,2.7,2.6,2.6,2.7],
+    '零跑汽车': [2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.2,3.3,3.4],
+    '华为问界': [3.8,4.0,4.2,4.3,4.5,4.6,4.5,4.6,4.7,4.1,4.2,4.3],
+    '小米汽车': [0.8,1.0,1.2,1.4,1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2],
+    '奇瑞汽车': [4.8,4.9,5.0,5.1,5.2,5.3,5.4,5.5,5.6,5.6,5.7,5.8],
+    '长城汽车': [4.2,4.1,4.0,3.9,3.8,3.7,3.6,3.7,3.8,3.8,3.9,4.0],
+    '哪吒汽车': [1.5,1.4,1.3,1.2,1.1,1.0,0.9,0.8,0.7,0.7,0.6,0.6],
+};
+
+// 智驾能力评分 [自动泊车,高速领航,城市领航,紧急制动,车道保持,视觉感知]
+const CMP_RADAR = {
+    '比亚迪':   [82,78,70,85,88,80],
+    '吉利汽车': [72,68,60,78,80,72],
+    '广汽集团': [65,62,55,70,75,68],
+    '长安汽车': [70,68,62,74,78,72],
+    '上汽集团': [68,65,58,72,76,70],
+    '特斯拉':   [95,92,90,95,98,95],
+    '理想汽车': [88,85,82,90,92,88],
+    '蔚来':     [85,82,78,88,90,85],
+    '小鹏汽车': [90,88,85,92,94,90],
+    '零跑汽车': [70,68,62,75,78,72],
+    '华为问界': [92,90,88,93,95,92],
+    '小米汽车': [85,82,80,88,90,86],
+    '奇瑞汽车': [68,65,60,72,76,70],
+    '长城汽车': [75,72,68,78,80,74],
+    '哪吒汽车': [58,55,50,62,65,60],
+};
+
+// 价格带与毛利率矩阵 [avg price (万), gross margin %, monthly sales (万辆), category]
+const CMP_MATRIX = [
+    {name:'比亚迪',   price:15.5, margin:22.5, sales:47.46, cat:'自主'},
+    {name:'吉利汽车', price:16.8, margin:16.2, sales:22.8,  cat:'自主'},
+    {name:'广汽集团', price:15.2, margin:13.8, sales:17.5,  cat:'自主'},
+    {name:'长安汽车', price:14.8, margin:14.5, sales:16.2,  cat:'自主'},
+    {name:'上汽集团', price:13.5, margin:11.2, sales:22.4,  cat:'自主'},
+    {name:'特斯拉',   price:28.5, margin:18.5, sales:18.8,  cat:'外资'},
+    {name:'理想汽车', price:38.5, margin:21.5, sales:28.5,  cat:'新势力'},
+    {name:'蔚来',     price:42.0, margin:9.5,  sales:8.2,   cat:'新势力'},
+    {name:'小鹏汽车', price:18.5, margin:8.5,  sales:10.2,  cat:'新势力'},
+    {name:'零跑汽车', price:12.5, margin:11.8, sales:8.5,   cat:'新势力'},
+    {name:'华为问界', price:35.0, margin:20.2, sales:16.2,  cat:'新势力'},
+    {name:'小米汽车', price:24.5, margin:12.5, sales:12.8,  cat:'新势力'},
+    {name:'奇瑞汽车', price:12.8, margin:15.8, sales:16.5,  cat:'自主'},
+    {name:'长城汽车', price:18.5, margin:17.2, sales:14.8,  cat:'自主'},
+    {name:'哪吒汽车', price:11.5, margin:2.5,  sales:4.5,   cat:'新势力'},
+];
+const CMP_CAT_COLOR = { '自主':'#3B82F6', '外资':'#F97316', '新势力':'#8B5CF6' };
+
+function cmpColor(b) { return SP_COLORS[b] || '#999'; }
+
+function cmpMakeShareSelector(containerId, callback) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    let active = CMP_DEFAULT_SHARE.slice();
+    CMP_BRANDS.forEach(b => {
+        const pill = document.createElement('span');
+        pill.className = 'cmp-brand-pill' + (active.includes(b) ? ' active' : '');
+        pill.textContent = b;
+        const c = cmpColor(b);
+        if (active.includes(b)) pill.style.cssText = `background:${c};border-color:${c}`;
+        pill.addEventListener('click', () => {
+            if (pill.classList.contains('active')) {
+                if (active.length <= 1) return;
+                active = active.filter(x => x !== b);
+                pill.classList.remove('active');
+                pill.style.cssText = '';
+            } else {
+                if (active.length >= 7) return;
+                active.push(b);
+                pill.classList.add('active');
+                pill.style.cssText = `background:${c};border-color:${c}`;
+            }
+            callback(active);
+        });
+        wrap.appendChild(pill);
+    });
+    callback(active);
+}
+
+function cmpMakeRadarSelector(containerId, callback) {
+    const wrap = document.getElementById(containerId);
+    if (!wrap) return;
+    let active = CMP_DEFAULT_RADAR.slice();
+    CMP_BRANDS.forEach(b => {
+        const pill = document.createElement('span');
+        pill.className = 'cmp-brand-pill' + (active.includes(b) ? ' active' : '');
+        pill.textContent = b;
+        const c = cmpColor(b);
+        if (active.includes(b)) pill.style.cssText = `background:${c};border-color:${c}`;
+        pill.addEventListener('click', () => {
+            if (pill.classList.contains('active')) {
+                if (active.length <= 1) return;
+                active = active.filter(x => x !== b);
+                pill.classList.remove('active');
+                pill.style.cssText = '';
+            } else {
+                if (active.length >= 4) return;
+                active.push(b);
+                pill.classList.add('active');
+                pill.style.cssText = `background:${c};border-color:${c}`;
+            }
+            callback(active);
+        });
+        wrap.appendChild(pill);
+    });
+    callback(active);
+}
+
+function cmpSetChart1(sel) {
+    const el = document.getElementById('cmp-chart-1');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'axis', formatter: params => {
+            const lines = params.map(p => `<span style="color:${p.color}">●</span> ${p.seriesName}: ${p.value}%`);
+            return params[0].name + '<br>' + lines.join('<br>');
+        }},
+        legend:{ show:false },
+        grid:{ top:8, bottom:32, left:42, right:16 },
+        xAxis:{ type:'category', data:CMP_MONTHS, axisLabel:{ fontSize:11 }, axisLine:{ lineStyle:{ color:'#ddd' } } },
+        yAxis:{ type:'value', name:'份额%', nameTextStyle:{ fontSize:10 }, axisLabel:{ formatter:'{value}%', fontSize:11 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } } },
+        series: sel.map(b => ({
+            name:b, type:'line', smooth:true, data: CMP_SHARE[b]||[],
+            lineStyle:{ color:cmpColor(b), width:2 }, itemStyle:{ color:cmpColor(b) },
+            symbol:'none', emphasis:{ focus:'series' },
+            areaStyle:{ color:{ type:'linear', x:0,y:0,x2:0,y2:1, colorStops:[{offset:0, color:cmpColor(b)+'40'},{offset:1, color:cmpColor(b)+'05'}] } }
+        }))
+    }, true);
+}
+
+function cmpSetChart2(sel) {
+    const el = document.getElementById('cmp-chart-2');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    const dims = ['自动泊车','高速领航','城市领航','紧急制动','车道保持','视觉感知'];
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'item' },
+        radar:{ indicator: dims.map(d => ({ name:d, max:100 })), radius:'70%', center:['50%','52%'],
+            axisName:{ fontSize:10, color:'#666' },
+            splitLine:{ lineStyle:{ color:'#e8ecf0' } },
+            splitArea:{ areaStyle:{ color:['rgba(245,247,250,0.5)','transparent'] } } },
+        series:[{ type:'radar', data: sel.map(b => ({
+            name:b, value: CMP_RADAR[b]||[],
+            lineStyle:{ color:cmpColor(b), width:2 },
+            areaStyle:{ color:cmpColor(b)+'30' },
+            itemStyle:{ color:cmpColor(b) }
+        }))}]
+    }, true);
+}
+
+function cmpSetChart3() {
+    const el = document.getElementById('cmp-chart-3');
+    if (!el) return;
+    const c = echarts.getInstanceByDom(el) || echarts.init(el);
+    const cats = ['自主','外资','新势力'];
+    c.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ formatter: p => {
+            const d = CMP_MATRIX[p.dataIndex];
+            return `${d.name}<br>均价: ${d.price}万元<br>毛利率: ${d.margin}%<br>月销: ${d.sales}万辆`;
+        }},
+        legend:{ data:cats, bottom:0, textStyle:{ fontSize:11 } },
+        grid:{ top:8, bottom:40, left:48, right:16 },
+        xAxis:{ type:'value', name:'均价(万元)', nameTextStyle:{ fontSize:10 }, axisLabel:{ fontSize:11 }, min:8, max:48, splitLine:{ lineStyle:{ color:'#f0f0f0' } } },
+        yAxis:{ type:'value', name:'毛利率%', nameTextStyle:{ fontSize:10 }, axisLabel:{ formatter:'{value}%', fontSize:11 }, splitLine:{ lineStyle:{ color:'#f0f0f0' } } },
+        series: cats.map(cat => ({
+            name:cat, type:'scatter', symbolSize: d => Math.max(10, Math.sqrt(d[2]) * 9),
+            itemStyle:{ color: CMP_CAT_COLOR[cat], opacity:0.75 },
+            label:{ show:true, formatter: p => CMP_MATRIX[p.dataIndex].name, fontSize:9, color:'#333', position:'top' },
+            data: CMP_MATRIX.filter(d => d.cat === cat).map(d => [d.price, d.margin, d.sales])
+        }))
+    }, true);
+}
+
+function initCmpPanels() {
+    if (document.getElementById('cmp-chart-1').dataset.init) return;
+    document.getElementById('cmp-chart-1').dataset.init = '1';
+    cmpMakeShareSelector('cmp1-brands', cmpSetChart1);
+    cmpMakeRadarSelector('cmp2-brands', cmpSetChart2);
+    cmpSetChart3();
 }
